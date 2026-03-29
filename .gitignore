@@ -28,9 +28,18 @@ dist/
 *.log
 .env
 .env.*
+.env.local
 
 # OS and editor files
 .DS_Store
 Thumbs.db
 .vscode/
 .idea/
+
+# Binaries and Large Files
+ffmpeg/
+**/ffmpeg/
+*.exe
+*.dll
+*.so
+*.dylib

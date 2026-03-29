@@ -1,73 +1,188 @@
-import { motion } from 'framer-motion';
-import { 
-  LayoutDashboard, 
-  Upload, 
-  RefreshCw, 
-  Library, 
-  LogOut
+import { motion, AnimatePresence } from 'framer-motion';
+import {
+  LayoutDashboard, Upload, RefreshCw, Library, LogOut
 } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
-const Sidebar = () => {
-  const navigate = useNavigate();
-  const location = useLocation();
+const menuItems = [
+  { icon: LayoutDashboard, label: 'Dashboard',  path: '/dashboard',  color: '#7c3aed' },
+  { icon: Upload,          label: 'Upload',      path: '/upload',      color: '#a855f7' },
+  { icon: RefreshCw,       label: 'Processing',  path: '/processing',  color: '#d946ef' },
+  { icon: Library,         label: 'Library',     path: '/library',     color: '#7c3aed' },
+];
 
-  const menuItems = [
-    { icon: <LayoutDashboard size={20} />, label: 'Dashboard', path: '/dashboard' },
-    { icon: <Upload size={20} />, label: 'Upload', path: '/upload' },
-    { icon: <RefreshCw size={20} />, label: 'Processing', path: '/processing' },
-    { icon: <Library size={20} />, label: 'Library', path: '/library' },
-  ];
+const Sidebar = () => {
+  const navigate  = useNavigate();
+  const location  = useLocation();
 
   return (
-    <div className="w-72 h-screen bg-white/30 backdrop-blur-2xl border-r border-white/40 flex flex-col p-6 sticky top-0 z-10 shadow-[4px_0_24px_rgba(0,0,0,0.02)]">
-      {/* Logo */}
-      <div className="flex items-center gap-3 mb-10 px-2 cursor-pointer" onClick={() => navigate('/')}>
-        <div className="w-9 h-9 bg-[#7c3aed] rounded-xl flex items-center justify-center text-white shadow-lg shadow-purple-200">
-          <span className="font-bold text-xl italic italic">A</span>
-        </div>
-        <span className="text-2xl font-black tracking-tight text-[#2f2e36]">Anuvad</span>
-      </div>
+    <motion.div
+      initial={{ x: -20, opacity: 0 }}
+      animate={{ x: 0,   opacity: 1 }}
+      transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+      className="w-72 h-screen flex flex-col p-6 z-20 overflow-hidden"
+      style={{
+        background: 'rgba(255,255,255,0.45)',
+        backdropFilter: 'blur(32px)',
+        WebkitBackdropFilter: 'blur(32px)',
+        borderRight: '1px solid rgba(174,172,182,0.18)',
+        boxShadow: '4px 0 32px rgba(100,83,130,0.05)',
+      }}
+    >
+      {/* Side-panel inner glow */}
+      <div
+        aria-hidden="true"
+        className="absolute top-0 left-0 right-0 h-48 pointer-events-none"
+        style={{
+          background: 'linear-gradient(180deg, rgba(222,200,255,0.18) 0%, transparent 100%)',
+        }}
+      />
+      <div
+        aria-hidden="true"
+        className="absolute bottom-0 left-0 right-0 h-32 pointer-events-none"
+        style={{
+          background: 'linear-gradient(0deg, rgba(177,242,184,0.12) 0%, transparent 100%)',
+        }}
+      />
 
-      {/* Nav Items */}
-      <div className="flex-1 space-y-2">
-        {menuItems.map((item) => {
-          const isActive = location.pathname === item.path;
+      {/* ── Logo ────────────────────────────────────────────── */}
+      <motion.div
+        whileHover={{ scale: 1.02 }}
+        onClick={() => navigate('/')}
+        className="flex items-center gap-2.5 mb-10 px-2 cursor-pointer relative z-10"
+      >
+        <div
+          className="w-10 h-10 rounded-xl flex items-center justify-center text-white relative overflow-hidden"
+          style={{ background:'linear-gradient(135deg,#7c3aed,#d946ef)', boxShadow:'0 6px 20px rgba(124,58,237,0.30)' }}
+        >
+          <div className="absolute inset-0" style={{ background:'linear-gradient(135deg,rgba(255,255,255,0.22) 0%,transparent 55%)' }} />
+          <span className="text-xl font-black italic relative z-10">A</span>
+        </div>
+        <span className="text-[22px] font-black tracking-tight text-[#2f2e36]">Anuvad</span>
+      </motion.div>
+
+      {/* ── Section label ───────────────────────────────────── */}
+      <p className="text-[9px] font-bold uppercase tracking-[0.22em] text-gray-400 mb-3 px-4 relative z-10">
+        Navigation
+      </p>
+
+      {/* ── Nav Items ───────────────────────────────────────── */}
+      <div className="flex-1 space-y-1 relative z-10">
+        {menuItems.map((item, idx) => {
+          const isActive  = location.pathname === item.path;
+          const Icon      = item.icon;
+
           return (
             <motion.div
               key={item.path}
+              initial={{ opacity: 0, x: -12 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: idx * 0.06, duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
               whileHover={{ x: 4 }}
               onClick={() => navigate(item.path)}
-              className={`flex items-center justify-between p-4 rounded-2xl cursor-pointer transition-all ${
-                isActive 
-                  ? 'bg-white/60 backdrop-blur-md text-[#7c3aed] shadow-sm shadow-purple-100/50 font-bold border border-white/50' 
-                  : 'text-gray-500 hover:bg-white/40 hover:text-[#7c3aed]'
-              }`}
+              className="relative flex items-center justify-between p-3.5 rounded-2xl cursor-pointer transition-all duration-200 group"
+              style={isActive ? {
+                background: 'rgba(255,255,255,0.75)',
+                boxShadow:  '0 4px 20px rgba(100,83,130,0.10), inset 0 1px 1px rgba(255,255,255,0.8)',
+              } : {
+                background: 'transparent',
+              }}
             >
-              <div className="flex items-center gap-4">
-                {item.icon}
-                <span className="text-[15px]">{item.label}</span>
+              {/* Active glow blob */}
+              {isActive && (
+                <div
+                  className="absolute inset-0 rounded-2xl pointer-events-none"
+                  style={{
+                    background: `linear-gradient(135deg, ${item.color}18 0%, transparent 70%)`,
+                  }}
+                />
+              )}
+
+              <div className="flex items-center gap-3.5">
+                {/* Icon container */}
+                <div
+                  className="w-9 h-9 rounded-xl flex items-center justify-center transition-all duration-200"
+                  style={isActive ? {
+                    background: `linear-gradient(135deg, ${item.color} 0%, #d946ef 100%)`,
+                    boxShadow:  `0 6px 16px ${item.color}40`,
+                  } : {
+                    background: 'rgba(100,83,130,0.07)',
+                  }}
+                >
+                  <Icon
+                    size={17}
+                    className="transition-all duration-200"
+                    style={{ color: isActive ? '#fff' : '#7c3aed' }}
+                  />
+                </div>
+                <span
+                  className="text-[14px] font-semibold transition-all duration-200"
+                  style={{ color: isActive ? '#2f2e36' : '#6b6977' }}
+                >
+                  {item.label}
+                </span>
               </div>
-              {isActive && <motion.div layoutId="active" className="w-1.5 h-1.5 bg-[#7c3aed] rounded-full" />}
+
+              {/* Active dot */}
+              <AnimatePresence>
+                {isActive && (
+                  <motion.div
+                    layoutId="active-dot"
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    exit={{ scale: 0 }}
+                    className="w-2 h-2 rounded-full"
+                    style={{ background: item.color }}
+                  />
+                )}
+              </AnimatePresence>
             </motion.div>
           );
         })}
       </div>
 
-      {/* Footer / User */}
-      <div className="pt-6 border-t border-white/40">
-        <div className="flex items-center justify-between p-4 rounded-2xl hover:bg-white/50 backdrop-blur-md cursor-pointer transition-all text-gray-500 group border border-transparent hover:border-white/40">
-          <div className="flex items-center gap-4">
-            <div className="w-10 h-10 bg-purple-200 rounded-full flex items-center justify-center text-[#7c3aed] font-bold">JD</div>
-            <div>
-              <p className="text-sm font-bold text-[#2f2e36]">John Doe</p>
-              <p className="text-[11px] opacity-70">Pro Account</p>
+      {/* ── Divider ─────────────────────────────────────────── */}
+      <div
+        className="my-4 relative z-10"
+        style={{ height: 1, background: 'linear-gradient(90deg, transparent, rgba(174,172,182,0.25), transparent)' }}
+      />
+
+      {/* ── User Card ───────────────────────────────────────── */}
+      <motion.div
+        whileHover={{ y: -2 }}
+        className="relative z-10 flex items-center justify-between p-4 rounded-2xl cursor-pointer group transition-all"
+        style={{
+          background: 'rgba(255,255,255,0.50)',
+          border: '1px solid rgba(174,172,182,0.15)',
+          boxShadow: '0 4px 16px rgba(100,83,130,0.04)',
+        }}
+      >
+        <div className="flex items-center gap-3">
+          {/* Avatar with pulse ring */}
+          <div className="relative">
+            <div
+              className="w-10 h-10 rounded-full flex items-center justify-center text-white font-bold text-sm"
+              style={{ background: 'linear-gradient(135deg, #7c3aed, #d946ef)' }}
+            >
+              JD
             </div>
+            {/* Online ring */}
+            <div
+              className="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full border-2 border-white"
+              style={{ background: '#22c55e' }}
+            />
           </div>
-          <LogOut size={18} className="group-hover:text-red-400" />
+          <div>
+            <p className="text-sm font-bold text-[#2f2e36]">John Doe</p>
+            <p className="text-[11px] font-semibold" style={{ color: '#a855f7' }}>Pro Account</p>
+          </div>
         </div>
-      </div>
-    </div>
+        <LogOut
+          size={16}
+          className="text-gray-400 group-hover:text-red-400 transition-colors"
+        />
+      </motion.div>
+    </motion.div>
   );
 };
 

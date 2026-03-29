@@ -1,335 +1,506 @@
-import { motion } from 'framer-motion';
-import { Search, User } from 'lucide-react';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { Search, User, ArrowRight, Zap, Globe, Layers } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { useRef } from 'react';
+
+/* ── Stagger variants ───────────────────────────────────────── */
+const container: any = {
+  hidden: {},
+  show:   { transition: { staggerChildren: 0.12 } },
+};
+const fadeUp: any = {
+  hidden: { opacity: 0, y: 28 },
+  show:   { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] } },
+};
+
+/* ── Feature card data ──────────────────────────────────────── */
+const features: Array<{ Icon: any, title: string, desc: string, accent: string, from: string, badge: string, dark?: boolean, isNew?: boolean }> = [
+  {
+    Icon:  Zap,
+    title: 'AI Dubbing',
+    desc:  'Translate videos into any language with real-like AI voices that preserve emotion and true meaning.',
+    accent: '#d946ef',
+    from: 'from-fuchsia-50',
+    badge: 'rgba(217,70,239,0.10)',
+  },
+  {
+    Icon:  Globe,
+    title: 'AI Subtitles',
+    desc:  'Auto-generate perfectly-synced, accurate subtitles in हिन्दी and 10+ Indian regional scripts.',
+    accent: '#ec4899',
+    from: 'from-pink-50',
+    badge: 'rgba(236,72,153,0.10)',
+  },
+  {
+    Icon:  Layers,
+    title: 'Text To Speech',
+    desc:  'Realistic AI voiceovers for your text in any style, tone, and emotion — in seconds.',
+    accent: '#f472b6',
+    from: 'from-pink-50',
+    badge: 'rgba(244,114,182,0.10)',
+  },
+];
+
+/* ── Objective card data ─────────────────────────────────────── */
+const objectives = [
+  {
+    bg:      '#fefce8',
+    text:    '#422006',
+    waveFill:'#eab308',
+    tags:    ['😲 Translation', '👩 Indian Languages', 'Accessibility'],
+    tagColor:'yellow',
+    seed:    'Felix',
+    avatarBg:'fef08a',
+    body:    'Enable multilingual translation of digital content into Indian languages to improve accessibility for non-technical users across diverse regions.',
+  },
+  {
+    bg:      '#f0fdf4',
+    text:    '#052e16',
+    waveFill:'#22c55e',
+    tags:    ['🎙️ OTT-Style', '👨 Single-upload', '🌐 Target'],
+    tagColor:'green',
+    seed:    'Jack',
+    avatarBg:'bbf7d0',
+    body:    'Develop an OTT-style content localization framework that supports single-upload processing with dynamic target language selection.',
+  },
+  {
+    bg:      '#f5f3ff',
+    text:    '#2e1065',
+    waveFill:'#7c3aed',
+    tags:    ['🎙️ Parallel', '⚡ Reusable', '🔄 Efficient'],
+    tagColor:'purple',
+    seed:    'Mia',
+    avatarBg:'d8b4fe',
+    body:    'Enhance localization efficiency by reducing redundant computation through parallel and reusable translation pipelines.',
+  },
+];
 
 const Home = () => {
   const navigate = useNavigate();
+  const heroRef  = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({ target: heroRef, offset: ['start start', 'end start'] });
+  const blobY = useTransform(scrollYProgress, [0, 1], ['0%', '20%']);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-white via-pink-50/30 to-purple-50/40 text-[#2f2e36] font-body selection:bg-purple-100/50 overflow-x-hidden">
-      {/* Navigation */}
-      <nav className="border-b border-gray-100/50 sticky top-0 bg-white/70 backdrop-blur-xl z-50">
-        <div className="max-w-[1400px] mx-auto px-6 py-6 flex items-center justify-between">
-          <div className="flex items-center gap-12">
-            {/* Logo */}
-            <div className="flex items-center gap-2 cursor-pointer group" onClick={() => navigate('/')}>
-              <div className="w-8 h-8 bg-[#7c3aed] rounded-lg flex items-center justify-center text-white">
-                <span className="font-bold text-lg italic transition-transform group-hover:scale-110">A</span>
-              </div>
-              <span className="text-2xl font-bold tracking-tight text-[#2f2e36]">Anuvad</span>
-            </div>
-          </div>
+    <div className="min-h-screen text-[#2f2e36] overflow-x-hidden" style={{ background: '#f9f5ff' }}>
 
-          <div className="flex items-center gap-6">
-            <Search size={22} className="text-gray-500 cursor-pointer hover:text-[#7c3aed]" />
-            <User size={22} className="text-gray-500 cursor-pointer hover:text-[#7c3aed]" />
-            <button 
-              onClick={() => navigate('/dashboard')}
-              className="bg-[#2e1065] text-white px-8 py-3 rounded-xl font-bold hover:bg-[#1e0a45] transition-all uppercase text-[12px] tracking-wide shadow-sm"
-            >
-              Try Now
-            </button>
-          </div>
+      {/* ── Global background blobs ──────────────────────────── */}
+      <div className="fixed inset-0 -z-10 pointer-events-none overflow-hidden" aria-hidden="true">
+        <motion.div style={{ y: blobY }} className="absolute inset-0">
+          {/* Top-right lavender blob */}
+          <div style={{
+            position:'absolute', top:'-12%', right:'-6%',
+            width:900, height:900,
+            borderRadius:'60% 40% 30% 70% / 60% 30% 70% 40%',
+            background:'radial-gradient(ellipse, rgba(222,200,255,0.58) 0%, rgba(224,195,252,0.28) 60%, transparent 100%)',
+            filter:'blur(90px)',
+            animation:'morph 16s ease-in-out infinite, drift-1 11s ease-in-out infinite',
+          }} />
+          {/* Bottom-left mint blob */}
+          <div style={{
+            position:'absolute', bottom:'-10%', left:'-8%',
+            width:800, height:800,
+            borderRadius:'40% 60% 55% 45% / 45% 65% 35% 55%',
+            background:'radial-gradient(ellipse, rgba(177,242,184,0.52) 0%, rgba(161,228,170,0.26) 60%, transparent 100%)',
+            filter:'blur(80px)',
+            animation:'morph 13s ease-in-out infinite reverse, drift-2 13s ease-in-out infinite',
+          }} />
+          {/* Centre soft purple */}
+          <div style={{
+            position:'absolute', top:'40%', left:'30%',
+            width:600, height:600,
+            borderRadius:'50%',
+            background:'radial-gradient(ellipse, rgba(224,195,252,0.22) 0%, transparent 70%)',
+            filter:'blur(80px)',
+            animation:'breathe-slow 14s ease-in-out infinite',
+          }} />
+        </motion.div>
+
+        {/* Noise texture */}
+        <div className="noise-overlay" />
+
+        {/* Floating star particles */}
+        {Array.from({length:14}).map((_,i) => (
+          <div
+            key={i}
+            className="star-particle"
+            style={{
+              width:  2 + (i % 4),
+              height: 2 + (i % 4),
+              top:  `${(i * 7.3) % 100}%`,
+              left: `${(i * 13.4 + 5) % 100}%`,
+              background: ['#dec8ff','#b1f2b8','#e0c3fc','#cfbaf0'][i%4],
+              '--delay':    `${(i * 0.7) % 5}s`,
+              '--duration': `${3 + (i % 4)}s`,
+            } as React.CSSProperties}
+          />
+        ))}
+
+        {/* Rotating ring – top right */}
+        <div style={{ position:'absolute', top:'5%', right:'-80px', width:360, height:360 }}>
+          <svg viewBox="0 0 360 360" style={{ animation:'spin-slow 22s linear infinite', opacity:0.12 }}>
+            <circle cx="180" cy="180" r="170" fill="none" stroke="url(#hRing1)" strokeWidth="1" strokeDasharray="10 8" />
+            <circle cx="180" cy="180" r="140" fill="none" stroke="url(#hRing2)" strokeWidth="0.6" strokeDasharray="5 12" />
+            <defs>
+              <linearGradient id="hRing1" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%"   stopColor="#dec8ff" />
+                <stop offset="100%" stopColor="#b1f2b8" />
+              </linearGradient>
+              <linearGradient id="hRing2" x1="100%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%"   stopColor="#e0c3fc" />
+                <stop offset="100%" stopColor="#dec8ff" />
+              </linearGradient>
+            </defs>
+          </svg>
         </div>
-      </nav>
 
-      {/* Hero Section */}
-      <section className="relative pt-32 pb-24 px-6 overflow-hidden flex flex-col items-center">
-        <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-purple-100/50 rounded-full blur-[150px] -z-10 opacity-70" />
-        <div className="absolute top-40 left-0 w-[600px] h-[600px] bg-pink-100/40 rounded-full blur-[150px] -z-10 opacity-60" />
-        
-        <div className="max-w-4xl mx-auto text-center space-y-10">
-          <motion.h1 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="text-[64px] font-black leading-[1.1] tracking-tight text-[#1a1a1a]"
-          >
-            voices so real,<br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#9333ea] to-[#db2777]">
-              you won't know it's AI
-            </span>
-          </motion.h1>
-          
-          <motion.p 
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            className="text-gray-500 text-lg max-w-2xl mx-auto leading-relaxed"
-          >
-            Generate AI voiceovers in <span className="text-purple-600 font-bold underline decoration-purple-200">हिन्दी, தமிழ், বাংলা</span> & others.
-            Create projects that feel real and relatable rather than 
-            <span className="text-gray-900 font-bold"> cold and mechanical</span> with Anuvad in minutes.
-          </motion.p>
+        {/* Rotating ring – bottom left */}
+        <div style={{ position:'absolute', bottom:'8%', left:'-60px', width:260, height:260 }}>
+          <svg viewBox="0 0 260 260" style={{ animation:'spin-slow 30s linear infinite reverse', opacity:0.10 }}>
+            <circle cx="130" cy="130" r="120" fill="none" stroke="url(#hRing3)" strokeWidth="1" strokeDasharray="6 14" />
+            <defs>
+              <linearGradient id="hRing3" x1="0%" y1="100%" x2="100%" y2="0%">
+                <stop offset="0%"   stopColor="#b1f2b8" />
+                <stop offset="100%" stopColor="#e0c3fc" />
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+      </div>
 
+      {/* ── Navigation ────────────────────────────────────────── */}
+      <motion.nav
+        initial={{ y:-20, opacity:0 }}
+        animate={{ y:0,   opacity:1 }}
+        transition={{ duration:0.6, ease:[0.22,1,0.36,1] }}
+        className="sticky top-0 z-50"
+        style={{
+          background:'rgba(249,245,255,0.72)',
+          backdropFilter:'blur(28px)',
+          WebkitBackdropFilter:'blur(28px)',
+          borderBottom:'1px solid rgba(174,172,182,0.15)',
+        }}
+      >
+        <div className="max-w-[1400px] mx-auto px-8 py-5 flex items-center justify-between">
+          {/* Logo */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.2 }}
-            className="flex flex-col items-center gap-6 pt-4"
+            whileHover={{ scale:1.03 }}
+            className="flex items-center gap-2.5 cursor-pointer"
+            onClick={() => navigate('/')}
           >
-            <button 
-              onClick={() => navigate('/dashboard')}
-              className="bg-[#d946ef] text-white px-10 py-5 rounded-full text-lg font-bold hover:bg-[#c026d3] transition-all shadow-xl hover:shadow-2xl uppercase tracking-widest"
+            <div
+              className="w-9 h-9 rounded-xl flex items-center justify-center text-white relative overflow-hidden"
+              style={{ background:'linear-gradient(135deg,#7c3aed,#d946ef)', boxShadow:'0 6px 20px rgba(124,58,237,0.30)' }}
             >
-              Get Started
-            </button>
-            <button className="text-[#2e1065] font-black border-b-2 border-[#2e1065] text-xs uppercase tracking-[0.2em] hover:text-[#7c3aed] hover:border-[#7c3aed] transition-colors pb-1">
-              View All Features
-            </button>
+              <div className="absolute inset-0" style={{ background:'linear-gradient(135deg,rgba(255,255,255,0.22) 0%,transparent 55%)' }} />
+              <span className="text-lg font-black italic relative z-10">A</span>
+            </div>
+            <span className="text-[22px] font-black tracking-tight text-[#2f2e36]">Anuvad</span>
           </motion.div>
+
+          {/* Right actions */}
+          <div className="flex items-center gap-5">
+            <Search size={20} className="text-gray-400 cursor-pointer hover:text-[#7c3aed] transition-colors" />
+            <User   size={20} className="text-gray-400 cursor-pointer hover:text-[#7c3aed] transition-colors" />
+            <motion.button
+              whileHover={{ scale:1.04 }}
+              whileTap={{ scale:0.97 }}
+              onClick={() => navigate('/dashboard')}
+              className="btn-primary text-[12px] px-7 py-3"
+            >
+              Try Now <ArrowRight size={14} />
+            </motion.button>
+          </div>
         </div>
+      </motion.nav>
+
+      {/* ── Hero ──────────────────────────────────────────────── */}
+      <section ref={heroRef} className="relative pt-32 pb-28 px-6 flex flex-col items-center overflow-hidden">
+
+        {/* Decorative iridescent pill above headline */}
+        <motion.div
+          initial={{ opacity:0, scale:0.8 }}
+          animate={{ opacity:1, scale:1 }}
+          transition={{ duration:0.6, delay:0.1, ease:[0.22,1,0.36,1] }}
+          className="mb-8 px-5 py-2 rounded-full text-[12px] font-bold uppercase tracking-[0.18em] flex items-center gap-2"
+          style={{
+            background: 'rgba(222,200,255,0.35)',
+            border:     '1px solid rgba(124,58,237,0.20)',
+            color:      '#7c3aed',
+            backdropFilter:'blur(12px)',
+          }}
+        >
+          <span className="w-2 h-2 rounded-full bg-purple-400 animate-pulse inline-block" />
+          AI-Powered · Indian Languages · Real-Time
+        </motion.div>
+
+        {/* Headline */}
+        <motion.h1
+          initial={{ opacity:0, y:32 }}
+          animate={{ opacity:1, y:0 }}
+          transition={{ duration:0.8, delay:0.15, ease:[0.22,1,0.36,1] }}
+          className="text-center max-w-4xl"
+          style={{ fontSize:'clamp(44px,7vw,78px)', fontFamily:"'Space Grotesk',sans-serif", fontWeight:800, lineHeight:1.05, letterSpacing:'-0.025em', color:'#1a1a2e' }}
+        >
+          voices so real,{' '}
+          <br />
+          <span className="text-shimmer">you won't know it's AI</span>
+        </motion.h1>
+
+        {/* Sub-copy */}
+        <motion.p
+          initial={{ opacity:0, y:20 }}
+          animate={{ opacity:1, y:0 }}
+          transition={{ duration:0.7, delay:0.28, ease:[0.22,1,0.36,1] }}
+          className="mt-7 text-center text-lg max-w-2xl leading-relaxed"
+          style={{ color:'#5c5a63' }}
+        >
+          Generate AI voiceovers in{' '}
+          <span className="font-bold" style={{ color:'#7c3aed' }}>हिन्दी, தமிழ், বাংলা</span>{' '}
+          & others. Create projects that feel real and relatable — not{' '}
+          <em style={{ color:'#2f2e36', fontStyle:'normal', fontWeight:700 }}>cold and mechanical</em>.
+        </motion.p>
+
+        {/* CTAs */}
+        <motion.div
+          initial={{ opacity:0, y:20 }}
+          animate={{ opacity:1, y:0 }}
+          transition={{ duration:0.7, delay:0.40, ease:[0.22,1,0.36,1] }}
+          className="mt-10 flex flex-col sm:flex-row items-center gap-4 justify-center"
+        >
+          <motion.button
+            whileHover={{ scale:1.05 }}
+            whileTap={{ scale:0.96 }}
+            onClick={() => navigate('/dashboard')}
+            className="btn-primary text-[13px] px-10 py-5 flex items-center gap-2"
+          >
+            Get Started Free <ArrowRight size={16} />
+          </motion.button>
+        </motion.div>
+
+        {/* Stats strip */}
+        <motion.div
+          initial={{ opacity:0 }}
+          animate={{ opacity:1 }}
+          transition={{ duration:0.8, delay:0.60 }}
+          className="mt-16 flex items-center gap-10 flex-wrap justify-center"
+        >
+          {[
+            { val:'10+', label:'Indian Languages' },
+            { val:'50k+', label:'Videos Dubbed' },
+            { val:'99%', label:'Accuracy Rate' },
+            { val:'< 2min', label:'Processing Time' },
+          ].map((s,i) => (
+            <div key={i} className="text-center">
+              <div className="text-3xl font-black text-shimmer" style={{ letterSpacing:'-0.03em' }}>{s.val}</div>
+              <div className="text-[12px] font-semibold text-gray-400 mt-1 uppercase tracking-wider">{s.label}</div>
+            </div>
+          ))}
+        </motion.div>
       </section>
 
-      {/* Feature Cards Section */}
-      <section className="max-w-7xl mx-auto px-6 pb-40">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 px-4">
-            {[
-              { 
-                title: "AI Dubbing", 
-                desc: "Translate your videos into any language with real-like AI voices that maintain the true meaning and emotion of your original message.",
-                icon: (
-                  <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="url(#purpleGradient)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                    <rect x="2" y="4" width="20" height="16" rx="4" />
-                    <path d="M10 8l5 4-5 4V8z" fill="url(#purpleGradient)" />
-                    <path d="M18 10v4M20 8v8" strokeWidth="2" />
-                  </svg>
-                )
-              },
-              { 
-                title: "AI Subtitles", 
-                desc: "Auto-generate perfectly-synced, accurate subtitles in हिन्दी and 10+ Indian regional scripts to reach every viewer, on every platform.",
-                icon: (
-                  <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="url(#purpleGradient)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2v10z" />
-                    <path d="M7 8h10M7 12h7" strokeWidth="2" />
-                  </svg>
-                )
-              },
-              { 
-                title: "Text To Speech", 
-                desc: "Get realistic AI voiceovers for your text in any style, tone, and emotion you need in seconds without the hassle of hiring voice artists.",
-                icon: (
-                  <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="url(#purpleGradient)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6z" />
-                    <path d="M14 2v6h6" />
-                    <path d="M16 14l3 3m0-6l-3 3" stroke="url(#purpleGradient)" strokeWidth="2" />
-                    <circle cx="16" cy="14" r="3" />
-                  </svg>
-                )
-              },
-              { 
-                title: "API", 
-                desc: "Get full control over voices and use them your way—for videos, customer interactions & more. Easily integrate our voices into your platform or workflow.",
-                dark: true,
-                isNew: true,
-                icon: (
-                  <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                    <rect x="2" y="4" width="20" height="16" rx="4" />
-                    <path d="M8 10l-2 2 2 2M16 10l2 2-2 2M13 8l-2 8" />
-                  </svg>
-                )
-              },
-            ].map((feature, i) => (
+      {/* ── Feature Cards ────────────────────────────────────── */}
+      <section className="max-w-7xl mx-auto px-8 pb-32">
+        <motion.div
+          variants={container}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once:true, margin:'-100px' }}
+          className="grid grid-cols-1 md:grid-cols-3 gap-6"
+        >
+          {features.map((f, i) => {
+            const Icon = f.Icon;
+            return (
               <motion.div
                 key={i}
-                whileHover={{ y: -6, boxShadow: "0 25px 50px -12px rgb(0 0 0 / 0.15)" }}
-                className={`p-10 rounded-[2.5rem] transition-all cursor-pointer flex flex-col min-h-[380px] relative overflow-hidden group ${feature.dark ? 'bg-[#151515] text-white shadow-2xl' : 'bg-[#fce7f3] border border-pink-200 shadow-sm hover:shadow-2xl'}`}
+                variants={fadeUp}
+                whileHover={{ y:-10, transition:{ duration:0.35, ease:[0.22,1,0.36,1] } }}
+                className="relative rounded-[2rem] overflow-hidden cursor-pointer group"
+                style={{
+                  background: f.dark ? '#1a1a2e' : 'rgba(255,255,255,0.65)',
+                  backdropFilter: 'blur(24px)',
+                  WebkitBackdropFilter: 'blur(24px)',
+                  border: '1px solid',
+                  borderColor: f.dark ? 'rgba(255,255,255,0.08)' : 'rgba(174,172,182,0.18)',
+                  boxShadow: '0 8px 32px rgba(100,83,130,0.06)',
+                  minHeight: 360,
+                }}
               >
-                {/* SVG Gradient Definition */}
-                <svg className="absolute w-0 h-0">
-                  <defs>
-                    <linearGradient id="purpleGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                      <stop offset="0%" stopColor="#7c3aed" />
-                      <stop offset="100%" stopColor="#db2777" />
-                    </linearGradient>
-                  </defs>
-                </svg>
+                {/* Card inner glow on hover */}
+                <div
+                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-[2rem]"
+                  style={{ background: `radial-gradient(circle at 60% 20%, ${f.dark ? 'rgba(255,255,255,0.04)' : `${f.accent}10`} 0%, transparent 60%)` }}
+                />
 
-                {/* 'Cardient' Background - Darker Pink (Static) */}
-                {!feature.dark && (
-                  <div className="absolute inset-0 bg-gradient-to-br from-[#fce7f3] via-[#fce7f3] to-[#fae8ff] -z-0 pointer-events-none" />
+                {/* Subtle gradient bg */}
+                {!f.dark && (
+                  <div
+                    className="absolute inset-0 opacity-60 pointer-events-none"
+                    style={{ background: `linear-gradient(135deg, ${f.accent}08 0%, transparent 60%)` }}
+                  />
                 )}
 
-                {/* Animated Border Line Overlay (Hover Only) */}
-                {!feature.dark && (
-                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-30 pointer-events-none">
-                    <svg className="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
-                      <rect 
-                        x="0.5" y="0.5" width="99" height="99" 
-                        rx="10" ry="10" 
-                        fill="none" 
-                        stroke="#db2777" 
-                        strokeWidth="1.5" 
-                        strokeDasharray="20 10" 
-                        className="animate-border-draw"
-                        style={{ vectorEffect: 'non-scaling-stroke' }}
-                      />
-                    </svg>
-                  </div>
-                )}
-                
-                {/* Diagonal Ribbon for 'new' */}
-                {feature.isNew && (
-                  <div className="absolute top-0 right-0 w-24 h-24 overflow-hidden z-20">
-                    <div className="absolute top-4 -right-8 w-32 bg-gradient-to-r from-[#7c3aed] to-[#d946ef] text-white text-[10px] font-black py-1.5 text-center rotate-45 uppercase tracking-widest shadow-lg">
-                      new
+                {/* NEW badge */}
+                {f.isNew && (
+                  <div className="absolute top-5 right-5 z-20">
+                    <div
+                      className="text-[10px] font-black uppercase tracking-[0.15em] px-3 py-1.5 rounded-full text-white"
+                      style={{ background:'linear-gradient(135deg,#7c3aed,#d946ef)', boxShadow:'0 4px 12px rgba(124,58,237,0.40)' }}
+                    >
+                      NEW
                     </div>
                   </div>
                 )}
 
-                <div className="relative z-10 flex flex-col h-full">
-                  <div className={`mb-10 p-4 rounded-2xl w-fit inline-flex items-center justify-center ${feature.dark ? 'bg-white/10' : 'bg-white shadow-md border border-pink-200'}`}>
-                    {feature.icon}
-                  </div>
-                  <h3 className={`text-[22px] font-black mb-4 tracking-tight leading-none transition-colors ${feature.dark ? 'text-white' : 'text-[#2e1065] group-hover:text-pink-700'}`}>{feature.title}</h3>
-                  <p className={`text-[14px] leading-relaxed font-semibold mb-10 flex-1 ${feature.dark ? 'text-gray-400' : 'text-gray-600'}`}>
-                    {feature.desc}
-                  </p>
-                  <div 
-                    onClick={() => navigate(feature.title === 'API' ? '/dashboard' : '/upload', { state: { type: feature.title } })}
-                    className={`mt-auto flex items-center gap-2 group/btn cursor-pointer ${feature.dark ? 'text-white' : 'text-[#2e1065]'}`}
+                {/* Hover iridescent border */}
+                <div
+                  className="absolute inset-0 rounded-[2rem] pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                  style={{
+                    background: 'linear-gradient(135deg, #dec8ff, #b1f2b8, #e0c3fc)',
+                    backgroundSize: '300% 300%',
+                    animation: 'gradient-shift 5s ease infinite',
+                    mask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
+                    WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
+                    maskComposite: 'exclude',
+                    WebkitMaskComposite: 'xor',
+                    padding: '1px',
+                  }}
+                />
+
+                <div className="relative z-10 p-9 flex flex-col h-full" style={{ minHeight:360 }}>
+                  {/* Icon */}
+                  <div
+                    className="w-14 h-14 rounded-2xl flex items-center justify-center mb-8 relative overflow-hidden"
+                    style={{
+                      background: f.dark
+                        ? 'rgba(255,255,255,0.08)'
+                        : `linear-gradient(135deg, ${f.accent}18 0%, ${f.accent}08 100%)`,
+                      border: `1px solid ${f.dark ? 'rgba(255,255,255,0.10)' : f.accent + '25'}`,
+                      boxShadow: `0 8px 20px ${f.accent}22`,
+                    }}
                   >
-                    <span className="text-[11px] font-black uppercase tracking-[0.2em] border-b-2 border-current pb-0.5 group-hover/btn:text-pink-700 group-hover/btn:border-pink-700 transition-all">TRY NOW</span>
+                    <div className="absolute inset-0" style={{ background:'linear-gradient(135deg,rgba(255,255,255,0.15) 0%,transparent 60%)' }} />
+                    <Icon size={22} style={{ color: f.dark ? '#fff' : f.accent }} className="relative z-10" />
+                  </div>
+
+                  <h3
+                    className="text-xl font-black mb-3 tracking-tight"
+                    style={{ fontFamily:"'Space Grotesk',sans-serif", color: f.dark ? '#fff' : '#1a1a2e', letterSpacing:'-0.02em' }}
+                  >
+                    {f.title}
+                  </h3>
+                  <p className="text-[14px] leading-relaxed flex-1" style={{ color: f.dark ? 'rgba(255,255,255,0.55)' : '#5c5a63' }}>
+                    {f.desc}
+                  </p>
+
+                  <div
+                    className="mt-6 flex items-center gap-2 text-[11px] font-black uppercase tracking-[0.2em] cursor-pointer group/cta"
+                    style={{ color: f.dark ? '#dec8ff' : f.accent }}
+                    onClick={() => navigate(f.title === 'API' ? '/dashboard' : '/upload')}
+                  >
+                    <span>Try Now</span>
+                    <ArrowRight size={12} className="group-hover/cta:translate-x-1 transition-transform duration-200" />
                   </div>
                 </div>
               </motion.div>
-            ))}
-        </div>
+            );
+          })}
+        </motion.div>
       </section>
 
-      {/* Objectives Section */}
-      <section className="relative max-w-7xl mx-auto px-6 py-20 pb-40">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-pink-100/60 blur-[140px] rounded-full -z-10 pointer-events-none" />
-        
-        <div className="text-center mb-16">
-          <h2 className="text-4xl font-black text-[#1a1a1a] mb-4">Core <span className="text-[#7c3aed]">Objectives</span></h2>
-          <p className="text-gray-500 font-medium text-lg">Driving the future of digital content accessibility and localization.</p>
-        </div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {/* Card 1 */}
-          <motion.div
-            whileHover={{ y: -5 }}
-            className="bg-[#fefce8] p-8 rounded-3xl relative overflow-hidden group shadow-sm hover:shadow-xl transition-all flex flex-col justify-between min-h-[300px]"
-          >
-            <div className="flex items-center gap-4 mb-6 relative z-10">
-              <div className="w-10 h-10 rounded-full overflow-hidden bg-white/50 flex items-center justify-center border border-yellow-200">
-                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix&backgroundColor=fef08a" alt="avatar" className="w-full h-full object-cover" />
-              </div>
-              <div className="w-8 h-8 rounded-full bg-yellow-400 flex items-center justify-center text-white cursor-pointer hover:bg-yellow-500 transition-colors shadow-lg">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M8 5v14l11-7z" />
+      {/* ── Objectives ───────────────────────────────────────── */}
+      <section className="relative max-w-7xl mx-auto px-8 pb-40">
+        {/* Section label */}
+        <motion.div
+          initial={{ opacity:0, y:16 }}
+          whileInView={{ opacity:1, y:0 }}
+          viewport={{ once:true }}
+          transition={{ duration:0.6 }}
+          className="text-center mb-14"
+        >
+          <div className="inline-flex items-center gap-2 mb-4 px-4 py-1.5 rounded-full text-[11px] font-bold uppercase tracking-[0.18em]"
+            style={{ background:'rgba(222,200,255,0.30)', color:'#7c3aed', border:'1px solid rgba(124,58,237,0.15)' }}>
+            Core Mission
+          </div>
+          <h2 className="text-4xl font-black text-[#1a1a2e] mb-3" style={{ fontFamily:"'Space Grotesk',sans-serif", letterSpacing:'-0.025em' }}>
+            Core <span className="text-gradient-iridescent">Objectives</span>
+          </h2>
+          <p className="text-gray-500 font-medium text-base max-w-xl mx-auto">
+            Driving the future of digital content accessibility and localization.
+          </p>
+        </motion.div>
+
+        <motion.div
+          variants={container}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once:true, margin:'-80px' }}
+          className="grid grid-cols-1 md:grid-cols-3 gap-6"
+        >
+          {objectives.map((obj, i) => (
+            <motion.div
+              key={i}
+              variants={fadeUp}
+              whileHover={{ y:-6, transition:{ duration:0.35, ease:[0.22,1,0.36,1] } }}
+              className="relative rounded-[2rem] overflow-hidden group cursor-pointer"
+              style={{ background: obj.bg, minHeight:300, boxShadow:'0 8px 32px rgba(0,0,0,0.04)' }}
+            >
+              {/* hover shimmer overlay */}
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+                style={{ background:`radial-gradient(circle at 30% 30%, ${obj.waveFill}14 0%, transparent 65%)` }} />
+
+              {/* Animated waveform background */}
+              <div className="absolute top-1/2 left-0 w-full -translate-y-1/2 px-6 opacity-30 group-hover:opacity-50 transition-opacity pointer-events-none">
+                <svg viewBox="0 0 400 100" className="w-full h-24" preserveAspectRatio="none">
+                  <path d={`M0,50 Q${40+i*5},${10+i*8} ${80+i*3},50 T${160+i*2},50 T${240},50 T${320},50 T400,50`}
+                    fill="none" stroke={`url(#wg${i})`} strokeWidth="5" strokeLinecap="round"
+                    style={{ animation:`breathe ${3+i}s ease-in-out infinite` }} />
+                  <path d={`M0,50 Q${50+i*4},${85-i*6} ${100},50 T${200},50 T${300},50 T400,50`}
+                    fill="none" stroke={`url(#wg${i})`} strokeWidth="3.5" strokeLinecap="round"
+                    style={{ animation:`breathe ${2.5+i*0.5}s ease-in-out ${i*0.4}s infinite`, opacity:0.6 }} />
+                  <defs>
+                    <linearGradient id={`wg${i}`} x1="0%" y1="0%" x2="100%" y2="0%">
+                      <stop offset="0%"   stopColor={obj.waveFill} stopOpacity="0" />
+                      <stop offset="50%"  stopColor={obj.waveFill} />
+                      <stop offset="100%" stopColor={obj.waveFill} stopOpacity="0" />
+                    </linearGradient>
+                  </defs>
                 </svg>
               </div>
-            </div>
-            
-            <div className="absolute top-1/2 left-0 w-full transform -translate-y-1/2 px-6 opacity-40 group-hover:opacity-60 transition-opacity pointer-events-none">
-              <svg viewBox="0 0 400 100" className="w-full h-24" preserveAspectRatio="none">
-                <path d="M0,50 Q40,10 80,50 T160,50 T240,50 T320,50 T400,50" fill="none" stroke="url(#gradient-yellow)" strokeWidth="6" strokeLinecap="round" className="animate-[pulse_3s_ease-in-out_infinite]" />
-                <path d="M0,50 Q40,90 80,50 T160,50 T240,50 T320,50 T400,50" fill="none" stroke="url(#gradient-yellow)" strokeWidth="4" strokeLinecap="round" className="animate-[pulse_4s_ease-in-out_infinite_animation-delay-1000]" opacity="0.6"/>
-                <defs>
-                  <linearGradient id="gradient-yellow" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" stopColor="#eab308" stopOpacity="0"/>
-                    <stop offset="50%" stopColor="#eab308" />
-                    <stop offset="100%" stopColor="#eab308" stopOpacity="0"/>
-                  </linearGradient>
-                </defs>
-              </svg>
-            </div>
 
-            <p className="text-[#422006] font-semibold text-lg leading-relaxed relative z-10 mb-8">
-              Enable multilingual translation of digital content into Indian languages to improve accessibility for non-technical users across diverse regions.
-            </p>
-            
-            <div className="flex flex-wrap gap-2 mt-auto relative z-10">
-              <span className="bg-white/80 px-3 py-1 rounded-full text-xs font-bold text-yellow-800 shadow-sm backdrop-blur-sm border border-yellow-100 flex items-center gap-1">😲 Translation</span>
-              <span className="bg-white/80 px-3 py-1 rounded-full text-xs font-bold text-yellow-800 shadow-sm backdrop-blur-sm border border-yellow-100 flex items-center gap-1">👩 Indian Languages</span>
-              <span className="bg-white/80 px-3 py-1 rounded-full text-xs font-bold text-yellow-800 shadow-sm backdrop-blur-sm border border-yellow-100 flex items-center gap-1">Accessibility</span>
-            </div>
-          </motion.div>
+              <div className="relative z-10 p-9 flex flex-col h-full" style={{ minHeight:300 }}>
+                {/* Avatar row */}
+                <div className="flex items-center gap-3 mb-7">
+                  <div className="w-11 h-11 rounded-full overflow-hidden border-2 border-white shadow-md">
+                    <img src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${obj.seed}&backgroundColor=${obj.avatarBg}`} alt="" className="w-full h-full object-cover" />
+                  </div>
+                  <div className="w-9 h-9 rounded-full flex items-center justify-center text-white cursor-pointer shadow-md"
+                    style={{ background: obj.waveFill }}>
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                  </div>
+                </div>
 
-          {/* Card 2 */}
-          <motion.div
-            whileHover={{ y: -5 }}
-            className="bg-[#f0fdf4] p-8 rounded-3xl relative overflow-hidden group shadow-sm hover:shadow-xl transition-all flex flex-col justify-between min-h-[300px]"
-          >
-             <div className="flex items-center gap-4 mb-6 relative z-10">
-               <div className="w-10 h-10 rounded-full overflow-hidden bg-white/50 flex items-center justify-center border border-green-200">
-                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Jack&backgroundColor=bbf7d0" alt="avatar" className="w-full h-full object-cover" />
+                <p className="font-semibold text-base leading-relaxed flex-1 mb-8" style={{ color: obj.text }}>
+                  {obj.body}
+                </p>
+
+                <div className="flex flex-wrap gap-2 mt-auto">
+                  {obj.tags.map((tag, t) => (
+                    <span key={t} className="px-3 py-1 rounded-full text-[11px] font-bold shadow-sm"
+                      style={{
+                        background: 'rgba(255,255,255,0.75)',
+                        color: obj.text,
+                        border: `1px solid ${obj.waveFill}30`,
+                        backdropFilter: 'blur(8px)',
+                      }}>
+                      {tag}
+                    </span>
+                  ))}
+                </div>
               </div>
-              <div className="w-8 h-8 rounded-full bg-green-400 flex items-center justify-center text-white cursor-pointer hover:bg-green-500 transition-colors shadow-lg">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M8 5v14l11-7z" />
-                </svg>
-              </div>
-            </div>
-            
-            <div className="absolute top-1/2 left-0 w-full transform -translate-y-1/2 px-6 opacity-40 group-hover:opacity-60 transition-opacity pointer-events-none">
-              <svg viewBox="0 0 400 100" className="w-full h-24" preserveAspectRatio="none">
-                <path d="M0,50 Q50,0 100,50 T200,50 T300,50 T400,50" fill="none" stroke="url(#gradient-green)" strokeWidth="6" strokeLinecap="round" className="animate-[pulse_3.5s_ease-in-out_infinite]" />
-                <path d="M0,50 Q40,100 80,50 T160,50 T240,50 T320,50 T400,50" fill="none" stroke="url(#gradient-green)" strokeWidth="4" strokeLinecap="round" className="animate-[pulse_2.5s_ease-in-out_infinite]" opacity="0.6"/>
-                <defs>
-                  <linearGradient id="gradient-green" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" stopColor="#22c55e" stopOpacity="0"/>
-                    <stop offset="50%" stopColor="#22c55e" />
-                    <stop offset="100%" stopColor="#22c55e" stopOpacity="0"/>
-                  </linearGradient>
-                </defs>
-              </svg>
-            </div>
-
-            <p className="text-[#052e16] font-semibold text-lg leading-relaxed relative z-10 mb-8">
-              Develop an OTT-style content localization framework that supports single-upload processing with dynamic target language selection.
-            </p>
-            
-             <div className="flex flex-wrap gap-2 mt-auto relative z-10">
-              <span className="bg-white/80 px-3 py-1 rounded-full text-xs font-bold text-green-800 shadow-sm backdrop-blur-sm border border-green-100 flex items-center gap-1">🎙️ OTT-Style</span>
-              <span className="bg-white/80 px-3 py-1 rounded-full text-xs font-bold text-green-800 shadow-sm backdrop-blur-sm border border-green-100 flex items-center gap-1">👨 Single-upload</span>
-              <span className="bg-white/80 px-3 py-1 rounded-full text-xs font-bold text-green-800 shadow-sm backdrop-blur-sm border border-green-100 flex items-center gap-1">🇮🇪 Target</span>
-            </div>
-          </motion.div>
-
-          {/* Card 3 */}
-          <motion.div
-            whileHover={{ y: -5 }}
-            className="bg-[#f5f3ff] p-8 rounded-3xl relative overflow-hidden group shadow-sm hover:shadow-xl transition-all flex flex-col justify-between min-h-[300px]"
-          >
-            <div className="flex items-center gap-4 mb-6 relative z-10">
-               <div className="w-10 h-10 rounded-full overflow-hidden bg-white/50 flex items-center justify-center border border-purple-200">
-                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Mia&backgroundColor=d8b4fe" alt="avatar" className="w-full h-full object-cover" />
-              </div>
-              <div className="w-8 h-8 rounded-full bg-[#7c3aed] flex items-center justify-center text-white cursor-pointer hover:bg-[#6d28d9] transition-colors shadow-lg">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M8 5v14l11-7z" />
-                </svg>
-              </div>
-            </div>
-            
-            <div className="absolute top-1/2 left-0 w-full transform -translate-y-1/2 px-6 opacity-40 group-hover:opacity-60 transition-opacity pointer-events-none">
-              <svg viewBox="0 0 400 100" className="w-full h-24" preserveAspectRatio="none">
-                 <path d="M0,50 Q30,10 60,50 T120,50 T180,50 T240,50 T300,50 T360,50 T400,50" fill="none" stroke="url(#gradient-purple)" strokeWidth="6" strokeLinecap="round" className="animate-[pulse_2s_ease-in-out_infinite]" />
-                 <path d="M0,50 Q60,80 120,50 T240,50 T360,50 T400,50" fill="none" stroke="url(#gradient-purple)" strokeWidth="4" strokeLinecap="round" className="animate-[pulse_3s_ease-in-out_infinite]" opacity="0.6"/>
-                <defs>
-                  <linearGradient id="gradient-purple" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" stopColor="#7c3aed" stopOpacity="0"/>
-                    <stop offset="50%" stopColor="#7c3aed" />
-                    <stop offset="100%" stopColor="#7c3aed" stopOpacity="0"/>
-                  </linearGradient>
-                </defs>
-              </svg>
-            </div>
-
-            <p className="text-[#2e1065] font-semibold text-lg leading-relaxed relative z-10 mb-8">
-              Enhance localization efficiency by reducing redundant computation through parallel and reusable translation.
-            </p>
-            
-            <div className="flex flex-wrap gap-2 mt-auto relative z-10">
-              <span className="bg-white/80 px-3 py-1 rounded-full text-xs font-bold text-purple-800 shadow-sm backdrop-blur-sm border border-purple-100 flex items-center gap-1">🎙️ Podcast</span>
-              <span className="bg-white/80 px-3 py-1 rounded-full text-xs font-bold text-purple-800 shadow-sm backdrop-blur-sm border border-purple-100 flex items-center gap-1">👩 Parallel</span>
-              <span className="bg-white/80 px-3 py-1 rounded-full text-xs font-bold text-purple-800 shadow-sm backdrop-blur-sm border border-purple-100 flex items-center gap-1">Reusable</span>
-            </div>
-          </motion.div>
-        </div>
+            </motion.div>
+          ))}
+        </motion.div>
       </section>
     </div>
   );

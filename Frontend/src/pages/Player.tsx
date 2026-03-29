@@ -23,7 +23,7 @@ const Player = () => {
       </div>
 
       {/* Info & Engagement */}
-      <div className="flex items-start justify-between bg-white p-12 rounded-[3.5rem] border border-purple-50 shadow-sm">
+      <div className="flex items-start justify-between bg-white/60 backdrop-blur-2xl p-12 rounded-[3.5rem] border border-white/50 shadow-[0_8px_32px_rgba(100,83,130,0.04)]">
         <div className="space-y-6 flex-1">
           <div className="flex items-center gap-3">
             <span className="bg-purple-100 text-[#7c3aed] text-[10px] font-black px-4 py-1.5 rounded-full uppercase tracking-widest">Education</span>
@@ -41,14 +41,14 @@ const Player = () => {
             <Heart size={20} /> 124K Likes
           </button>
           <div className="grid grid-cols-2 gap-4">
-            <button className="bg-white border border-gray-100 p-5 rounded-[2rem] flex flex-col items-center gap-2 hover:bg-gray-50 transition-all text-gray-500">
+            <button className="bg-white/50 backdrop-blur-md border border-white/50 p-5 rounded-[2rem] flex flex-col items-center gap-2 hover:bg-white/80 transition-all text-gray-500 shadow-[0_4px_16px_rgba(100,83,130,0.04)]">
               <Share2 size={20} /> <span className="text-[10px] font-black uppercase">Share</span>
             </button>
-            <button className="bg-white border border-gray-100 p-5 rounded-[2rem] flex flex-col items-center gap-2 hover:bg-gray-50 transition-all text-gray-500">
+            <button className="bg-white/50 backdrop-blur-md border border-white/50 p-5 rounded-[2rem] flex flex-col items-center gap-2 hover:bg-white/80 transition-all text-gray-500 shadow-[0_4px_16px_rgba(100,83,130,0.04)]">
               <Download size={20} /> <span className="text-[10px] font-black uppercase">Save</span>
             </button>
           </div>
-          <button className="w-full bg-[#2f2e36] text-white py-5 rounded-[2rem] font-black text-xs uppercase tracking-widest flex items-center justify-center gap-3 shadow-lg">
+          <button className="w-full bg-gradient-to-br from-[#2f2e36] to-[#1a1a2e] text-white py-5 rounded-[2rem] font-black text-xs uppercase tracking-widest flex items-center justify-center gap-3 shadow-[0_12px_36px_rgba(47,46,54,0.3)] hover:scale-[1.02] transition-all border border-white/10">
             <MessageSquare size={18} /> Community Discussion
           </button>
         </div>

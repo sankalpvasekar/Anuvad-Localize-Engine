@@ -36,7 +36,7 @@ const Upload = () => {
       </div>
 
       {/* Type Selection */}
-      <div className="flex bg-purple-50 p-1.5 rounded-2xl w-fit mx-auto shadow-sm border border-purple-100 relative">
+      <div className="flex bg-white/40 backdrop-blur-xl p-1.5 rounded-2xl w-fit mx-auto shadow-[0_8px_32px_rgba(100,83,130,0.04)] border border-white/50 relative">
         {localizationTypes.map((type) => {
           const isActive = selectedType === type.id;
           return (
@@ -65,8 +65,8 @@ const Upload = () => {
         <div 
           onDragOver={(e) => { e.preventDefault(); setDragActive(true); }}
           onDragLeave={() => setDragActive(false)}
-          className={`aspect-square rounded-[3.5rem] border-4 border-dashed transition-all flex flex-col items-center justify-center p-10 cursor-pointer ${
-            dragActive ? 'border-purple-400 bg-purple-50' : 'border-purple-100 bg-white hover:border-purple-200'
+          className={`aspect-square rounded-[3.5rem] border-[3px] border-dashed transition-all duration-300 flex flex-col items-center justify-center p-10 cursor-pointer backdrop-blur-md ${
+            dragActive ? 'border-[#7c3aed] bg-[#7c3aed]/10' : 'border-purple-300/60 bg-purple-900/5 hover:bg-purple-900/10 hover:border-purple-400/60 hover:shadow-[0_20px_40px_rgba(100,83,130,0.06)]'
           }`}
         >
           <div className="w-24 h-24 bg-purple-100 rounded-[2rem] flex items-center justify-center mb-6 text-[#7c3aed]">
@@ -77,7 +77,7 @@ const Upload = () => {
         </div>
 
         {/* Link Box */}
-        <div className="aspect-square bg-white rounded-[3.5rem] border border-purple-50 p-10 flex flex-col justify-between shadow-xl shadow-purple-100/20">
+        <div className="aspect-square bg-purple-900/5 backdrop-blur-2xl rounded-[3.5rem] border border-purple-200 p-10 flex flex-col justify-between shadow-[0_8px_32px_rgba(100,83,130,0.08)]">
           <div className="space-y-6">
             <div className="w-20 h-20 bg-purple-50 rounded-[2rem] flex items-center justify-center text-[#7c3aed]">
               <LinkIcon size={32} />
@@ -95,7 +95,7 @@ const Upload = () => {
                 value={videoUrl}
                 onChange={(e) => setVideoUrl(e.target.value)}
                 placeholder="https://youtube.com/watch?v=..." 
-                className="w-full bg-purple-50/50 border-none rounded-2xl pl-12 pr-4 py-4 text-sm outline-none focus:ring-2 focus:ring-purple-200 transition-all"
+                className="w-full bg-white/60 border border-purple-100 rounded-2xl pl-12 pr-4 py-4 text-sm outline-none focus:ring-2 focus:ring-purple-300 transition-all font-semibold"
               />
             </div>
           </div>
@@ -118,7 +118,7 @@ const Upload = () => {
               }
               navigate('/processing');
             }}
-            className="w-full bg-[#2e1065] text-white py-5 rounded-3xl font-black uppercase text-xs tracking-widest flex items-center justify-center gap-3 hover:bg-[#1e0a45] transition-all disabled:opacity-50 disabled:cursor-not-allowed">
+            className="w-full bg-gradient-to-br from-primary to-primary-container text-white py-5 rounded-3xl font-black uppercase text-xs tracking-widest flex items-center justify-center gap-3 hover:scale-[1.02] shadow-lg shadow-primary/20 transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 border border-white/20">
             {isSubmitting ? 'Starting...' : 'Fetch Video'} <ArrowRight size={20} />
           </button>
         </div>
@@ -126,7 +126,7 @@ const Upload = () => {
 
 
       {/* Language Selection Preview */}
-      <div className="bg-white/50 backdrop-blur-md rounded-[2.5rem] p-10 border border-purple-100 space-y-8">
+      <div className="bg-white/40 backdrop-blur-2xl rounded-[3.5rem] p-10 border border-white/50 shadow-[0_8px_32px_rgba(100,83,130,0.04)] space-y-8">
         <div className="flex items-center justify-between">
           <h3 className="text-xl font-bold flex items-center gap-3">
             <Globe className="text-purple-500" /> Target Indian Languages

@@ -15,18 +15,18 @@ const Library = () => {
             <input 
               type="text" 
               placeholder="Search projects..." 
-              className="bg-white border-none rounded-2xl pl-12 pr-6 py-3 text-sm w-80 outline-none focus:ring-2 focus:ring-purple-200 shadow-sm"
+              className="bg-white/50 backdrop-blur-md border border-white/50 rounded-2xl pl-12 pr-6 py-3 text-sm w-80 outline-none focus:ring-2 focus:ring-purple-300 shadow-[0_8px_32px_rgba(100,83,130,0.04)]"
             />
           </div>
-          <button className="bg-white p-3 rounded-2xl text-gray-400 hover:text-purple-600 shadow-sm border border-purple-50">
+          <button className="bg-white/50 backdrop-blur-md p-3 rounded-2xl text-gray-500 hover:text-purple-600 shadow-[0_8px_32px_rgba(100,83,130,0.04)] border border-white/50">
             <Filter size={20} />
           </button>
         </div>
       </div>
 
-      <div className="bg-white rounded-[2.5rem] border border-purple-50 shadow-sm overflow-hidden">
+      <div className="bg-white/60 backdrop-blur-2xl rounded-[2.5rem] border border-white/50 shadow-[0_8px_32px_rgba(100,83,130,0.04)] overflow-hidden">
         <table className="w-full text-left">
-          <thead className="bg-[#fcfaff] border-b border-purple-50">
+          <thead className="bg-white/40 border-b border-white/50">
             <tr className="text-[11px] font-black uppercase tracking-widest text-gray-400">
               <th className="px-10 py-6">Project Name</th>
               <th className="px-6 py-6">Language</th>
@@ -36,12 +36,12 @@ const Library = () => {
               <th className="px-10 py-6 text-right">Actions</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-purple-50">
+          <tbody className="divide-y divide-white/20">
             {projects.map((proj) => (
               <motion.tr 
                 key={proj.id}
-                whileHover={{ backgroundColor: '#fdfbff' }}
-                className="group cursor-pointer"
+                whileHover={{ backgroundColor: 'rgba(255, 255, 255, 0.4)' }}
+                className="group cursor-pointer border-b border-white/20 last:border-none transition-colors duration-200"
               >
                 <td className="px-10 py-6">
                   <div className="flex items-center gap-4">

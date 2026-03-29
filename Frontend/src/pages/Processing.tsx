@@ -13,7 +13,7 @@ const Processing = () => {
           <h1 className="text-4xl font-black tracking-tight text-[#2f2e36]">Processing Jobs ⚙️</h1>
           <p className="text-gray-500 font-medium mt-1">Track your active localizations in real-time.</p>
         </div>
-        <div className="bg-purple-100/50 px-6 py-3 rounded-2xl flex items-center gap-3 text-[#7c3aed] font-bold">
+        <div className="bg-white/60 backdrop-blur-xl border border-white/50 px-6 py-3 rounded-2xl flex items-center gap-3 text-[#7c3aed] font-bold shadow-sm">
           <RefreshCw size={20} className="animate-spin" />
           Auto-updating
         </div>
@@ -25,7 +25,7 @@ const Processing = () => {
             key={task.id}
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
-            className={`bg-white p-8 rounded-[2.5rem] border border-purple-50 shadow-sm flex items-center gap-8 ${task.status === 'done' ? 'opacity-70' : ''}`}
+            className={`bg-white/60 backdrop-blur-2xl p-8 rounded-[2.5rem] border border-white/50 shadow-[0_8px_32px_rgba(100,83,130,0.04)] flex items-center gap-8 relative overflow-hidden ${task.status === 'done' ? 'opacity-70' : ''}`}
           >
             {/* Status Icon */}
             <div className={`w-16 h-16 rounded-2xl flex items-center justify-center ${
@@ -74,7 +74,7 @@ const Processing = () => {
       </div>
 
       {/* Tip Card */}
-      <div className="bg-gradient-to-br from-[#1a1a2e] to-[#16213e] p-10 rounded-[3rem] text-white flex items-center justify-between">
+      <div className="bg-gradient-to-br from-[#1a1a2e]/90 to-[#16213e]/90 backdrop-blur-3xl p-10 rounded-[3rem] border border-white/10 shadow-2xl text-white flex items-center justify-between">
         <div className="space-y-4">
           <div className="flex items-center gap-3 text-orange-400 font-bold uppercase tracking-[0.2em] text-[11px]">
             <AlertCircle size={16} /> Pro Tip
