@@ -1,5 +1,9 @@
 import os
 import re
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
 
 class ScholarShield:
     def __init__(self):
@@ -93,8 +97,17 @@ class NeuralSyncEngine:
         self.dtype = torch.float16 if self.device == "cuda" else torch.float32
         
         print(f"Loading Neural Engine ({model_name}) on {self.device} with {self.dtype}...")
-        self.tokenizer = AutoTokenizer.from_pretrained(model_name, trust_remote_code=True)
-        self.model = AutoModelForSeq2SeqLM.from_pretrained(model_name, trust_remote_code=True).to(self.device, dtype=self.dtype)
+        hf_token = os.getenv("HF_TOKEN")
+        self.tokenizer = AutoTokenizer.from_pretrained(
+            model_name, 
+            trust_remote_code=True,
+            token=hf_token
+        )
+        self.model = AutoModelForSeq2SeqLM.from_pretrained(
+            model_name, 
+            trust_remote_code=True,
+            token=hf_token
+        ).to(self.device, dtype=self.dtype)
         
     def translate_batch(self, texts: list, src_lang: str, tgt_lang: str, batch_size=4):
         import torch
