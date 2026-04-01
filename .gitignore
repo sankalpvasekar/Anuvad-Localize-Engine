@@ -1,0 +1,11 @@
+.env
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.DS_Store
+*.json
+!test_input.json
+!test_output_downloaded.json
+debug_err.txt
+debug_out.txt

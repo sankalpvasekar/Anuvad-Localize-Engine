@@ -1,0 +1,675 @@
+0:01
+[Music]
+0:04
+hello and welcome to excellence academy
+0:08
+for today we're looking at integration
+0:11
+integration is simply the rivers of
+0:14
+differentiation
+0:15
+record that we said if i'm given y
+0:19
+being equal to x to the power n
+0:22
+then from integration
+0:24
+from differentiation if i differentiate
+0:27
+y with respect to x i will get the y all
+0:31
+over the x and we said the concept of
+0:34
+differentiation is simply to multiply by
+0:37
+the power the pi has n so becomes
+0:40
+n
+0:41
+x to the power we said subtract one from
+0:43
+you
+0:44
+becomes n
+0:46
+minus one so this was just a simple
+0:48
+concept of differentiation
+0:51
+for integration if i'm given that
+0:54
+the y over dx is equal to x to the power
+0:58
+n now for me to go back to get the
+1:00
+valuable square i'll have to
+1:03
+integrate so that's how we said
+1:05
+integration is simply the reverse of
+1:08
+differentiation
+1:09
+so for this concept now the first case
+1:11
+would be i'll move the x over here
+1:14
+such that this number becomes half
+1:16
+electric if the x comes here i'll be
+1:18
+left with y
+1:19
+so i'll have that z y is equal to
+1:22
+against x by m to becomes x to the power
+1:25
+n and then i have x so this becomes the
+1:29
+x so the y is equal to x bar n and then
+1:32
+x
+1:34
+um
+1:34
+problems on integration are identified
+1:37
+when i use the integral symbol the
+1:40
+integral symbol is simply this this is
+1:42
+called the integral symbol alright this
+1:44
+is called integral symbol if i attach
+1:47
+the integral symbol to my left hand side
+1:50
+and right hand side of equation i have
+1:53
+that the integral of d y
+1:56
+is equal to attach integral side to this
+1:59
+becomes the integral of x by n and of
+2:03
+course dx
+2:05
+if you observe the process of
+2:06
+differentiation it was simply to
+2:09
+multiply by the path and then subtract
+2:11
+one that was differentiation for
+2:13
+integration i will do the exact opposite
+2:16
+so this will now become
+2:18
+if i integrate the y you get y
+2:21
+is equal to to integrate this for this
+2:23
+now for differentiation i multiply by n
+2:27
+i subtract them so if i'm doing the
+2:29
+opposite now instead of instead of
+2:30
+subtracting one again i will add one to
+2:33
+becomes x to the power and i'll now add
+2:37
+one as opposed to subtraction in
+2:39
+differentiation and then also as opposed
+2:42
+to multiplying by the path i will divide
+2:45
+by the pi yeah
+2:47
+and
+2:48
+plus one and of course add a constant so
+2:51
+this is how um we do integration it's as
+2:55
+simple as adding one to the power and
+2:57
+then dividing by what i have here we'll
+3:00
+take very simple examples and we'll see
+3:02
+how this
+3:03
+when it comes to before that when it
+Integration by General Method
+3:05
+comes to
+3:07
+integration there are different methods
+3:09
+of doing integration there is um
+3:12
+general method there is by substitution
+3:14
+there is bypass and etcetera will take
+3:17
+the methods one after the other and work
+3:20
+on them together let's start the first
+3:22
+method of integration known as
+3:24
+integration
+3:25
+via the general method so number one
+3:28
+general method of inspiration
+3:42
+all right so let's see we are given that
+3:44
+basically we asked
+3:45
+evaluated
+3:48
+rather than with the integral of uh
+3:53
+four
+3:54
+x cubed minus two x squared plus six x
+4:00
+plus
+4:01
+seven
+4:02
+dx
+4:04
+right
+4:04
+let's say you're asking about one space
+4:06
+what do you do now notice this when it
+4:08
+comes to integration the first thing you
+4:11
+look at is this your integral variable
+4:13
+this is the x it's called the integral
+4:16
+variable that means i'm integrating this
+4:18
+whole function with respect to x that's
+4:21
+what it means so if i integrate what do
+4:23
+i do now when it comes to integration
+4:25
+and if i'm actually integrating a number
+4:28
+of things such as this
+4:30
+the key concept will be this um i'll be
+4:33
+the integral sign for each of the tens
+4:36
+and of course i'll now attach the x to
+4:38
+all of them right so the functions take
+4:40
+the things ground sign for each of the
+4:42
+ten so integral sign with four x cubed
+4:45
+and then the x this will now give me the
+4:48
+integral of
+4:50
+four
+4:50
+x cubed and then
+4:52
+the x
+4:54
+this time hex minus becomes minus take
+4:57
+integral sign to this and the x becomes
+5:00
+integral two x squared
+5:03
+dx next one plus so i'm having plus
+5:07
+taking plus sign to 6x and then x
+5:10
+because integrals 6 x to the x
+5:14
+plus finally integral 7 to x becomes
+5:19
+integral 7
+5:21
+dx
+5:23
+so i have this
+5:24
+the next step is
+5:26
+for each of the integrals you take away
+5:29
+constants to take the constant 10
+5:31
+outside the integral side if i take
+5:33
+constant then outside its ground sign
+5:36
+the constant has 4 so take 4 outside x
+5:39
+ground side becomes
+5:40
+4
+5:41
+i'm left with integral of x cube so
+5:44
+integral
+5:45
+x cubed of course which dx
+5:48
+minus my constant 10 has 2 available
+6:06
+integral
+6:07
+x
+6:08
+dx then finally i have plus yeah so plus
+6:12
+my constant can get seven it becomes
+6:15
+seven integral
+6:17
+yes i have this all right so work on
+6:21
+this now this number equal to
+6:24
+i'm having yes
+6:25
+so i'm having four yeah
+6:27
+into to integrate as you said i want to
+6:30
+be pi and divide by what you have so i'm
+6:32
+having x cubed here
+6:35
+add one this becomes plus one over
+6:39
+three plus one i have this
+6:41
+negative minus two
+6:44
+into in square this becomes x square r 1
+6:48
+to b second plus 1 all over
+6:51
+2 plus 1
+6:53
+next up
+6:54
+plus
+6:56
+6
+6:57
+into yes x becomes x the power is one
+7:01
+becomes one and one one plus one all
+7:04
+over
+7:05
+one plus one finally i have plus seven
+7:09
+so plus seven
+7:11
+into for this now having yes all right
+7:14
+now notice that when i integrated the y
+7:18
+here i have y
+7:20
+similarly when i integrate the x i'll
+7:23
+get x and of course we said after
+7:26
+expression you add plus c
+7:28
+c is your constant of integration so
+7:31
+this becomes
+7:32
+plus
+7:33
+c
+7:34
+all right so i'll try as much as
+7:36
+possible to simplify this
+7:40
+working on this i now have this becomes
+7:43
+4
+7:45
+so it's now
+7:46
+equal to 4
+7:49
+okay so i have x n into 3 plus 1 and 64
+7:54
+that's x to the power 4 all over
+7:57
+three plus one here gives four so all
+8:00
+over four
+8:01
+next one
+8:03
+minus two
+8:04
+into
+8:06
+x here
+8:07
+two plus one is three so x by three so
+8:10
+having having
+8:11
+x to the power three all over i'm having
+8:14
+three depth
+8:16
+okay
+8:17
+plus six so plus six into
+8:21
+x to the power one plus one that's two
+8:23
+like two x squared from having
+8:26
+x squared on the bar
+8:28
+one plus one here is two so it becomes
+8:31
+all over
+8:33
+two
+8:34
+plus seven x so i'm having plus
+8:38
+seven x
+8:40
+plus i have the constant of integration
+8:44
+that c
+8:45
+all right so simplify this level
+8:47
+this tsunami equals
+8:49
+from here now four times four i'm left
+8:52
+with x by 4 so i'm having
+8:54
+x plus 4 here
+8:56
+minus 2 of course this cannot readily
+8:59
+cancel out it becomes 2 all over 3 so 2
+9:04
+all over 3 times x cubed so times xb or
+9:08
+you can see 2x cube about 3 12.
+9:12
+let me write it this way
+9:14
+so 2 by 3
+9:15
+x cubed right but that's this way so
+9:18
+next one plus from here
+9:24
+becomes plus three x squared becomes
+9:26
+plus
+9:27
+three
+9:28
+x squared
+9:29
+plus next by half seven x
+9:32
+so seven x plus finally
+9:35
+c so i'm having this so my answer
+9:38
+becomes x 4
+9:40
+minus x over 3 x cubed plus 3 x squared
+9:44
+plus 7 x plus c so this is how you do
+9:48
+integration
+9:50
+using general method
+Example
+9:53
+so take a final example on general
+9:56
+method of integration
+9:58
+let's have asked to evaluate this
+10:00
+instagram
+10:01
+as in my previous example your first
+10:04
+test would be used inside outside for
+10:06
+each of these terms and then the x so
+10:09
+now that this
+10:11
+has been
+10:12
+integral this term the x becomes
+10:15
+integral
+10:16
+4 over 5
+10:18
+x cubed dx
+10:21
+then the side x minus becomes minus
+10:24
+integral this time the x becomes
+10:26
+integral
+10:28
+2 over 7 and 5
+10:31
+dx
+10:32
+and then minus again
+10:34
+so minus
+10:36
+integral in level x dx becomes integral
+10:39
+of the w x d x finally plus
+10:43
+plus
+10:45
+integral 6 x
+10:47
+having integral 6
+10:49
+d so i have this step
+10:52
+next up i will keep the constant there
+10:55
+outside the integral side so take
+10:57
+constant m outside integral sign this
+11:00
+becomes constant yes over five so having
+11:04
+four over five into the integral
+11:08
+x cubed dx
+11:10
+minus constant here is two over seven so
+11:14
+two all over seven integral
+11:17
+x to the power five
+11:18
+the x
+11:19
+minus
+11:21
+constant take this level so becomes
+11:23
+eleven
+11:24
+integral x d x plus constantine has six
+11:29
+becomes six integral
+11:31
+dx
+11:33
+work on this now this is now equal to
+11:36
+i'm having
+11:37
+four over five we said for this case
+11:40
+it's as easy as add one to the index
+11:43
+becomes x cubed plus one all over
+11:46
+divided by the pi yeah x
+11:49
+plus one
+11:50
+minus this is two over seven
+11:53
+two over seven into x 5 so x bar 5 plus
+11:59
+1 all over
+12:00
+5 plus 1
+12:02
+minus
+12:04
+is 11 so 11 into
+12:06
+x the part x 1 becomes one plus one all
+12:10
+over
+12:11
+one plus one
+12:13
+plus six
+12:15
+integral x is equal to x and then c
+12:19
+the constant of integration
+12:22
+if i simplify this it's now equal to
+12:25
+i'm having this as
+12:27
+four all over five
+12:29
+into
+12:30
+x to the power three plus one is four so
+12:32
+x to the power four
+12:34
+all over three plus one here is four
+12:37
+next or minus
+12:40
+2 all over 7 into x to the power
+12:44
+5 plus 1 is 6
+12:47
+all over 6
+12:49
+okay minus 11 so minus 11
+12:52
+into x by one plus one is two so x by
+12:56
+two all over one plus one is two
+12:59
+okay finally plus c x six x plus six x
+13:04
+of course plus c somehow plus c so
+13:07
+having this yeah simplify this folder
+13:09
+this will now be equal to i'm having 4
+13:12
+times 4
+13:14
+x gives you
+13:15
+4 times x plus 4 gives you
+13:18
+4 x to the power 4 all over 5 times 4 is
+13:22
+20
+13:24
+minus
+13:25
+2 times x plus 6 gives you 2 x plus 6
+13:29
+over
+13:31
+this gives you
+13:32
+42
+13:34
+okay minus 11 times x plus
+13:37
+2 gives you 11 x squared all over
+13:41
+2
+13:42
+plus 6 x
+13:44
+plus c i have s
+13:46
+so this is now equal to
+13:49
+reduce this to its lowest term
+13:51
+so four here one four here five so one
+13:55
+times x by four gives you x plus four on
+13:59
+five
+14:00
+minus two here one two here twenty one
+14:05
+one times x plus six gives you x plus
+14:08
+six all over 21
+14:11
+minus eleven x squared over two
+14:15
+plus six x plus c
+14:18
+so this is how we solve problems on
+14:20
+general method of integration
+
+
+
