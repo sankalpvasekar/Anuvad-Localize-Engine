@@ -1,20 +1,20 @@
-import { motion } from 'framer-motion';
-import { Plus, Search, Filter, MoreVertical, Play, Clock, TrendingUp, Zap, Globe } from 'lucide-react';
+import { motion, type Variants } from 'framer-motion';
+import { Plus, Search, Filter, MoreVertical, Play, Clock, TrendingUp, Zap, Globe, Trash2 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useProjects } from '../context/ProjectContext';
-import { useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 
-const fadeUp = {
+const fadeUp: Variants = {
   hidden: { opacity:0, y:20 },
-  show:   { opacity:1, y:0, transition:{ duration:0.55, ease:[0.22,1,0.36,1] } },
+  show:   { opacity:1, y:0, transition:{ duration:0.55, ease:[0.22,1,0.36,1] as const } },
 };
-const container = {
+const container: Variants = {
   hidden: {},
   show:   { transition:{ staggerChildren:0.10 } },
 };
 
 /* Animated counter */
-const Counter = ({ value }: { value: number }) => {
+const Counter = ({ value }: { value: number }): React.JSX.Element => {
   const spanRef = useRef<HTMLSpanElement>(null);
   useEffect(() => {
     let start = 0;
@@ -58,13 +58,27 @@ const statConfig = [
 
 const Dashboard = () => {
   const navigate = useNavigate();
-  const { projects } = useProjects();
+  const { projects, deleteProject } = useProjects();
+  
+  // Sort projects by created_at (DESC)
+  const sortedProjects = [...projects].sort((a, b) => {
+    const da = a.created_at ? new Date(a.created_at).getTime() : 0;
+    const db = b.created_at ? new Date(b.created_at).getTime() : 0;
+    return db - da;
+  });
 
   const stats = [
     projects.length,
     projects.filter(p => p.status === 'Processing').length,
     new Set(projects.map(p => p.lang)).size,
   ];
+
+  const handleDelete = async (e: React.MouseEvent, id: string | number) => {
+    e.stopPropagation();
+    if (window.confirm('Are you sure you want to delete this project? This action cannot be undone.')) {
+      await deleteProject(id);
+    }
+  };
 
   return (
     <div className="max-w-7xl mx-auto space-y-12">
@@ -154,7 +168,7 @@ const Dashboard = () => {
                     style={{ background:`linear-gradient(135deg,${s.accent}22 0%,${s.accent}10 100%)` }}
                   >
                     <div className="absolute inset-0" style={{ background:'linear-gradient(135deg,rgba(255,255,255,0.4) 0%,transparent 60%)' }} />
-                    <Icon size={20} className="relative z-10" style={{ color:s.accent }} />
+                    <Icon size={20} className="relative z-10" color={s.accent} />
                   </div>
                   {/* Badge */}
                   <span
@@ -182,7 +196,7 @@ const Dashboard = () => {
                       key={b}
                       initial={{ scaleY:0 }}
                       animate={{ scaleY:1 }}
-                      transition={{ delay:0.4+b*0.05, duration:0.5, ease:[0.22,1,0.36,1] }}
+                      transition={{ delay:0.4+b*0.05, duration:0.5, ease:[0.22,1,0.36,1] as const }}
                       className="flex-1 rounded-sm origin-bottom"
                       style={{ height:`${h}%`, background:`${s.accent}${30+b*4}`, minWidth:3 }}
                     />
@@ -258,11 +272,11 @@ const Dashboard = () => {
           animate="show"
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7"
         >
-          {projects.map(proj => (
+          {sortedProjects.map(proj => (
             <motion.div
               key={proj.id}
               variants={fadeUp}
-              whileHover={{ y:-10, transition:{ duration:0.35, ease:[0.22,1,0.36,1] } }}
+              whileHover={{ y:-10, transition:{ duration:0.35, ease:[0.22,1,0.36,1] as const } }}
               className="relative rounded-[2rem] overflow-hidden cursor-pointer group"
               style={{
                 background:'rgba(255,255,255,0.62)',
@@ -284,13 +298,13 @@ const Dashboard = () => {
                   WebkitMask:'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
                   maskComposite:'exclude',
                   WebkitMaskComposite:'xor',
-                }}
+                } as any}
               />
 
               {/* Preview */}
               <div className="relative aspect-video overflow-hidden">
                 <img
-                  src={proj.preview}
+                  src={proj.preview || `https://images.unsplash.com/photo-1620712943543-bcc4545a9457?w=600&h=400&fit=crop`}
                   alt={proj.title}
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />
@@ -333,15 +347,18 @@ const Dashboard = () => {
                   >
                     {proj.title}
                   </h3>
-                  <button className="text-gray-300 hover:text-gray-600 ml-3 transition-colors">
-                    <MoreVertical size={18} />
+                  <button 
+                    onClick={(e) => handleDelete(e, proj.id)}
+                    className="text-gray-300 hover:text-red-500 ml-3 transition-colors p-1 rounded-md hover:bg-red-50"
+                  >
+                    <Trash2 size={18} />
                   </button>
                 </div>
 
                 <div className="flex items-center justify-between text-[12px] font-semibold">
                   <div className="flex items-center gap-1.5" style={{ color:'#b0adb8' }}>
                     <Clock size={13} />
-                    <span>{proj.date}</span>
+                    <span>{proj.date || 'Recent'}</span>
                   </div>
                   <span
                     className="px-3 py-1 rounded-full font-black uppercase tracking-wider text-[10px]"
@@ -366,7 +383,7 @@ const Dashboard = () => {
           {/* Add New Card */}
           <motion.div
             variants={fadeUp}
-            whileHover={{ y:-10, transition:{ duration:0.35, ease:[0.22,1,0.36,1] } }}
+            whileHover={{ y:-10, transition:{ duration:0.35, ease:[0.22,1,0.36,1] as const } }}
             onClick={() => navigate('/upload')}
             className="relative rounded-[2rem] flex flex-col items-center justify-center gap-5 cursor-pointer group overflow-hidden"
             style={{

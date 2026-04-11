@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Mail, Lock, ArrowRight, Key, Globe, Eye, EyeOff, Sparkles } from 'lucide-react';
+import { Mail, Lock, ArrowRight, Key, Globe, Eye, EyeOff } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 
@@ -125,18 +125,17 @@ const SignIn = () => {
                 className="relative"
               >
                 <div
-                  className="w-16 h-16 rounded-2xl flex items-center justify-center text-white relative overflow-hidden"
-                  style={{
-                    background:'linear-gradient(135deg,#7c3aed,#d946ef)',
-                    boxShadow:'0 12px 36px rgba(124,58,237,0.40)',
-                  }}
+                  className="w-16 h-16 rounded-[1.5rem] flex items-center justify-center bg-white relative overflow-hidden shadow-2xl shadow-purple-500/20 border border-purple-100"
                 >
-                  <div className="absolute inset-0" style={{ background:'linear-gradient(135deg,rgba(255,255,255,0.25) 0%,transparent 60%)' }} />
-                  <Sparkles size={26} className="relative z-10" />
+                  <img 
+                    src="/logo.png" 
+                    alt="Anuvad Logo" 
+                    className="w-full h-full object-contain p-2"
+                  />
                 </div>
                 {/* Pulse ring */}
                 <div
-                  className="absolute inset-0 rounded-2xl"
+                  className="absolute inset-0 rounded-[1.5rem]"
                   style={{
                     border:'2px solid rgba(124,58,237,0.40)',
                     animation:'ring-pulse 2.5s cubic-bezier(0.22,1,0.36,1) infinite',

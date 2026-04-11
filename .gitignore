@@ -43,3 +43,12 @@ ffmpeg/
 *.dll
 *.so
 *.dylib
+
+# Local Data and Persistence
+Backend/mongodb_data/
+Backend/static/audio/
+.cache/
+*.wav
+*.mp4
+*.mp3
+uploads/

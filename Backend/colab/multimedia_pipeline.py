@@ -9,7 +9,7 @@ import mimetypes
 import os
 import subprocess
 from pathlib import Path
-from typing import Any
+from typing import Any, Union, Optional
 
 import whisper
 from langdetect import DetectorFactory, LangDetectException, detect
@@ -59,7 +59,7 @@ def upload_file() -> dict[str, Any]:
     return {"path": path, "media_type": media_type, "mime": mime}
 
 
-def extract_audio(input_path: Path | str, output_path: Path | str, ffmpeg_binary: str = "ffmpeg") -> Path:
+def extract_audio(input_path: Union[Path, str], output_path: Union[Path, str], ffmpeg_binary: str = "ffmpeg") -> Path:
     """Extract or normalize input media into mono 16kHz WAV."""
     source = Path(input_path)
     target = Path(output_path)
@@ -89,7 +89,7 @@ def extract_audio(input_path: Path | str, output_path: Path | str, ffmpeg_binary
     return target
 
 
-def _safe_text_language(sample_text: str) -> str | None:
+def _safe_text_language(sample_text: str) -> Optional[str]:
     cleaned = sample_text.strip()
     if len(cleaned) < 10:
         return None
@@ -99,7 +99,7 @@ def _safe_text_language(sample_text: str) -> str | None:
         return None
 
 
-def detect_language(audio_path: Path | str, model: whisper.Whisper) -> dict[str, Any]:
+def detect_language(audio_path: Union[Path, str], model: whisper.Whisper) -> dict[str, Any]:
     """
     Detect language using Whisper probabilities + langdetect text fallback.
 
@@ -160,7 +160,7 @@ def detect_language(audio_path: Path | str, model: whisper.Whisper) -> dict[str,
 
 
 def transcribe_audio(
-    audio_path: Path | str,
+    audio_path: Union[Path, str],
     model: whisper.Whisper,
     language: str,
 ) -> dict[str, Any]:
@@ -184,7 +184,7 @@ def transcribe_audio(
     return output
 
 
-def save_transcript(text: str, transcript_path: Path | str) -> Path:
+def save_transcript(text: str, transcript_path: Union[Path, str]) -> Path:
     path = Path(transcript_path)
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(text.strip() + "\n", encoding="utf-8")

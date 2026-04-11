@@ -52,11 +52,13 @@ const Sidebar = () => {
         className="flex items-center gap-2.5 mb-10 px-2 cursor-pointer relative z-10"
       >
         <div
-          className="w-10 h-10 rounded-xl flex items-center justify-center text-white relative overflow-hidden"
-          style={{ background:'linear-gradient(135deg,#7c3aed,#d946ef)', boxShadow:'0 6px 20px rgba(124,58,237,0.30)' }}
+          className="w-10 h-10 rounded-xl flex items-center justify-center bg-white relative overflow-hidden shadow-lg shadow-purple-500/10 border border-purple-100"
         >
-          <div className="absolute inset-0" style={{ background:'linear-gradient(135deg,rgba(255,255,255,0.22) 0%,transparent 55%)' }} />
-          <span className="text-xl font-black italic relative z-10">A</span>
+          <img 
+            src="/logo.png" 
+            alt="Anuvad Logo" 
+            className="w-full h-full object-contain p-1.5"
+          />
         </div>
         <span className="text-[22px] font-black tracking-tight text-[#2f2e36]">Anuvad</span>
       </motion.div>

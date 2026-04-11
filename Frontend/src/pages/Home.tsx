@@ -82,7 +82,7 @@ const Home = () => {
   const blobY = useTransform(scrollYProgress, [0, 1], ['0%', '20%']);
 
   return (
-    <div className="min-h-screen text-[#2f2e36] overflow-x-hidden" style={{ background: '#f9f5ff' }}>
+    <div className="h-screen w-full flex flex-col overflow-hidden text-[#2f2e36]" style={{ background: '#f9f5ff' }}>
 
       {/* ── Global background blobs ──────────────────────────── */}
       <div className="fixed inset-0 -z-10 pointer-events-none overflow-hidden" aria-hidden="true">
@@ -182,18 +182,19 @@ const Home = () => {
         }}
       >
         <div className="max-w-[1400px] mx-auto px-8 py-5 flex items-center justify-between">
-          {/* Logo */}
           <motion.div
             whileHover={{ scale:1.03 }}
             className="flex items-center gap-2.5 cursor-pointer"
             onClick={() => navigate('/')}
           >
             <div
-              className="w-9 h-9 rounded-xl flex items-center justify-center text-white relative overflow-hidden"
-              style={{ background:'linear-gradient(135deg,#7c3aed,#d946ef)', boxShadow:'0 6px 20px rgba(124,58,237,0.30)' }}
+              className="w-9 h-9 rounded-xl flex items-center justify-center bg-white relative overflow-hidden shadow-lg shadow-purple-500/10 border border-purple-100"
             >
-              <div className="absolute inset-0" style={{ background:'linear-gradient(135deg,rgba(255,255,255,0.22) 0%,transparent 55%)' }} />
-              <span className="text-lg font-black italic relative z-10">A</span>
+              <img 
+                src="/logo.png" 
+                alt="Anuvad Logo" 
+                className="w-full h-full object-contain p-1"
+              />
             </div>
             <span className="text-[22px] font-black tracking-tight text-[#2f2e36]">Anuvad</span>
           </motion.div>
@@ -214,89 +215,188 @@ const Home = () => {
         </div>
       </motion.nav>
 
+      {/* ── Scrollable Content Area ────────────────────────── */}
+      <div className="flex-1 overflow-y-auto overflow-x-hidden relative scroll-container">
+
       {/* ── Hero ──────────────────────────────────────────────── */}
-      <section ref={heroRef} className="relative pt-32 pb-28 px-6 flex flex-col items-center overflow-hidden">
+      <section ref={heroRef} className="relative pt-24 pb-28 px-6 md:px-12 overflow-hidden">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 items-center gap-16">
 
-        {/* Decorative iridescent pill above headline */}
-        <motion.div
-          initial={{ opacity:0, scale:0.8 }}
-          animate={{ opacity:1, scale:1 }}
-          transition={{ duration:0.6, delay:0.1, ease:[0.22,1,0.36,1] }}
-          className="mb-8 px-5 py-2 rounded-full text-[12px] font-bold uppercase tracking-[0.18em] flex items-center gap-2"
-          style={{
-            background: 'rgba(222,200,255,0.35)',
-            border:     '1px solid rgba(124,58,237,0.20)',
-            color:      '#7c3aed',
-            backdropFilter:'blur(12px)',
-          }}
-        >
-          <span className="w-2 h-2 rounded-full bg-purple-400 animate-pulse inline-block" />
-          AI-Powered · Indian Languages · Real-Time
-        </motion.div>
-
-        {/* Headline */}
-        <motion.h1
-          initial={{ opacity:0, y:32 }}
-          animate={{ opacity:1, y:0 }}
-          transition={{ duration:0.8, delay:0.15, ease:[0.22,1,0.36,1] }}
-          className="text-center max-w-4xl"
-          style={{ fontSize:'clamp(44px,7vw,78px)', fontFamily:"'Space Grotesk',sans-serif", fontWeight:800, lineHeight:1.05, letterSpacing:'-0.025em', color:'#1a1a2e' }}
-        >
-          voices so real,{' '}
-          <br />
-          <span className="text-shimmer">you won't know it's AI</span>
-        </motion.h1>
-
-        {/* Sub-copy */}
-        <motion.p
-          initial={{ opacity:0, y:20 }}
-          animate={{ opacity:1, y:0 }}
-          transition={{ duration:0.7, delay:0.28, ease:[0.22,1,0.36,1] }}
-          className="mt-7 text-center text-lg max-w-2xl leading-relaxed"
-          style={{ color:'#5c5a63' }}
-        >
-          Generate AI voiceovers in{' '}
-          <span className="font-bold" style={{ color:'#7c3aed' }}>हिन्दी, தமிழ், বাংলা</span>{' '}
-          & others. Create projects that feel real and relatable — not{' '}
-          <em style={{ color:'#2f2e36', fontStyle:'normal', fontWeight:700 }}>cold and mechanical</em>.
-        </motion.p>
-
-        {/* CTAs */}
-        <motion.div
-          initial={{ opacity:0, y:20 }}
-          animate={{ opacity:1, y:0 }}
-          transition={{ duration:0.7, delay:0.40, ease:[0.22,1,0.36,1] }}
-          className="mt-10 flex flex-col sm:flex-row items-center gap-4 justify-center"
-        >
-          <motion.button
-            whileHover={{ scale:1.05 }}
-            whileTap={{ scale:0.96 }}
-            onClick={() => navigate('/dashboard')}
-            className="btn-primary text-[13px] px-10 py-5 flex items-center gap-2"
+          {/* ── Left: Text + CTAs ── */}
+          <motion.div
+            variants={container}
+            initial="hidden"
+            animate="show"
+            className="flex flex-col items-start"
           >
-            Get Started Free <ArrowRight size={16} />
-          </motion.button>
-        </motion.div>
+            {/* Pill badge */}
+            <motion.div
+              variants={fadeUp}
+              className="mb-8 px-5 py-2 rounded-full text-[12px] font-bold uppercase tracking-[0.18em] flex items-center gap-2"
+              style={{
+                background: 'rgba(222,200,255,0.35)',
+                border:     '1px solid rgba(124,58,237,0.20)',
+                color:      '#7c3aed',
+                backdropFilter:'blur(12px)',
+              }}
+            >
+              <span className="w-2 h-2 rounded-full bg-purple-400 animate-pulse inline-block" />
+              AI-Powered · Indian Languages · Real-Time
+            </motion.div>
 
-        {/* Stats strip */}
-        <motion.div
-          initial={{ opacity:0 }}
-          animate={{ opacity:1 }}
-          transition={{ duration:0.8, delay:0.60 }}
-          className="mt-16 flex items-center gap-10 flex-wrap justify-center"
-        >
-          {[
-            { val:'10+', label:'Indian Languages' },
-            { val:'50k+', label:'Videos Dubbed' },
-            { val:'99%', label:'Accuracy Rate' },
-            { val:'< 2min', label:'Processing Time' },
-          ].map((s,i) => (
-            <div key={i} className="text-center">
-              <div className="text-3xl font-black text-shimmer" style={{ letterSpacing:'-0.03em' }}>{s.val}</div>
-              <div className="text-[12px] font-semibold text-gray-400 mt-1 uppercase tracking-wider">{s.label}</div>
+            {/* Headline */}
+            <motion.h1
+              variants={fadeUp}
+              className="max-w-xl"
+              style={{ fontSize:'clamp(38px,5.5vw,72px)', fontFamily:"'Space Grotesk',sans-serif", fontWeight:800, lineHeight:1.06, letterSpacing:'-0.025em', color:'#1a1a2e' }}
+            >
+              voices so real,{' '}
+              <br />
+              <span className="text-shimmer">you won't know it's AI</span>
+            </motion.h1>
+
+            {/* Sub-copy */}
+            <motion.p
+              variants={fadeUp}
+              className="mt-6 text-lg leading-relaxed max-w-lg"
+              style={{ color:'#5c5a63' }}
+            >
+              Generate AI voiceovers in{' '}
+              <span className="font-bold" style={{ color:'#7c3aed' }}>हिन्दी, தமிழ், বাংলা</span>{' '}
+              & 10+ Indian languages. Upload once, localize everywhere — fast, accurate, human.
+            </motion.p>
+
+            {/* CTAs */}
+            <motion.div variants={fadeUp} className="mt-10 flex flex-col sm:flex-row items-center gap-4">
+              <motion.button
+                whileHover={{ scale:1.05 }}
+                whileTap={{ scale:0.96 }}
+                onClick={() => navigate('/dashboard')}
+                className="btn-primary text-[13px] px-10 py-5 flex items-center gap-2"
+              >
+                Get Started Free <ArrowRight size={16} />
+              </motion.button>
+              <motion.button
+                whileHover={{ scale:1.03 }}
+                whileTap={{ scale:0.97 }}
+                onClick={() => navigate('/upload')}
+                className="text-[13px] px-10 py-5 flex items-center gap-2 rounded-full font-black tracking-wide"
+                style={{ background:'rgba(124,58,237,0.07)', color:'#7c3aed', border:'1px solid rgba(124,58,237,0.18)' }}
+              >
+                Try Demo
+              </motion.button>
+            </motion.div>
+
+            {/* Stats strip removed */}
+          </motion.div>
+
+          {/* ── Right: Glassmorphism Logo Showcase ── */}
+          <motion.div
+            initial={{ opacity:0, x:40, scale:0.95 }}
+            animate={{ opacity:1, x:0,  scale:1   }}
+            transition={{ duration:0.9, delay:0.25, ease:[0.22,1,0.36,1] }}
+            className="relative flex items-center justify-center"
+          >
+            {/* Outer glow ring */}
+            <div
+              className="absolute"
+              style={{
+                width:460, height:460,
+                borderRadius:'50%',
+                background:'radial-gradient(ellipse, rgba(167,139,250,0.28) 0%, rgba(196,181,253,0.12) 50%, transparent 70%)',
+                filter:'blur(40px)',
+                animation:'breathe-slow 6s ease-in-out infinite',
+              }}
+            />
+
+            {/* Animated dashed ring */}
+            <div className="absolute" style={{ width:420, height:420 }}>
+              <svg viewBox="0 0 420 420" style={{ animation:'spin-slow 24s linear infinite', opacity:0.18 }}>
+                <circle cx="210" cy="210" r="200" fill="none" stroke="url(#heroRing)" strokeWidth="1.5" strokeDasharray="12 10" />
+                <defs>
+                  <linearGradient id="heroRing" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%"   stopColor="#7c3aed" />
+                    <stop offset="100%" stopColor="#d946ef" />
+                  </linearGradient>
+                </defs>
+              </svg>
             </div>
-          ))}
-        </motion.div>
+
+            {/* Glassmorphism card */}
+            <motion.div
+              whileHover={{ scale:1.03, rotate:-1 }}
+              transition={{ type:'spring', stiffness:260, damping:22 }}
+              className="relative z-10 flex flex-col items-center justify-center"
+              style={{
+                width:360, height:360,
+                borderRadius:'3rem',
+                background:'rgba(255,255,255,0.25)',
+                backdropFilter:'blur(32px)',
+                WebkitBackdropFilter:'blur(32px)',
+                border:'1.5px solid rgba(255,255,255,0.55)',
+                boxShadow:'0 24px 64px rgba(124,58,237,0.14), 0 2px 0 rgba(255,255,255,0.8) inset, 0 -1px 0 rgba(124,58,237,0.08) inset',
+              }}
+            >
+              {/* Inner subtle gradient overlay */}
+              <div
+                className="absolute inset-0 rounded-[3rem] pointer-events-none"
+                style={{
+                  background:'linear-gradient(135deg, rgba(255,255,255,0.45) 0%, rgba(222,200,255,0.15) 50%, rgba(177,242,184,0.10) 100%)',
+                }}
+              />
+
+              {/* Logo image */}
+              <motion.img
+                src="/logo.png"
+                alt="Anuvad Logo"
+                animate={{ y:[0,-8,0] }}
+                transition={{ duration:4, repeat:Infinity, ease:'easeInOut' }}
+                style={{ width:220, height:220, objectFit:'contain', position:'relative', zIndex:10, filter:'drop-shadow(0 16px 32px rgba(124,58,237,0.28))' }}
+              />
+
+              {/* Brand name below logo */}
+              <p
+                className="relative z-10 mt-1 font-black tracking-[0.12em] uppercase"
+                style={{ fontSize:22, color:'#4c1d95', letterSpacing:'0.18em', textShadow:'0 1px 8px rgba(124,58,237,0.18)' }}
+              >
+                Anuvad
+              </p>
+            </motion.div>
+
+            {/* Floating tag chips around card */}
+            {[
+              { label:'हिन्दी', top:'8%',  left:'-2%',  delay:0    },
+              { label:'தமிழ்', top:'12%', right:'-4%', delay:0.4  },
+              { label:'বাংলা', bottom:'18%', left:'-6%', delay:0.8 },
+              { label:'తెలుగు', bottom:'10%', right:'-2%', delay:1.2 },
+            ].map((chip,i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity:0, scale:0.7 }}
+                animate={{ opacity:1, scale:1   }}
+                transition={{ duration:0.5, delay:0.6 + chip.delay, ease:[0.22,1,0.36,1] }}
+                style={{
+                  position:'absolute',
+                  top:chip.top, left:(chip as any).left, right:(chip as any).right, bottom:(chip as any).bottom,
+                  background:'rgba(255,255,255,0.72)',
+                  backdropFilter:'blur(16px)',
+                  WebkitBackdropFilter:'blur(16px)',
+                  border:'1px solid rgba(124,58,237,0.20)',
+                  borderRadius:999,
+                  padding:'6px 18px',
+                  fontSize:13,
+                  fontWeight:700,
+                  color:'#4c1d95',
+                  boxShadow:'0 4px 16px rgba(124,58,237,0.10)',
+                  whiteSpace:'nowrap',
+                  animation:`breathe ${3.5 + i*0.4}s ease-in-out ${i*0.3}s infinite`,
+                }}
+              >
+                {chip.label}
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
       </section>
 
       {/* ── Feature Cards ────────────────────────────────────── */}
@@ -314,92 +414,57 @@ const Home = () => {
               <motion.div
                 key={i}
                 variants={fadeUp}
-                whileHover={{ y:-10, transition:{ duration:0.35, ease:[0.22,1,0.36,1] } }}
+                whileHover={{ y: -10, transition: { duration: 0.35, ease: [0.22, 1, 0.36, 1] } }}
                 className="relative rounded-[2rem] overflow-hidden cursor-pointer group"
                 style={{
-                  background: f.dark ? '#1a1a2e' : 'rgba(255,255,255,0.65)',
+                  background: 'rgba(217, 70, 239, 0.05)',
                   backdropFilter: 'blur(24px)',
                   WebkitBackdropFilter: 'blur(24px)',
-                  border: '1px solid',
-                  borderColor: f.dark ? 'rgba(255,255,255,0.08)' : 'rgba(174,172,182,0.18)',
-                  boxShadow: '0 8px 32px rgba(100,83,130,0.06)',
-                  minHeight: 360,
+                  border: '1px solid rgba(217, 70, 239, 0.12)',
+                  minHeight: 420,
+                  display: 'flex',
+                  flexDirection: 'column',
                 }}
               >
-                {/* Card inner glow on hover */}
+                {/* Visual accents */}
                 <div
-                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-[2rem]"
-                  style={{ background: `radial-gradient(circle at 60% 20%, ${f.dark ? 'rgba(255,255,255,0.04)' : `${f.accent}10`} 0%, transparent 60%)` }}
+                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+                  style={{ background: `radial-gradient(circle at 50% 0%, rgba(217, 70, 239, 0.08) 0%, transparent 70%)` }}
                 />
 
-                {/* Subtle gradient bg */}
-                {!f.dark && (
-                  <div
-                    className="absolute inset-0 opacity-60 pointer-events-none"
-                    style={{ background: `linear-gradient(135deg, ${f.accent}08 0%, transparent 60%)` }}
-                  />
-                )}
-
-                {/* NEW badge */}
-                {f.isNew && (
-                  <div className="absolute top-5 right-5 z-20">
-                    <div
-                      className="text-[10px] font-black uppercase tracking-[0.15em] px-3 py-1.5 rounded-full text-white"
-                      style={{ background:'linear-gradient(135deg,#7c3aed,#d946ef)', boxShadow:'0 4px 12px rgba(124,58,237,0.40)' }}
-                    >
-                      NEW
-                    </div>
-                  </div>
-                )}
-
-                {/* Hover iridescent border */}
-                <div
-                  className="absolute inset-0 rounded-[2rem] pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                  style={{
-                    background: 'linear-gradient(135deg, #dec8ff, #b1f2b8, #e0c3fc)',
-                    backgroundSize: '300% 300%',
-                    animation: 'gradient-shift 5s ease infinite',
-                    mask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
-                    WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
-                    maskComposite: 'exclude',
-                    WebkitMaskComposite: 'xor',
-                    padding: '1px',
-                  }}
-                />
-
-                <div className="relative z-10 p-9 flex flex-col h-full" style={{ minHeight:360 }}>
-                  {/* Icon */}
-                  <div
-                    className="w-14 h-14 rounded-2xl flex items-center justify-center mb-8 relative overflow-hidden"
-                    style={{
-                      background: f.dark
-                        ? 'rgba(255,255,255,0.08)'
-                        : `linear-gradient(135deg, ${f.accent}18 0%, ${f.accent}08 100%)`,
-                      border: `1px solid ${f.dark ? 'rgba(255,255,255,0.10)' : f.accent + '25'}`,
-                      boxShadow: `0 8px 20px ${f.accent}22`,
-                    }}
-                  >
-                    <div className="absolute inset-0" style={{ background:'linear-gradient(135deg,rgba(255,255,255,0.15) 0%,transparent 60%)' }} />
-                    <Icon size={22} style={{ color: f.dark ? '#fff' : f.accent }} className="relative z-10" />
+                <div className="relative z-10 p-10 flex flex-col h-full flex-1">
+                  {/* Icon with specific gradient styling from image */}
+                  <div className="mb-10 text-fuchsia-500">
+                    <Icon size={72} strokeWidth={1.5} style={{ 
+                      filter: 'drop-shadow(0 0 12px rgba(217, 70, 239, 0.2))',
+                      stroke: 'url(#iconGrad)' 
+                    }} />
+                    <svg width="0" height="0">
+                      <linearGradient id="iconGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stopColor="#7c3aed" />
+                        <stop offset="100%" stopColor="#d946ef" />
+                      </linearGradient>
+                    </svg>
                   </div>
 
                   <h3
-                    className="text-xl font-black mb-3 tracking-tight"
-                    style={{ fontFamily:"'Space Grotesk',sans-serif", color: f.dark ? '#fff' : '#1a1a2e', letterSpacing:'-0.02em' }}
+                    className="text-2xl font-black mb-5 tracking-tight"
+                    style={{ fontFamily: "'Space Grotesk',sans-serif", color: '#1a1a2e', letterSpacing: '-0.02em' }}
                   >
                     {f.title}
                   </h3>
-                  <p className="text-[14px] leading-relaxed flex-1" style={{ color: f.dark ? 'rgba(255,255,255,0.55)' : '#5c5a63' }}>
+                  <p className="text-[16px] leading-relaxed text-gray-500 flex-1">
                     {f.desc}
                   </p>
 
                   <div
-                    className="mt-6 flex items-center gap-2 text-[11px] font-black uppercase tracking-[0.2em] cursor-pointer group/cta"
-                    style={{ color: f.dark ? '#dec8ff' : f.accent }}
-                    onClick={() => navigate(f.title === 'API' ? '/dashboard' : '/upload')}
+                    className="mt-8 flex items-center group/link font-black text-[12px] uppercase tracking-widest"
+                    style={{ color: '#4c1d95' }}
+                    onClick={() => navigate('/upload')}
                   >
-                    <span>Try Now</span>
-                    <ArrowRight size={12} className="group-hover/cta:translate-x-1 transition-transform duration-200" />
+                    <span className="border-b-2 border-transparent group-hover/link:border-[#d946ef] transition-all duration-300">
+                      TRY NOW
+                    </span>
                   </div>
                 </div>
               </motion.div>
@@ -503,6 +568,7 @@ const Home = () => {
         </motion.div>
       </section>
     </div>
+  </div>
   );
 };
 

@@ -25,6 +25,7 @@ const PlatformLayout = () => (
 function App() {
   return (
     <Router>
+      <div className="app-noise" />
       <Routes>
         {/* Public Routes */}
         <Route path="/" element={<Home />} />
