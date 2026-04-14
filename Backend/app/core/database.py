@@ -8,10 +8,16 @@ class DatabaseManager:
 
     async def connect(self):
         """Connect to MongoDB"""
-        print(f"DEBUG: Connecting to MongoDB at {settings.mongo_uri}")
-        self.client = AsyncIOMotorClient(settings.mongo_uri)
-        self.db = self.client[settings.mongo_db_name]
-        print(f"DEBUG: Connected to database: {settings.mongo_db_name}, db object: {self.db}")
+        try:
+            print(f"DEBUG: Connecting to MongoDB at {settings.mongo_uri}")
+            self.client = AsyncIOMotorClient(settings.mongo_uri, serverSelectionTimeoutMS=5000)
+            self.db = self.client[settings.mongo_db_name]
+            # Ping database to verify connection
+            await self.client.admin.command('ping')
+            print(f"DEBUG: ✅ Successfully connected to database: {settings.mongo_db_name}")
+        except Exception as e:
+            print(f"DEBUG: ❌ FAILED to connect to MongoDB: {e}")
+            raise e
 
     async def disconnect(self):
         """Disconnect from MongoDB"""

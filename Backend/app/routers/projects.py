@@ -29,9 +29,12 @@ def map_project(doc: dict) -> ProjectOut:
         is_community=doc.get("is_community", False),
         created_at=doc.get("created_at", datetime.now(timezone.utc)),
         audio_url=doc.get("audio_url"),
+        video_url=doc.get("video_url"),
         detected_language=doc.get("detected_language"),
         transcript=doc.get("transcript"),
         target_languages=doc.get("target_languages"),
+        audio_tracks=doc.get("audio_tracks"),
+        translations=doc.get("translations"),
     )
 
 @router.get("", response_model=List[ProjectOut])
@@ -44,6 +47,8 @@ async def get_projects(user_id: Optional[str] = None, is_community: Optional[boo
             query["is_community"] = is_community
 
         projects_col = db_manager.get_projects_collection()
+        count = await projects_col.count_documents(query)
+        print(f"DEBUG: Found {count} projects in MongoDB for query: {query}")
         cursor = projects_col.find(query).sort("created_at", -1)
         projects = await cursor.to_list(length=100)
         return [map_project(p) for p in projects]

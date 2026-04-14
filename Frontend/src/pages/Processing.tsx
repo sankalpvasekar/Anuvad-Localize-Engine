@@ -2,7 +2,7 @@ import * as React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   RefreshCw, CheckCircle2, Loader2, Download, Mic2, Globe2, FileText, UploadCloud, Trash2,
-  Sparkles, ChevronRight, Zap, Target
+  Sparkles, ChevronRight, Zap, Target, Play, Pause, Volume2, VolumeX, Archive
 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useProjects } from '../context/ProjectContext';
@@ -22,9 +22,14 @@ const langLabel = (code: string | undefined) => {
 
 // ── Individual pipeline stage definition ────────────────────────────────────
 const STAGES = [
-  { id: 'extraction', label: 'Audio Extraction', icon: Mic2, milestone: [0, 30], color: 'from-blue-500 to-cyan-400', shadow: 'shadow-blue-200' },
-  { id: 'detection', label: 'Language Detection', icon: Globe2, milestone: [30, 65], color: 'from-indigo-500 to-purple-400', shadow: 'shadow-indigo-200' },
-  { id: 'transcription', label: 'Transcription', icon: FileText, milestone: [65, 100], color: 'from-fuchsia-500 to-pink-500', shadow: 'shadow-fuchsia-200' },
+  { id: 'extraction', label: 'Audio Extraction', icon: Mic2, milestone: [0, 12.5], color: 'from-blue-500 to-cyan-400', shadow: 'shadow-blue-200' },
+  { id: 'detection', label: 'Language Detection', icon: Globe2, milestone: [12.5, 25], color: 'from-cyan-500 to-teal-400', shadow: 'shadow-cyan-200' },
+  { id: 'domain', label: 'Domain Detection', icon: Target, milestone: [25, 37.5], color: 'from-emerald-500 to-green-400', shadow: 'shadow-emerald-200' },
+  { id: 'transcription', label: 'Transcription Generation', icon: FileText, milestone: [37.5, 50], color: 'from-yellow-500 to-orange-400', shadow: 'shadow-yellow-200' },
+  { id: 'translation', label: 'Parallel Translating', icon: RefreshCw, milestone: [50, 62.5], color: 'from-orange-500 to-red-400', shadow: 'shadow-orange-200' },
+  { id: 'refinement', label: 'Transcript Refinement', icon: Sparkles, milestone: [62.5, 75], color: 'from-pink-500 to-fuchsia-400', shadow: 'shadow-pink-200' },
+  { id: 'audio_gen', label: 'Audio Generation', icon: Zap, milestone: [75, 87.5], color: 'from-purple-500 to-indigo-400', shadow: 'shadow-purple-200' },
+  { id: 'muxing', label: 'Mux with Video', icon: CheckCircle2, milestone: [87.5, 100], color: 'from-indigo-500 to-blue-400', shadow: 'shadow-indigo-200' },
 ];
 
 // ── Stage Row Component ─────────────────────────────────────────────────────
@@ -59,6 +64,16 @@ const StageRow = ({ stage, globalProgress, isDone, isFailed }: { stage: typeof S
                 <Zap size={10} className="fill-current" /> Processing step...
               </motion.span>
             )}
+            {isCompleted && (
+               <div className="flex flex-wrap gap-1 mt-1">
+                  {stage.id === 'detection' && (
+                    <span className="text-[8px] font-black bg-emerald-50 text-emerald-600 px-1.5 py-0.5 rounded-md uppercase">Detected</span>
+                  )}
+                  {stage.id === 'domain' && (
+                    <span className="text-[8px] font-black bg-blue-50 text-blue-600 px-1.5 py-0.5 rounded-md uppercase">Identified</span>
+                  )}
+               </div>
+            )}
           </div>
         </div>
         <div className="text-right">
@@ -88,6 +103,279 @@ const StageRow = ({ stage, globalProgress, isDone, isFailed }: { stage: typeof S
   );
 };
 
+// ── Watch Mode (Integrated OTT Player) ──────────────────────────────────────
+const WatchMode = ({ task }: { task: Project }) => {
+  const [selectedLang, setSelectedLang] = React.useState('original');
+  const [isPlaying, setIsPlaying] = React.useState(false);
+  const [progress, setProgress] = React.useState(0);
+  const [volume, setVolume] = React.useState(1);
+
+  const videoRef = React.useRef<HTMLVideoElement>(null);
+  const audioRef = React.useRef<HTMLAudioElement>(null);
+
+  // Sync Logic
+  React.useEffect(() => {
+    const video = videoRef.current;
+    const audio = audioRef.current;
+    if (!video) return;
+
+    const sync = () => {
+      setProgress((video.currentTime / video.duration) * 100);
+      if (selectedLang !== 'original' && audio) {
+        if (Math.abs(audio.currentTime - video.currentTime) > 0.15) {
+          audio.currentTime = video.currentTime;
+        }
+      }
+    };
+
+    video.addEventListener('timeupdate', sync);
+    return () => video.removeEventListener('timeupdate', sync);
+  }, [selectedLang]);
+
+  const togglePlay = () => {
+    if (videoRef.current) {
+      if (isPlaying) {
+        videoRef.current.pause();
+        audioRef.current?.pause();
+      } else {
+        videoRef.current.play();
+        if (selectedLang !== 'original') audioRef.current?.play();
+      }
+      setIsPlaying(!isPlaying);
+    }
+  };
+
+  const handleLanguageChange = (lang: string) => {
+    setSelectedLang(lang);
+    const audio = audioRef.current;
+    const video = videoRef.current;
+    if (!video) return;
+
+    const backendUrl = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' 
+      ? 'http://127.0.0.1:8000' 
+      : `http://${window.location.hostname}:8000`;
+
+    if (lang === 'original') {
+      video.muted = false;
+      video.volume = volume;
+      if (audio) {
+        audio.pause();
+        audio.currentTime = 0;
+      }
+    } else {
+      video.muted = true; // Hard mute original to prevent mixing
+      video.volume = 0;
+      if (audio) {
+        const audioPath = task.translations?.[lang]?.audio_path || task.audio_tracks?.[lang];
+        audio.src = `${backendUrl}${audioPath}`;
+        audio.currentTime = video.currentTime;
+        audio.volume = volume;
+        if (isPlaying) audio.play();
+      }
+    }
+  };
+
+  const backendUrl = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' 
+    ? 'http://127.0.0.1:8000' 
+    : `http://${window.location.hostname}:8000`;
+
+  return (
+    <div className="space-y-6">
+      <div className="aspect-video bg-[#1a1a2e] rounded-[2.5rem] overflow-hidden relative group border border-white/5 shadow-2xl">
+        <video 
+          ref={videoRef}
+          src={`${backendUrl}${task.video_url}`}
+          className="w-full h-full object-contain"
+          onPlay={() => setIsPlaying(true)}
+          onPause={() => setIsPlaying(false)}
+        />
+        <audio ref={audioRef} className="hidden" />
+
+        {/* Player Controls */}
+        <div className="absolute inset-x-0 bottom-0 p-8 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity space-y-4">
+          <div className="h-1 w-full bg-white/20 rounded-full overflow-hidden">
+             <div className="h-full bg-purple-500" style={{ width: `${progress}%` }} />
+          </div>
+          <div className="flex items-center justify-between">
+            <button onClick={togglePlay} className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-white/20 border border-white/10">
+              {isPlaying ? <Pause size={18} fill="currentColor" /> : <Play size={18} fill="currentColor" className="ml-1" />}
+            </button>
+            <div className="flex items-center gap-2">
+               <Volume2 size={16} className="text-white/60" />
+               <input 
+                  type="range" min="0" max="1" step="0.1" value={volume} 
+                  onChange={(e) => {
+                    const v = parseFloat(e.target.value);
+                    setVolume(v);
+                    if (selectedLang === 'original' && videoRef.current) videoRef.current.volume = v;
+                    if (selectedLang !== 'original' && audioRef.current) audioRef.current.volume = v;
+                  }}
+                  className="w-20 accent-purple-500"
+                />
+            </div>
+          </div>
+        </div>
+
+        {/* OTT Switcher Overlay */}
+        <div className="absolute top-6 right-6 flex flex-col items-end gap-2">
+           <div className="bg-black/40 backdrop-blur-xl p-1 rounded-2xl border border-white/10 flex flex-col gap-1">
+              <button 
+                onClick={() => handleLanguageChange('original')}
+                className={`px-4 py-2 rounded-xl text-[9px] font-black uppercase tracking-wider flex items-center gap-2 transition-all
+                ${selectedLang === 'original' ? 'bg-purple-600 text-white shadow-lg' : 'text-white/40 hover:text-white'}`}
+              >
+                <Globe2 size={12} /> Original (EN)
+              </button>
+              {task.target_languages?.map(lang => (
+                <button 
+                  key={lang}
+                  onClick={() => handleLanguageChange(lang)}
+                  className={`px-4 py-2 rounded-xl text-[9px] font-black uppercase tracking-wider flex items-center gap-2 transition-all
+                  ${selectedLang === lang ? 'bg-indigo-600 text-white shadow-lg' : 'text-white/40 hover:text-white'}`}
+                >
+                  <RefreshCw size={12} /> {LANG_NAMES[lang] || lang} Dub
+                </button>
+              ))}
+           </div>
+        </div>
+      </div>
+
+      <div className="flex items-center justify-between px-4">
+         <div className="flex items-center gap-3">
+            <div className="flex -space-x-2">
+               {['en', ...(task.target_languages || [])].map(l => (
+                 <div key={l} title={LANG_NAMES[l]} className="w-8 h-8 rounded-full border-2 border-white bg-gray-100 flex items-center justify-center text-[10px] uppercase font-black text-gray-500">
+                    {l}
+                 </div>
+               ))}
+            </div>
+            <span className="text-[10px] font-black uppercase tracking-widest text-gray-400">
+               {task.target_languages?.length || 0} Tracks Optimized
+            </span>
+         </div>
+         <a 
+          href={`${backendUrl}${task.video_url}`} download
+          className="flex items-center gap-2 px-6 py-3 bg-emerald-50 text-emerald-600 rounded-2xl text-[10px] font-black uppercase tracking-widest border border-emerald-100 hover:bg-emerald-100 transition-all"
+         >
+           <Download size={14} /> Download Final Multi-track
+         </a>
+      </div>
+    </div>
+  );
+};
+
+// ── Asset Studio (Diagnostic Raw Access) ────────────────────────────────────
+const AssetStudio = ({ task }: { task: Project }) => {
+  const backendUrl = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' 
+    ? 'http://127.0.0.1:8000' 
+    : `http://${window.location.hostname}:8000`;
+  const downloadTextFile = (content: string, filename: string) => {
+    const blob = new Blob([content], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+  };
+
+  return (
+    <div className="space-y-12">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {/* Source Assets */}
+        <div className="space-y-6">
+          <h4 className="text-[10px] font-black uppercase tracking-[0.2em] text-gray-400 px-4">AI Extraction Deliverables</h4>
+          <div className="p-8 rounded-[3rem] bg-gray-50/50 border border-gray-100 space-y-4">
+            <div className="flex items-center justify-between p-4 bg-white rounded-2xl border border-gray-100 shadow-sm">
+               <div className="flex items-center gap-3">
+                  <div className="p-2 bg-blue-50 text-blue-600 rounded-lg"><Mic2 size={16} /></div>
+                  <div>
+                    <p className="text-[10px] font-black uppercase">Source Audio</p>
+                    <p className="text-[9px] text-gray-400 font-bold">Extracted RAW WAV</p>
+                  </div>
+               </div>
+               {task.audio_url && (
+                 <a href={`${backendUrl}${task.audio_url}`} download className="p-2 hover:bg-gray-50 rounded-lg text-blue-600 transition-all"><Download size={18} /></a>
+               )}
+            </div>
+            
+            <div className="flex items-center justify-between p-4 bg-white rounded-2xl border border-gray-100 shadow-sm">
+               <div className="flex items-center gap-3">
+                  <div className="p-2 bg-emerald-50 text-emerald-600 rounded-lg"><FileText size={16} /></div>
+                  <div>
+                    <p className="text-[10px] font-black uppercase">Source Script</p>
+                    <p className="text-[9px] text-gray-400 font-bold">Refined Neural Text</p>
+                  </div>
+               </div>
+               {task.transcript && (
+                 <button onClick={() => downloadTextFile(task.transcript || "", `Original_Script_${task.id}.txt`)} className="p-2 hover:bg-gray-50 rounded-lg text-emerald-600 transition-all"><Download size={18} /></button>
+               )}
+            </div>
+          </div>
+        </div>
+
+        {/* Localized Assets */}
+        <div className="space-y-6">
+          <h4 className="text-[10px] font-black uppercase tracking-[0.2em] text-purple-600 px-4">Neural Synthesis Deliverables</h4>
+          <div className="p-8 rounded-[3rem] bg-purple-50/20 border border-purple-100 space-y-6">
+            {task.translations && Object.keys(task.translations).length > 0 ? (
+              Object.entries(task.translations).map(([lang, data]) => (
+                <div key={lang} className="space-y-3">
+                   <div className="flex items-center gap-2 mb-2">
+                     <span className="text-[9px] font-black uppercase px-2 py-0.5 bg-purple-600 text-white rounded-md shadow-sm">{LANG_NAMES[lang] || lang} track</span>
+                     <div className="h-px flex-1 bg-purple-100" />
+                   </div>
+                   <div className="grid grid-cols-2 gap-3">
+                      <a 
+                        href={`${backendUrl}${data.audio_path}`} 
+                        download 
+                        className="flex items-center justify-center gap-2 py-3 bg-white border border-purple-100 rounded-xl text-[9px] font-black uppercase tracking-widest text-purple-600 hover:bg-purple-50 transition-all"
+                      >
+                         <Mic2 size={12} /> High-Fidelity Dub
+                      </a>
+                      <button 
+                        onClick={() => downloadTextFile(data.transcript || "", `${lang.toUpperCase()}_Script_${task.id}.txt`)}
+                        className="flex items-center justify-center gap-2 py-3 bg-white border border-purple-100 rounded-xl text-[9px] font-black uppercase tracking-widest text-purple-600 hover:bg-purple-50 transition-all"
+                      >
+                         <FileText size={12} /> Localized Text
+                      </button>
+                   </div>
+                </div>
+              ))
+            ) : (
+              <div className="py-12 text-center opacity-30">
+                 <Archive size={32} className="mx-auto mb-4" />
+                 <p className="text-[10px] font-black uppercase tracking-widest">No target tracks generated</p>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+      
+      <div className="p-8 rounded-[3rem] bg-[#1a1a2e] text-white flex flex-col md:flex-row items-center justify-between gap-6 shadow-2xl">
+         <div className="flex items-center gap-4">
+            <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-purple-500 to-indigo-600 flex items-center justify-center shadow-lg shadow-indigo-500/20">
+               <Archive size={20} />
+            </div>
+            <div>
+               <h3 className="text-sm font-black uppercase tracking-[0.2em]">Package Inspector</h3>
+               <p className="text-[10px] text-white/40 font-bold uppercase">Multi-track OTT Container Deliverable</p>
+            </div>
+         </div>
+         <a 
+          href={`http://localhost:8000${task.video_url}`} 
+          download 
+          className="flex items-center gap-3 px-10 py-4 bg-white text-[#1a1a2e] rounded-2xl text-[11px] font-black uppercase tracking-widest shadow-xl hover:-translate-y-1 transition-all"
+         >
+            <Download size={16} /> Finalize Full Download
+         </a>
+      </div>
+    </div>
+  );
+};
+
 // ── Single Task Card ─────────────────────────────────────────────────────────
 const TaskCard = ({ task, onDelete }: { task: Project, onDelete: (id: string | number) => void }) => {
   const isDone = task.status === 'Completed' || task.status === 'done';
@@ -95,7 +383,8 @@ const TaskCard = ({ task, onDelete }: { task: Project, onDelete: (id: string | n
   const isProcessing = task.status === 'Processing' || task.status === 'Initializing';
   const detectedLang = langLabel(task.detected_language);
 
-  // ── Smooth "Creeping" Progress Logic ──────────────────────────────────────
+  // ── Tab & Smooth Progress Logic ──────────────────────────────────────
+  const [activeTab, setActiveTab] = React.useState<'pipeline' | 'watch' | 'assets'>(isDone ? 'watch' : 'pipeline');
   const [smoothProgress, setSmoothProgress] = React.useState(task.progress);
 
   React.useEffect(() => {
@@ -162,6 +451,17 @@ const TaskCard = ({ task, onDelete }: { task: Project, onDelete: (id: string | n
                     : 'bg-purple-50 text-purple-600 border border-purple-100'}`}>
                 {isDone ? '✨ Completed' : isFailed ? '❌ Failed' : `🔄 ${task.status}`}
               </span>
+
+              {task.detected_language && (
+                <span className="px-4 py-1.5 rounded-full bg-blue-50 text-blue-600 border border-blue-100 text-[10px] font-black uppercase tracking-[0.15em] shadow-sm">
+                  🌐 Source: {langLabel(task.detected_language)}
+                </span>
+              )}
+              {isFailed && (
+                <span className="px-4 py-1.5 rounded-full text-[10px] font-bold text-red-500 bg-red-50 border border-red-200">
+                  {task.stage}
+                </span>
+              )}
               <span className="px-4 py-1.5 rounded-full text-[10px] font-bold text-gray-500 bg-gray-50 border border-gray-100">
                 {task.type}
               </span>
@@ -171,6 +471,14 @@ const TaskCard = ({ task, onDelete }: { task: Project, onDelete: (id: string | n
                   className="px-4 py-1.5 rounded-full text-[10px] font-black bg-blue-50 text-blue-600 border border-blue-100 flex items-center gap-1.5"
                 >
                   <Globe2 size={12} /> {detectedLang}
+                </motion.span>
+              )}
+              {task.domain && (
+                <motion.span
+                  initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }}
+                  className="px-4 py-1.5 rounded-full text-[10px] font-black bg-emerald-50 text-emerald-600 border border-emerald-100 flex items-center gap-1.5"
+                >
+                  <Target size={12} /> {task.domain.toUpperCase()}
                 </motion.span>
               )}
             </div>
@@ -204,18 +512,42 @@ const TaskCard = ({ task, onDelete }: { task: Project, onDelete: (id: string | n
           </div>
         </div>
 
-        {/* Granular Pipeline Section */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative p-6 bg-gray-50/50 rounded-[2.5rem] border border-gray-100">
-          {STAGES.map((stage) => (
-            <StageRow 
-              key={stage.id} 
-              stage={stage} 
-              globalProgress={smoothProgress} 
-              isDone={isDone} 
-              isFailed={isFailed}
-            />
+
+        {/* Tab Navigation */}
+        <div className="flex items-center gap-1 p-1.5 bg-gray-100/50 rounded-2xl w-max mx-auto border border-gray-200/50">
+          {[
+            { id: 'pipeline', label: 'Engine Status', icon: Zap },
+            { id: 'watch', label: 'OTT Watch', icon: Play, disabled: !isDone },
+            { id: 'assets', label: 'Asset Studio', icon: Archive, disabled: !isDone }
+          ].map((tab) => (
+            <button
+              key={tab.id}
+              disabled={tab.disabled}
+              onClick={() => setActiveTab(tab.id as any)}
+              className={`flex items-center gap-2 px-6 py-2.5 rounded-xl text-[11px] font-black uppercase tracking-widest transition-all
+                ${activeTab === tab.id 
+                  ? 'bg-white text-purple-600 shadow-sm border border-purple-100' 
+                  : (tab.disabled ? 'text-gray-300 cursor-not-allowed' : 'text-gray-400 hover:text-gray-600')}`}
+            >
+              <tab.icon size={14} /> {tab.label}
+            </button>
           ))}
         </div>
+
+        {/* Granular Pipeline Section */}
+        {activeTab === 'pipeline' && (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 relative p-8 bg-gray-50/50 rounded-[3rem] border border-gray-100">
+            {STAGES.map((stage) => (
+              <StageRow 
+                key={stage.id} 
+                stage={stage} 
+                globalProgress={smoothProgress} 
+                isDone={isDone} 
+                isFailed={isFailed}
+              />
+            ))}
+          </div>
+        )}
 
         {/* Contextual Action Areas */}
         <div className="space-y-4">
@@ -225,7 +557,7 @@ const TaskCard = ({ task, onDelete }: { task: Project, onDelete: (id: string | n
                 initial={{ opacity: 0, height: 0 }}
                 animate={{ opacity: 1, height: 'auto' }}
                 exit={{ opacity: 0, height: 0 }}
-                className="overflow-hidden"
+                className="overflow-hidden space-y-4"
               >
                 <div className="p-4 rounded-3xl bg-indigo-50/50 border border-indigo-100 flex items-center justify-between">
                   <div className="flex items-center gap-3">
@@ -244,6 +576,82 @@ const TaskCard = ({ task, onDelete }: { task: Project, onDelete: (id: string | n
                     ))}
                   </div>
                 </div>
+
+                {/* ── Neural Intelligence Hub ── */}
+                <motion.div
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="p-8 rounded-[3.5rem] bg-white border border-purple-100 shadow-[inset_0_2px_10px_rgba(0,0,0,0.02)] space-y-8"
+                >
+                  <div className="flex items-center justify-between border-b border-gray-50 pb-6">
+                    <div className="flex items-center gap-3">
+                      <div className="p-2 bg-purple-600 rounded-xl text-white shadow-lg shadow-purple-200">
+                        <Sparkles size={16} />
+                      </div>
+                      <div>
+                        <h4 className="text-sm font-black text-[#1a1a2e] uppercase tracking-[0.2em]">Neural Intelligence Hub</h4>
+                        <p className="text-[9px] text-gray-400 font-bold uppercase tracking-wider">
+                          Context: <span className="text-purple-600">{langLabel(task.detected_language)}</span> → <span className="text-purple-600">{task.target_languages?.map(l => langLabel(l)).join(', ')}</span>
+                        </p>
+                      </div>
+                    </div>
+                    
+                    {task.domain && (
+                      <motion.div 
+                        initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }}
+                        className="flex items-center gap-2 px-4 py-2 bg-emerald-50 border border-emerald-100 rounded-2xl"
+                      >
+                        <Target size={12} className="text-emerald-600" />
+                        <span className="text-[10px] font-black text-emerald-700 uppercase tracking-widest">{task.domain}</span>
+                      </motion.div>
+                    )}
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    {/* Original Transcript */}
+                    <div className="space-y-4">
+                      <div className="flex items-center gap-2">
+                        <div className="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse" />
+                        <span className="text-[10px] font-black uppercase tracking-widest text-gray-400">Neural Transcript (Original)</span>
+                      </div>
+                      <div className="p-6 rounded-[2rem] bg-gray-50/50 border border-gray-100 min-h-[120px] max-h-[250px] overflow-y-auto custom-scrollbar">
+                        <p className="text-xs text-[#1a1a2e] leading-relaxed font-bold italic opacity-80">
+                          {task.transcript || "Awaiting neural synthesis..."}
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Target Transcripts */}
+                    <div className="space-y-4">
+                      <div className="flex items-center gap-2">
+                        <div className="w-1.5 h-1.5 rounded-full bg-purple-500 animate-pulse" />
+                        <span className="text-[10px] font-black uppercase tracking-widest text-gray-400">Target Track Pipeline (Localized)</span>
+                      </div>
+                      <div className="p-6 rounded-[2rem] bg-purple-50/30 border border-purple-100 min-h-[120px] max-h-[250px] overflow-y-auto custom-scrollbar space-y-6">
+                        {task.translations && Object.keys(task.translations).length > 0 ? (
+                          Object.entries(task.translations).map(([lang, text]) => (
+                            <div key={lang} className="space-y-2 group/trans">
+                              <div className="flex items-center gap-2">
+                                <span className="text-[9px] font-black px-2 py-0.5 bg-purple-600 text-white rounded-md uppercase shadow-sm">
+                                  {LANG_NAMES[lang] || lang}
+                                </span>
+                                <div className="h-px flex-1 bg-purple-100 scale-x-0 group-hover/trans:scale-x-100 transition-transform origin-left" />
+                              </div>
+                              <p className="text-xs text-purple-900 leading-relaxed font-bold italic opacity-90">
+                                {text}
+                              </p>
+                            </div>
+                          ))
+                        ) : (
+                          <div className="flex flex-col items-center justify-center py-8 opacity-30">
+                            <RefreshCw size={24} className="animate-spin mb-2" />
+                            <p className="text-[10px] font-black uppercase tracking-widest">Translating...</p>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
               </motion.div>
             )}
           </AnimatePresence>
@@ -265,10 +673,22 @@ const TaskCard = ({ task, onDelete }: { task: Project, onDelete: (id: string | n
               <motion.button
                 whileHover={{ scale: 1.02, y: -2 }}
                 whileTap={{ scale: 0.98 }}
+                onClick={() => {
+                  if (task.video_url) {
+                    const link = document.createElement('a');
+                    link.href = `http://localhost:8000${task.video_url}`;
+                    link.download = `${task.title}_Localized.mp4`;
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                  } else {
+                    alert('Video not yet ready for download.');
+                  }
+                }}
                 className="flex items-center justify-center gap-3 py-4 rounded-2xl
                   bg-[#1a1a2e] text-white font-black text-[11px] uppercase tracking-widest shadow-xl shadow-gray-200"
               >
-                <Target size={16} /> Open in Studio
+                <Download size={16} /> Download Video
               </motion.button>
             </div>
           )}
@@ -286,29 +706,25 @@ const TaskCard = ({ task, onDelete }: { task: Project, onDelete: (id: string | n
           )}
         </div>
 
-        {/* Transcript Preview */}
-        <AnimatePresence>
-          {task.transcript && (
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              className="bg-white border-2 border-gray-100 rounded-[2rem] p-6 space-y-4"
-            >
-              <div className="flex items-center justify-between">
-                <p className="text-[11px] font-black uppercase tracking-widest text-gray-400 flex items-center gap-2">
-                  <FileText size={14} className="text-purple-500" /> Neural Transcript
-                </p>
-                <span className="text-[9px] font-black bg-purple-100 text-purple-600 px-3 py-1 rounded-full uppercase">High Confidence</span>
-              </div>
-              <div className="relative">
-                <p className="text-sm text-gray-700 leading-relaxed font-medium line-clamp-4">
-                  {task.transcript}
-                </p>
-                <div className="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-white to-transparent" />
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+        {/* Tab Content: OTT Watch */}
+        {activeTab === 'watch' && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.98 }}
+            animate={{ opacity: 1, scale: 1 }}
+          >
+             <WatchMode task={task} />
+          </motion.div>
+        )}
+
+        {/* Tab Content: Asset Studio */}
+        {activeTab === 'assets' && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+          >
+            <AssetStudio task={task} />
+          </motion.div>
+        )}
       </div>
     </motion.div>
   );

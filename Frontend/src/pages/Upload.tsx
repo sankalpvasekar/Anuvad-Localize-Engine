@@ -33,9 +33,9 @@ const LANGUAGES: Language[] = [
 ];
 
 const TYPES = [
-  { id: 'AI Dubbing',      icon: <Mic size={18} /> },
-  { id: 'AI Subtitles',   icon: <Type size={18} /> },
-  { id: 'Text To Speech', icon: <FileAudio size={18} /> },
+  { id: 'AI Dubbing',      icon: <Mic size={18} />, accept: '.mp4,.mkv,.mov' },
+  { id: 'AI Subtitles',   icon: <Type size={18} />, accept: '.pdf' },
+  { id: 'Text To Speech', icon: <FileAudio size={18} />, accept: '.mp4,.mkv' },
 ];
 
 const Upload = () => {
@@ -82,12 +82,18 @@ const Upload = () => {
   /* ── File handling ───────────────────────────────────────────────── */
   const handleFileSelect = (file: File) => {
     const ext = file.name.split('.').pop()?.toLowerCase() ?? '';
-    const validExts = ['mp4', 'mkv', 'mov', 'avi', 'webm', 'flv', 'wmv', '3gp', 'm4v'];
-    if (file.type.startsWith('video/') || validExts.includes(ext)) {
+    const isVideo = ['mp4', 'mkv', 'mov', 'avi', 'webm', 'flv', 'wmv', '3gp', 'm4v'].includes(ext);
+    const isPdf = ext === 'pdf';
+
+    if (selectedType === 'AI Subtitles' && isPdf) {
+      setSelectedFile(file);
+      setError(null);
+    } else if (selectedType !== 'AI Subtitles' && isVideo) {
       setSelectedFile(file);
       setError(null);
     } else {
-      setError('Please select a valid video file (MP4, MKV, MOV, etc.)');
+      const expected = selectedType === 'AI Subtitles' ? 'PDF file' : 'video file';
+      setError(`Please select a valid ${expected}.`);
     }
   };
 
@@ -131,24 +137,24 @@ const Upload = () => {
       variants={containerVariants}
       initial="hidden"
       animate="visible"
-      className="max-w-[1200px] mx-auto space-y-6 py-6 px-6"
+      className="max-w-7xl mx-auto space-y-12 py-16 px-8"
     >
       <ErrorToast message={error} onClose={() => setError(null)} onRetry={handleStart} />
 
       {/* Header */}
-      <motion.div variants={itemVariants} className="text-left space-y-2">
-        <div className="inline-flex items-center gap-2 bg-purple-50 px-3 py-1.5 rounded-full text-purple-600 font-bold text-[10px] uppercase tracking-widest border border-purple-100">
-          <Sparkles size={12} /> AI-Powered Localization
+      <motion.div variants={itemVariants} className="text-left space-y-4 max-w-2xl">
+        <div className="inline-flex items-center gap-2 bg-purple-100/50 px-4 py-2 rounded-full text-purple-600 font-black text-[11px] uppercase tracking-widest border border-purple-200 backdrop-blur-sm">
+          <Sparkles size={14} /> AI-Powered Localization
         </div>
-        <h1 className="text-3xl font-black tracking-tight text-[#1a1a2e]" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>Start Localizing 🚀</h1>
-        <p className="text-gray-400 text-base font-medium">
-          Upload your video and pick your target languages.
+        <h1 className="text-5xl font-black tracking-tight text-[#1a1a2e]" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>Create New Project</h1>
+        <p className="text-gray-400 text-xl font-bold font-medium">
+          Upload your high-definition content and select your target localization tracks.
         </p>
       </motion.div>
 
-      <div className="lg:grid lg:grid-cols-[1fr_1.2fr] lg:gap-10 items-start">
+      <div className="lg:grid lg:grid-cols-[1.2fr_1fr] lg:gap-16 items-start">
         {/* Left Column: Upload Zone */}
-        <div className="space-y-6">
+        <div className="space-y-8">
           <motion.div variants={itemVariants}>
             <motion.div
               whileHover={!isSubmitting ? { scale: 1.01, y: -4 } : {}}
@@ -156,10 +162,10 @@ const Upload = () => {
               onDragLeave={() => setDragActive(false)}
               onDrop={onDrop}
               onClick={() => !isSubmitting && fileInputRef.current?.click()}
-              className={`relative rounded-[2.5rem] border-[3px] border-dashed transition-all duration-500 flex flex-col items-center justify-center py-12 px-8 cursor-pointer overflow-hidden group
+              className={`relative rounded-[4rem] border-[4px] border-dashed transition-all duration-700 flex flex-col items-center justify-center min-h-[500px] px-12 cursor-pointer overflow-hidden group
                 ${dragActive || selectedFile
-                  ? 'border-purple-500 bg-purple-500/5 shadow-[0_32px_64px_-16px_rgba(124,58,237,0.1)]'
-                  : 'border-purple-200 bg-white/30 hover:bg-white/50 hover:border-purple-300'}
+                  ? 'border-purple-500 bg-purple-500/5 shadow-[0_48px_120px_-24px_rgba(124,58,237,0.15)]'
+                  : 'border-purple-200 bg-white/40 backdrop-blur-xl hover:bg-white/60 hover:border-purple-300 shadow-xl shadow-gray-100/50'}
                 ${isSubmitting ? 'opacity-60 pointer-events-none' : ''}`}
             >
               <input type="file" ref={fileInputRef} className="hidden" accept="video/*"
@@ -172,18 +178,18 @@ const Upload = () => {
                 </motion.div>
               )}
 
-              <div className="w-20 h-20 bg-purple-100 rounded-[2rem] flex items-center justify-center mb-6 text-purple-600 group-hover:scale-110 transition-transform duration-500">
-                <UploadIcon size={34} />
-              </div>
-              <h3 className="text-2xl font-black mb-2 text-[#1a1a2e]">
-                {selectedFile ? 'Ready to Process!' : 'Upload Video'}
-              </h3>
-              <p className="text-gray-400 font-bold text-center text-xs">
-                {selectedFile
-                  ? <span className="text-purple-600 font-black">{selectedFile.name} ({(selectedFile.size / (1024 * 1024)).toFixed(1)} MB)</span>
-                  : <>Drag &amp; drop or click to browse<br /><span>MP4, MKV, MOV — up to 2 GB</span></>
-                }
-              </p>
+                <div className="w-24 h-24 bg-purple-100 rounded-[2.5rem] flex items-center justify-center mb-8 text-purple-600 group-hover:scale-110 group-hover:rotate-3 transition-all duration-700 shadow-inner">
+                  <UploadIcon size={42} />
+                </div>
+                <h3 className="text-3xl font-black mb-4 text-[#1a1a2e]">
+                  {selectedFile ? 'Content Analyzed' : 'Direct Upload'}
+                </h3>
+                <p className="text-gray-400 font-bold text-center text-sm leading-relaxed max-w-xs">
+                  {selectedFile
+                    ? <span className="text-purple-600 font-extrabold">{selectedFile.name} ({(selectedFile.size / (1024 * 1024)).toFixed(1)} MB)</span>
+                    : <>Securely drop your files or browse locally.<br /><span className="text-[10px] uppercase tracking-widest text-purple-300">MP4, MKV, MOV • UP TO 2 GB</span></>
+                  }
+                </p>
             </motion.div>
           </motion.div>
         </div>
@@ -209,73 +215,74 @@ const Upload = () => {
             })}
           </motion.div>
 
-          {/* Target Language Multi-Select */}
-          <motion.div variants={itemVariants} className="space-y-4">
-            <div className="flex items-center justify-between flex-wrap gap-2">
-              <div>
-                <h3 className="text-lg font-black text-[#1a1a2e] tracking-tight">Target Languages</h3>
-                <p className="text-[10px] text-gray-400 font-medium">Localization targets</p>
+            {/* Target Language Multi-Select */}
+            <motion.div variants={itemVariants} className="space-y-6">
+              <div className="flex items-center justify-between flex-wrap gap-2 px-2">
+                <div>
+                  <h3 className="text-xl font-black text-[#1a1a2e] tracking-tight">Localization Tracks</h3>
+                  <p className="text-[11px] text-gray-400 font-bold uppercase tracking-widest">Multi-language synthesis</p>
+                </div>
+
+                <div className="flex items-center gap-2">
+                  <AnimatePresence mode="wait">
+                    <motion.span
+                      key={targetLangs.size}
+                      initial={{ scale: 0.7, opacity: 0 }}
+                      animate={{ scale: 1, opacity: 1 }}
+                      className="text-xs bg-purple-600 text-white px-4 py-1.5 rounded-full font-black shadow-lg shadow-purple-200"
+                    >
+                      {targetLangs.size} Selected
+                    </motion.span>
+                  </AnimatePresence>
+                  <button
+                    onClick={toggleAll}
+                    className={`text-[11px] px-4 py-1.5 rounded-full font-black border transition-all uppercase tracking-widest shadow-sm
+                      ${allSelected ? 'bg-white border-gray-200 text-gray-400 hover:text-gray-600' : 'bg-purple-100/50 border-purple-200 text-purple-600 hover:bg-purple-100'}`}
+                  >
+                    {allSelected ? 'Clear' : 'Select All'}
+                  </button>
+                </div>
               </div>
 
-              <div className="flex items-center gap-1.5">
-                <AnimatePresence mode="wait">
-                  <motion.span
-                    key={targetLangs.size}
-                    initial={{ scale: 0.7, opacity: 0 }}
-                    animate={{ scale: 1, opacity: 1 }}
-                    className="text-[10px] bg-purple-600 text-white px-2.5 py-1 rounded-full font-black shadow-md shadow-purple-300/40"
-                  >
-                    {targetLangs.size}
-                  </motion.span>
-                </AnimatePresence>
-                <button
-                  onClick={toggleAll}
-                  className={`text-[10px] px-2.5 py-1 rounded-full font-black border transition-all uppercase tracking-widest
-                    ${allSelected ? 'bg-gray-100 border-gray-200 text-gray-500' : 'bg-purple-50 border-purple-200 text-purple-600'}`}
-                >
-                  {allSelected ? 'None' : 'All'}
-                </button>
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                {LANGUAGES.map((lang) => {
+                  const isSelected = targetLangs.has(lang.code);
+                  return (
+                    <motion.button
+                      key={lang.code}
+                      onClick={() => toggleLang(lang.code)}
+                      whileHover={{ scale: 1.02, y: -2 }}
+                      whileTap={{ scale: 0.98 }}
+                      className={`relative flex items-center gap-3 px-5 py-6 rounded-[2rem] font-black text-[12px] transition-all border select-none
+                        ${isSelected
+                          ? 'bg-purple-600 border-purple-600 text-white shadow-xl shadow-purple-500/20'
+                          : 'bg-white border-gray-100 text-gray-500 hover:border-purple-200 hover:shadow-lg'}`}
+                    >
+                      <span className="text-xl leading-none">{lang.flag}</span>
+                      <span className="tracking-tight">{lang.label}</span>
+                      {isSelected && <div className="ml-auto bg-white/20 p-1 rounded-full"><Check size={10} strokeWidth={4} /></div>}
+                    </motion.button>
+                  );
+                })}
               </div>
-            </div>
-
-            <div className="grid grid-cols-3 gap-2">
-              {LANGUAGES.map((lang) => {
-                const isSelected = targetLangs.has(lang.code);
-                return (
-                  <motion.button
-                    key={lang.code}
-                    onClick={() => toggleLang(lang.code)}
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    className={`relative flex items-center gap-1.5 px-3 py-2.5 rounded-xl font-bold text-[11px] transition-all border select-none
-                      ${isSelected
-                        ? 'bg-purple-600 border-purple-600 text-white shadow-lg shadow-purple-500/25'
-                        : 'bg-white/40 border-purple-100 text-gray-500 hover:border-purple-300 hover:text-gray-700'}`}
-                  >
-                    <span className="text-xs leading-none">{lang.flag}</span>
-                    <span className="truncate">{lang.label}</span>
-                    {isSelected && <Check size={8} strokeWidth={4} className="ml-auto" />}
-                  </motion.button>
-                );
-              })}
-            </div>
-          </motion.div>
+            </motion.div>
 
           {/* Start Button */}
           <motion.div variants={itemVariants} className="pt-2">
             <motion.button
               onClick={handleStart}
               disabled={!selectedFile || isSubmitting}
-              whileHover={!isSubmitting && selectedFile ? { scale: 1.02 } : {}}
+              whileHover={!isSubmitting && selectedFile ? { scale: 1.02, y: -2 } : {}}
               whileTap={!isSubmitting && selectedFile ? { scale: 0.98 } : {}}
-              className="w-full py-5 bg-gradient-to-r from-purple-700 to-purple-950 text-white rounded-[1.5rem] font-black text-[12px] uppercase tracking-[0.2em] shadow-xl shadow-purple-900/40 flex items-center justify-center gap-3 disabled:opacity-40 disabled:cursor-not-allowed transition-all"
+              className="w-full py-8 bg-gradient-to-r from-purple-700 via-indigo-800 to-purple-950 text-white rounded-[2.5rem] font-black text-sm uppercase tracking-[0.3em] shadow-2xl shadow-purple-900/40 flex items-center justify-center gap-4 disabled:opacity-40 disabled:cursor-not-allowed transition-all relative overflow-hidden group"
             >
+              <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity" />
               {isSubmitting ? (
-                <><RefreshCw size={16} className="animate-spin" /> Starting...</>
+                <><RefreshCw size={20} className="animate-spin" /> Initializing Engine...</>
               ) : (
                 <>
-                  <ArrowRight size={16} />
-                  Start Processing
+                  <ArrowRight size={20} />
+                  Initiate Localization
                 </>
               )}
             </motion.button>

@@ -1,3 +1,4 @@
+from typing import Optional
 from pydantic import Field
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
@@ -13,10 +14,10 @@ class Settings(BaseSettings):
     jwt_algorithm: str = "HS256"
     jwt_expire_minutes: int = 60 * 24
 
-    google_client_id: str | None = None
+    google_client_id: Optional[str] = None
 
     # Optional override. If empty, the app auto-detects ../ffmpeg/bin from workspace root.
-    ffmpeg_dir: str | None = None
+    ffmpeg_dir: Optional[str] = None
 
 
 settings = Settings()

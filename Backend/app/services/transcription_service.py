@@ -29,6 +29,10 @@ from app.utils.audio_utils import extract_audio
 from app.models.response_model import TranscriptionResponse
 from app.core.config import get_whisper_model
 from app.core.database import db_manager
+from app.services.rag_service import rag_service
+from app.services.sbert_service import domain_service
+from app.services.dubbing_service import dubbing_service
+from app.ffmpeg_utils import merge_to_ott_video
 
 # Deterministic langdetect (matches Colab seed=0)
 DetectorFactory.seed = 0
@@ -86,7 +90,8 @@ def _detect_language(audio_path: str, model: whisper.Whisper) -> Dict[str, Any]:
         audio, 
         task="transcribe",
         temperature=0.0,
-        condition_on_previous_text=False
+        condition_on_previous_text=False,
+        fp16=(str(model.device) != "cpu")
     )
     text_sample = str(result.get("text", ""))[:500]
 
@@ -154,17 +159,17 @@ class TranscriptionService:
         self, video_path: str, project_id: Optional[str] = None
     ) -> TranscriptionResponse:
         """
-        Full pipeline (mirrors Colab run_pipeline):
-          1. FFmpeg audio extraction
-          2. Language detection (spectral + optional cheap probe)
-          3. Full transcription with confirmed language
-          4. DB progress updates at each stage
+        Full 4-Stage Neural Pipeline:
+          1. AI Perception (Extraction + Transcription)
+          2. Neural Intelligence (RAG + SBERT Refinement)
+          3. Synthesis & Localization (Parallel Translation + TTS)
+          4. Finalization (OTT Muxing)
         """
         start_time = time.monotonic()
         projects_col = db_manager.get_projects_collection()
         loop = asyncio.get_event_loop()
 
-        # Prepare unique audio path
+        # Prepare unique filenames
         audio_id = str(uuid.uuid4())
         audio_filename = f"{audio_id}.wav"
         static_audio_dir = os.path.join("static", "audio")
@@ -172,75 +177,111 @@ class TranscriptionService:
         audio_path = os.path.join(static_audio_dir, audio_filename)
         audio_url = f"/static/audio/{audio_filename}"
 
+        async def update_status(prog: float, stage_name: str, msg: str = ""):
+            if project_id:
+                await projects_col.update_one(
+                    {"_id": ObjectId(project_id)},
+                    {"$set": {
+                        "progress": prog,
+                        "stage": stage_name,
+                        "timeRemaining": msg or f"Executing {stage_name}..."
+                    }}
+                )
+
         try:
-            # ── Stage 1: Audio Extraction ──────────────────────────────
-            logger.info(f"[{project_id}] Extracting audio → {audio_path}")
+            # ── Step 1: Audio Extraction (0%) ─────────────────────────
+            await update_status(5, "Audio Extraction", "Extracting high-fidelity WAV...")
             await loop.run_in_executor(None, extract_audio, video_path, audio_path)
 
-            if project_id:
-                await projects_col.update_one(
-                    {"_id": ObjectId(project_id)},
-                    {"$set": {
-                        "audio_url": audio_url,
-                        "progress": 25,
-                        "stage": "Language Detection",
-                        "timeRemaining": "Detecting language...",
-                    }},
-                )
-
-            # ── Stage 2: Language Detection ────────────────────────────
-            logger.info(f"[{project_id}] Detecting language")
+            # ── Step 2: Language Detection (12.5%) ────────────────────
+            await update_status(12.5, "Language Detection", "Probing spectral frequencies...")
             detect_fn = partial(_detect_language, audio_path, self.model)
             detection = await loop.run_in_executor(None, detect_fn)
-
             final_lang = detection["final_language"]
-            whisper_conf = detection["whisper_confidence"]
-            logger.info(
-                f"[{project_id}] Language detected: {final_lang} "
-                f"(decision={detection['decision']}, conf={whisper_conf:.4f})"
-            )
-
-            if project_id:
-                await projects_col.update_one(
-                    {"_id": ObjectId(project_id)},
-                    {"$set": {
-                        "lang": final_lang,
-                        "detected_language": final_lang,
-                        "progress": 60,
-                        "stage": "Neural Transcription",
-                        "timeRemaining": "Transcribing...",
-                    }},
-                )
-
-            # ── Stage 3: Full Transcription ────────────────────────────
-            logger.info(f"[{project_id}] Transcribing with language={final_lang}")
+            
+            # ── Step 3: Domain Detection (25%) ────────────────────────
+            await update_status(25, "Domain Detection", "Analyzing semantic context...")
+            await loop.run_in_executor(None, rag_service.auto_index_knowledge_base)
+            
+            # ── Step 4: Transcription Generation (37.5%) ──────────────
+            current_stage = "Transcription Generation"
+            await update_status(37.5, current_stage, f"Generating {final_lang} script...")
             transcribe_fn = partial(_transcribe_audio, audio_path, final_lang, self.model)
             result = await loop.run_in_executor(None, transcribe_fn)
-
             transcript_text = result.get("clean_text", result.get("text", "")).strip()
-            processing_time = time.monotonic() - start_time
 
+            # ── Step 5: Parallel Translating (50%) ────────────────────
+            current_stage = "Parallel Translating"
+            await update_status(50, current_stage, "Neural machine translation...")
+            
+            # ── Step 6: Transcript Refinement (62.5%) ─────────────────
+            current_stage = "Transcript Refinement"
+            await update_status(62.5, current_stage, "Granite RAG optimization...")
+            context = rag_service.retrieve_context(transcript_text[:500])
+            refined_transcript = await loop.run_in_executor(
+                None, rag_service.refine_with_granite, transcript_text, context
+            )
+            # If refinement failed or was skipped, use original
+            if not refined_transcript:
+                refined_transcript = transcript_text
+                
+            domain = domain_service.detect_domain(refined_transcript)
+            
+            # ── Step 7: Audio Generation (75%) ────────────────────────
+            current_stage = "Audio Generation"
+            await update_status(75, current_stage, "Synthesizing localized voices...")
+            project_data = await projects_col.find_one({"_id": ObjectId(project_id)})
+            target_langs = project_data.get("target_languages", ["hi"])
+            segments = result.get("segments", [])
+            audio_results = await dubbing_service.translate_and_dub_parallel(segments, target_langs)
+
+            # ── Step 8: Mux with Video (87.5%) ────────────────────────
+            await update_status(87.5, "Mux with Video", "Finalizing OTT multi-track...")
+            
+            # Extract paths and transcripts from the results
+            audio_paths = {lang: res["audio_path"] for lang, res in audio_results.items()}
+            translations = {lang: res["transcript"] for lang, res in audio_results.items()}
+
+            output_dir = os.path.join("static", "videos")
+            os.makedirs(output_dir, exist_ok=True)
+            output_video_path = os.path.join(output_dir, f"ott_{project_id}.mp4")
+            
+            mux_success = await loop.run_in_executor(
+                None, merge_to_ott_video, video_path, audio_paths, output_video_path
+            )
+            
+            if not mux_success or not os.path.exists(output_video_path):
+                raise RuntimeError("Failed to generate final multi-track video file.")
+
+            # Convert audio_paths to URLs for frontend consumption
+            track_urls = {
+                lang: "/" + path.replace("\\", "/") if path else None 
+                for lang, path in audio_paths.items()
+            }
+
+            processing_time = time.monotonic() - start_time
             if project_id:
                 await projects_col.update_one(
                     {"_id": ObjectId(project_id)},
                     {"$set": {
-                        "transcript": transcript_text,
                         "status": "Completed",
                         "progress": 100,
                         "stage": "Finalized",
+                        "video_url": f"/static/videos/ott_{project_id}.mp4",
+                        "audio_tracks": track_urls,
+                        "translations": translations,
+                        "transcript": refined_transcript,
+                        "domain": domain,
+                        "lang": final_lang,
+                        "detected_language": final_lang,
                         "timeRemaining": "0s",
                     }},
                 )
 
-            logger.info(
-                f"[{project_id}] Done in {processing_time:.2f}s | "
-                f"lang={final_lang} | chars={len(transcript_text)}"
-            )
-
             return TranscriptionResponse(
                 detected_language=final_lang,
-                confidence=round(whisper_conf, 3),
-                transcript=transcript_text,
+                confidence=round(detection.get("whisper_confidence", 0), 3),
+                transcript=refined_transcript,
                 processing_time=round(processing_time, 2),
                 audio_url=audio_url,
             )
@@ -248,11 +289,14 @@ class TranscriptionService:
         except Exception as e:
             logger.exception(f"[{project_id}] Pipeline failed: {e}")
             if project_id:
+                # Use current_stage to pinpoint failure
+                error_msg = f"Error [{current_stage}]: {str(e)[:100]}"
                 await projects_col.update_one(
                     {"_id": ObjectId(project_id)},
                     {"$set": {
                         "status": "Failed",
-                        "stage": f"Error: {str(e)[:120]}",
+                        "stage": error_msg,
+                        "timeRemaining": "Failed",
                         "progress": 0,
                     }},
                 )

@@ -15,9 +15,13 @@ export interface Project {
   transcript?: string;
   preview?: string;
   audio_url?: string;
+  video_url?: string;
+  /** Mapping of language codes to audio URLs if stored separately */
+  audio_tracks?: Record<string, string>;
+  /** Mapping of language codes to localized deliverables (transcript + audio) */
+  translations?: Record<string, { transcript: string; audio_path: string }>;
   detected_language?: string;
-  /** Array of target language codes e.g. ['hi', 'en', 'ta'] */
-  target_languages?: string[];
+  domain?: string;
   is_community?: boolean;
   date?: string;
   created_at?: string;
@@ -35,8 +39,12 @@ interface ProjectContextType {
 
 const ProjectContext = createContext<ProjectContextType | undefined>(undefined);
 
-const API_BASE = 'http://localhost:8000/projects';
-const TRANSCRIBE_URL = 'http://localhost:8000/transcribe/';
+const BACKEND_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' 
+  ? 'http://127.0.0.1:8000' 
+  : `http://${window.location.hostname}:8000`;
+
+const API_BASE = `${BACKEND_URL}/projects`;
+const TRANSCRIBE_URL = `${BACKEND_URL}/transcribe/`;
 const POLL_INTERVAL_MS = 3000;
 
 export const ProjectProvider = ({ children }: { children: ReactNode }) => {
@@ -49,10 +57,20 @@ export const ProjectProvider = ({ children }: { children: ReactNode }) => {
   const fetchProjects = async () => {
     try {
       setLoading(true);
+      console.log('DEBUG: Fetching projects for user: guest');
       const res = await fetch(`${API_BASE}?user_id=guest`);
       if (res.ok) {
-        const data = await res.json();
+        const data: Project[] = await res.json();
+        console.log(`DEBUG: Loaded ${data.length} projects from MongoDB`);
         setProjects(data);
+        
+        // Auto-resume polling for any projects that are still processing
+        data.forEach(p => {
+          if (p.status === 'Processing' || p.status === 'Initializing') {
+            console.log(`DEBUG: Resuming polling for active project: ${p.id}`);
+            startPolling(String(p.id));
+          }
+        });
       }
       const comRes = await fetch(`${API_BASE}?is_community=true`);
       if (comRes.ok) {

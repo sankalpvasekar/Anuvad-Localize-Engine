@@ -39,12 +39,14 @@ class ProjectBase(BaseModel):
     type: str = "Dubbing"
     size: str = "0 MB"
     status: str = "Processing"
-    progress: int = 0
+    progress: float = 0.0
     timeRemaining: str = "TBD"
     stage: str = "Initializing"
     preview: Optional[str] = None
     is_community: bool = False
     target_languages: Optional[list[str]] = None
+    detected_language: Optional[str] = None
+    domain: Optional[str] = None
 
 class ProjectCreate(ProjectBase):
     pass
@@ -52,7 +54,7 @@ class ProjectCreate(ProjectBase):
 class ProjectUpdate(BaseModel):
     title: Optional[str] = None
     status: Optional[str] = None
-    progress: Optional[int] = None
+    progress: Optional[float] = None
     timeRemaining: Optional[str] = None
     stage: Optional[str] = None
     is_community: Optional[bool] = None
@@ -64,9 +66,10 @@ class ProjectOut(ProjectBase):
     created_at: datetime
     date: Optional[str] = None
     audio_url: Optional[str] = None
-    detected_language: Optional[str] = None
+    video_url: Optional[str] = None
     transcript: Optional[str] = None
-    target_languages: Optional[list[str]] = None
+    audio_tracks: Optional[dict[str, str]] = None
+    translations: Optional[dict[str, str]] = None
 
 
 class TranscriptionResponse(BaseModel):

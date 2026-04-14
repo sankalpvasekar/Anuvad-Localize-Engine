@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import {
-  LayoutDashboard, Upload, RefreshCw, Library, LogOut
+  LayoutDashboard, Upload, RefreshCw, History, LogOut
 } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
@@ -8,7 +8,7 @@ const menuItems = [
   { icon: LayoutDashboard, label: 'Dashboard',  path: '/dashboard',  color: '#7c3aed' },
   { icon: Upload,          label: 'Upload',      path: '/upload',      color: '#a855f7' },
   { icon: RefreshCw,       label: 'Processing',  path: '/processing',  color: '#d946ef' },
-  { icon: Library,         label: 'Library',     path: '/library',     color: '#7c3aed' },
+  { icon: History,         label: 'History',     path: '/history',     color: '#b8a6ff' },
 ];
 
 const Sidebar = () => {

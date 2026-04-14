@@ -1,0 +1,6 @@
+Mathematics and Science (STEM) terminology list:
+- differentiation: an algebraic process of calculating the rate of change.
+- integration: the inverse of differentiation, often used for areas under curves.
+- calculus: the study of continuous change.
+- derivative: the slope of a curve at a given point.
+- formula: a mathematical rule expressed in symbols.

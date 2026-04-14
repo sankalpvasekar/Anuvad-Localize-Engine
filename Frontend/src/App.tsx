@@ -5,7 +5,7 @@ import SignIn from './pages/SignIn';
 import Upload from './pages/Upload';
 import Processing from './pages/Processing';
 import Dashboard from './pages/Dashboard';
-import Library from './pages/Library';
+import History from './pages/History';
 import Player from './pages/Player';
 import Admin from './pages/Admin';
 import Layout from './components/Layout';
@@ -36,8 +36,8 @@ function App() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/upload" element={<Upload />} />
           <Route path="/processing" element={<Processing />} />
-          <Route path="/library" element={<Library />} />
-          <Route path="/player" element={<Player />} />
+          <Route path="/history" element={<History />} />
+          <Route path="/player/:id" element={<Player />} />
           <Route path="/admin" element={<Admin />} />
         </Route>
       </Routes>

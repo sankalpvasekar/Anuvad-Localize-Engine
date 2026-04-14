@@ -277,6 +277,7 @@ const Dashboard = () => {
               key={proj.id}
               variants={fadeUp}
               whileHover={{ y:-10, transition:{ duration:0.35, ease:[0.22,1,0.36,1] as const } }}
+              onClick={() => navigate(`/player/${proj.id}`)}
               className="relative rounded-[2rem] overflow-hidden cursor-pointer group"
               style={{
                 background:'rgba(255,255,255,0.62)',
