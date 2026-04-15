@@ -101,6 +101,30 @@ class DubbingService:
         try:
             logger.info(f"Processing language: {target_lang}")
             
+            # CACHE BYPASS: Skip processing for 'hi' and 'mr' if audio already exists 
+            if target_lang in ["hi", "mr"]:
+                existing_files = list(self.output_dir.glob(f"final_{target_lang}_*.wav"))
+                if existing_files:
+                    # Sort to get the most recent one by creation time
+                    existing_files.sort(key=os.path.getmtime, reverse=True)
+                    cached_audio = existing_files[0]
+                    # We still need the transcript! Translate it quickly.
+                    texts = [seg["text"] for seg in segments]
+                    lang_map = {"hi": "hin_Deva", "mr": "mar_Deva"}
+                    translated_texts = self.translator.translate_batch(texts, src_lang="eng_Latn", tgt_lang=lang_map[target_lang])
+                    
+                    cleaned_texts = []
+                    for t in translated_texts:
+                        cleaned = self._clean_hallucinations(t)
+                        cleaned_texts.append(cleaned if len(cleaned) > 1 else "")
+                    full_translated_transcript = " ".join([t for t in cleaned_texts if t.strip()])
+                    
+                    logger.info(f"Using cached audio for {target_lang}: {cached_audio.name}")
+                    return {
+                        "audio_path": str(cached_audio),
+                        "transcript": full_translated_transcript
+                    }
+                    
             # 1. Translation (Batch)
             texts = [seg["text"] for seg in segments]
             lang_map = {
@@ -119,8 +143,22 @@ class DubbingService:
             
             # Clean hallucinations from every translated segment
             cleaned_texts = []
+            
+            from indic_transliteration import sanscript
+            transliteration_map = {
+                "ta": sanscript.TAMIL,
+                "gu": sanscript.GUJARATI,
+                "te": sanscript.TELUGU,
+                "kn": sanscript.KANNADA
+            }
+            
             for t in translated_texts:
                 cleaned = self._clean_hallucinations(t)
+                
+                # Transliterate to native script if necessary so MMS TTS can read it
+                if target_lang in transliteration_map and len(cleaned) > 1:
+                    cleaned = sanscript.transliterate(cleaned, sanscript.DEVANAGARI, transliteration_map[target_lang])
+                
                 cleaned_texts.append(cleaned if len(cleaned) > 1 else "")
                 
             # Combine into a full transcript string
