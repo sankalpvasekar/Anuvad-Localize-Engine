@@ -629,7 +629,7 @@ const TaskCard = ({ task, onDelete }: { task: Project, onDelete: (id: string | n
                       </div>
                       <div className="p-6 rounded-[2rem] bg-purple-50/30 border border-purple-100 min-h-[120px] max-h-[250px] overflow-y-auto custom-scrollbar space-y-6">
                         {task.translations && Object.keys(task.translations).length > 0 ? (
-                          Object.entries(task.translations).map(([lang, text]) => (
+                          Object.entries(task.translations).map(([lang, data]) => (
                             <div key={lang} className="space-y-2 group/trans">
                               <div className="flex items-center gap-2">
                                 <span className="text-[9px] font-black px-2 py-0.5 bg-purple-600 text-white rounded-md uppercase shadow-sm">
@@ -638,7 +638,7 @@ const TaskCard = ({ task, onDelete }: { task: Project, onDelete: (id: string | n
                                 <div className="h-px flex-1 bg-purple-100 scale-x-0 group-hover/trans:scale-x-100 transition-transform origin-left" />
                               </div>
                               <p className="text-xs text-purple-900 leading-relaxed font-bold italic opacity-90">
-                                {text}
+                                {data.transcript}
                               </p>
                             </div>
                           ))

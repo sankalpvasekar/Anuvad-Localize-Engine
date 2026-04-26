@@ -1,0 +1,138 @@
+
+> frontend@0.0.0 lint
+> eslint .
+
+
+D:\Localize Engine\Frontend\src\components\ProcessingModal.tsx
+  27:6  warning  React Hook useEffect has a missing dependency: 'stages.length'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+D:\Localize Engine\Frontend\src\context\ProjectContext.tsx
+   91:19  warning  The ref value 'pollingRefs.current' will likely have changed by the time this effect cleanup function runs. If this ref points to a node rendered by React, copy 'pollingRefs.current' to a variable inside the effect, and use that variable in the cleanup function  react-hooks/exhaustive-deps
+   93:6   warning  React Hook useEffect has a missing dependency: 'fetchProjects'. Either include it or remove the dependency array                                                                                                                                                       react-hooks/exhaustive-deps
+  219:14  error    Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components                                                                                                                                         react-refresh/only-export-components
+
+D:\Localize Engine\Frontend\src\pages\Dashboard.tsx
+    2:32  error  'MoreVertical' is defined but never used  @typescript-eslint/no-unused-vars
+  302:22  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+D:\Localize Engine\Frontend\src\pages\Home.tsx
+    7:18   error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   11:15   error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   17:31   error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  380:47   error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  380:73   error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  380:101  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+D:\Localize Engine\Frontend\src\pages\Player.tsx
+   20:18  error  'AnimatePresence' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      @typescript-eslint/no-unused-vars
+  196:18  error  Error: Cannot access refs during render
+
+React refs are values that are not needed for rendering. Refs should only be accessed outside of render, such as in event handlers or effects. Accessing a ref value (the `current` property) during render can cause your component not to update as expected (https://react.dev/reference/react/useRef).
+
+D:\Localize Engine\Frontend\src\pages\Player.tsx:196:18
+  194 |
+  195 |               <div className="text-white/60 text-sm font-bold font-mono">
+> 196 |                 {videoRef.current ? Math.floor(videoRef.current.currentTime / 60) : 0}:
+      |                  ^^^^^^^^^^^^^^^^ Cannot access ref value during render
+  197 |                 {videoRef.current ? String(Math.floor(videoRef.current.currentTime % 60)).padStart(2, '0') : '00'} / 
+  198 |                 {videoRef.current ? Math.floor(videoRef.current.duration / 60) : 0}:
+  199 |                 {videoRef.current ? String(Math.floor(videoRef.current.duration % 60)).padStart(2, '0') : '00'}                                                                        react-hooks/refs
+  196:48  error  Error: Cannot access refs during render
+
+React refs are values that are not needed for rendering. Refs should only be accessed outside of render, such as in event handlers or effects. Accessing a ref value (the `current` property) during render can cause your component not to update as expected (https://react.dev/reference/react/useRef).
+
+D:\Localize Engine\Frontend\src\pages\Player.tsx:196:48
+  194 |
+  195 |               <div className="text-white/60 text-sm font-bold font-mono">
+> 196 |                 {videoRef.current ? Math.floor(videoRef.current.currentTime / 60) : 0}:
+      |                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Cannot access ref value during render
+  197 |                 {videoRef.current ? String(Math.floor(videoRef.current.currentTime % 60)).padStart(2, '0') : '00'} / 
+  198 |                 {videoRef.current ? Math.floor(videoRef.current.duration / 60) : 0}:
+  199 |                 {videoRef.current ? String(Math.floor(videoRef.current.duration % 60)).padStart(2, '0') : '00'}                              react-hooks/refs
+  197:18  error  Error: Cannot access refs during render
+
+React refs are values that are not needed for rendering. Refs should only be accessed outside of render, such as in event handlers or effects. Accessing a ref value (the `current` property) during render can cause your component not to update as expected (https://react.dev/reference/react/useRef).
+
+D:\Localize Engine\Frontend\src\pages\Player.tsx:197:18
+  195 |               <div className="text-white/60 text-sm font-bold font-mono">
+  196 |                 {videoRef.current ? Math.floor(videoRef.current.currentTime / 60) : 0}:
+> 197 |                 {videoRef.current ? String(Math.floor(videoRef.current.currentTime % 60)).padStart(2, '0') : '00'} / 
+      |                  ^^^^^^^^^^^^^^^^ Cannot access ref value during render
+  198 |                 {videoRef.current ? Math.floor(videoRef.current.duration / 60) : 0}:
+  199 |                 {videoRef.current ? String(Math.floor(videoRef.current.duration % 60)).padStart(2, '0') : '00'}
+  200 |               </div>                                                   react-hooks/refs
+  197:55  error  Error: Cannot access refs during render
+
+React refs are values that are not needed for rendering. Refs should only be accessed outside of render, such as in event handlers or effects. Accessing a ref value (the `current` property) during render can cause your component not to update as expected (https://react.dev/reference/react/useRef).
+
+D:\Localize Engine\Frontend\src\pages\Player.tsx:197:55
+  195 |               <div className="text-white/60 text-sm font-bold font-mono">
+  196 |                 {videoRef.current ? Math.floor(videoRef.current.currentTime / 60) : 0}:
+> 197 |                 {videoRef.current ? String(Math.floor(videoRef.current.currentTime % 60)).padStart(2, '0') : '00'} / 
+      |                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Cannot access ref value during render
+  198 |                 {videoRef.current ? Math.floor(videoRef.current.duration / 60) : 0}:
+  199 |                 {videoRef.current ? String(Math.floor(videoRef.current.duration % 60)).padStart(2, '0') : '00'}
+  200 |               </div>  react-hooks/refs
+  198:18  error  Error: Cannot access refs during render
+
+React refs are values that are not needed for rendering. Refs should only be accessed outside of render, such as in event handlers or effects. Accessing a ref value (the `current` property) during render can cause your component not to update as expected (https://react.dev/reference/react/useRef).
+
+D:\Localize Engine\Frontend\src\pages\Player.tsx:198:18
+  196 |                 {videoRef.current ? Math.floor(videoRef.current.currentTime / 60) : 0}:
+  197 |                 {videoRef.current ? String(Math.floor(videoRef.current.currentTime % 60)).padStart(2, '0') : '00'} / 
+> 198 |                 {videoRef.current ? Math.floor(videoRef.current.duration / 60) : 0}:
+      |                  ^^^^^^^^^^^^^^^^ Cannot access ref value during render
+  199 |                 {videoRef.current ? String(Math.floor(videoRef.current.duration % 60)).padStart(2, '0') : '00'}
+  200 |               </div>
+  201 |             </div>                                                                                                          react-hooks/refs
+  198:48  error  Error: Cannot access refs during render
+
+React refs are values that are not needed for rendering. Refs should only be accessed outside of render, such as in event handlers or effects. Accessing a ref value (the `current` property) during render can cause your component not to update as expected (https://react.dev/reference/react/useRef).
+
+D:\Localize Engine\Frontend\src\pages\Player.tsx:198:48
+  196 |                 {videoRef.current ? Math.floor(videoRef.current.currentTime / 60) : 0}:
+  197 |                 {videoRef.current ? String(Math.floor(videoRef.current.currentTime % 60)).padStart(2, '0') : '00'} / 
+> 198 |                 {videoRef.current ? Math.floor(videoRef.current.duration / 60) : 0}:
+      |                                                ^^^^^^^^^^^^^^^^^^^^^^^^^ Cannot access ref value during render
+  199 |                 {videoRef.current ? String(Math.floor(videoRef.current.duration % 60)).padStart(2, '0') : '00'}
+  200 |               </div>
+  201 |             </div>                                                                   react-hooks/refs
+  199:18  error  Error: Cannot access refs during render
+
+React refs are values that are not needed for rendering. Refs should only be accessed outside of render, such as in event handlers or effects. Accessing a ref value (the `current` property) during render can cause your component not to update as expected (https://react.dev/reference/react/useRef).
+
+D:\Localize Engine\Frontend\src\pages\Player.tsx:199:18
+  197 |                 {videoRef.current ? String(Math.floor(videoRef.current.currentTime % 60)).padStart(2, '0') : '00'} / 
+  198 |                 {videoRef.current ? Math.floor(videoRef.current.duration / 60) : 0}:
+> 199 |                 {videoRef.current ? String(Math.floor(videoRef.current.duration % 60)).padStart(2, '0') : '00'}
+      |                  ^^^^^^^^^^^^^^^^ Cannot access ref value during render
+  200 |               </div>
+  201 |             </div>
+  202 |                                                                                                                                                                                                  react-hooks/refs
+  199:55  error  Error: Cannot access refs during render
+
+React refs are values that are not needed for rendering. Refs should only be accessed outside of render, such as in event handlers or effects. Accessing a ref value (the `current` property) during render can cause your component not to update as expected (https://react.dev/reference/react/useRef).
+
+D:\Localize Engine\Frontend\src\pages\Player.tsx:199:55
+  197 |                 {videoRef.current ? String(Math.floor(videoRef.current.currentTime % 60)).padStart(2, '0') : '00'} / 
+  198 |                 {videoRef.current ? Math.floor(videoRef.current.duration / 60) : 0}:
+> 199 |                 {videoRef.current ? String(Math.floor(videoRef.current.duration % 60)).padStart(2, '0') : '00'}
+      |                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^ Cannot access ref value during render
+  200 |               </div>
+  201 |             </div>
+  202 |                                                                                                                                                    react-hooks/refs
+
+D:\Localize Engine\Frontend\src\pages\Processing.tsx
+    5:62  error    'VolumeX' is defined but never used                                                                                      @typescript-eslint/no-unused-vars
+  418:6   warning  React Hook React.useEffect has a missing dependency: 'smoothProgress'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+  526:53  error    Unexpected any. Specify a different type                                                                                 @typescript-eslint/no-explicit-any
+
+D:\Localize Engine\Frontend\src\pages\Upload.tsx
+    3:60  error  'X' is defined but never used                                          @typescript-eslint/no-unused-vars
+   78:9   error  'clearAll' is assigned a value but never used                          @typescript-eslint/no-unused-vars
+  123:19  error  Unexpected any. Specify a different type                               @typescript-eslint/no-explicit-any
+  131:9   error  'selectedLabels' is assigned a value but never used                    @typescript-eslint/no-unused-vars
+  161:56  error  Expected an assignment or function call and instead saw an expression  @typescript-eslint/no-unused-expressions
+
+✖ 29 problems (25 errors, 4 warnings)
+

@@ -25,6 +25,7 @@ export interface Project {
   is_community?: boolean;
   date?: string;
   created_at?: string;
+  target_languages?: string[];
 }
 
 interface ProjectContextType {

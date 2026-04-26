@@ -217,15 +217,18 @@ class TranscriptionService:
             # ── Step 6: Transcript Refinement (62.5%) ─────────────────
             current_stage = "Transcript Refinement"
             await update_status(62.5, current_stage, "Granite RAG optimization...")
-            context = rag_service.retrieve_context(transcript_text[:500])
+            # Detect domain FIRST so we can fetch domain-specific RAG context
+            domain = domain_service.detect_domain(transcript_text)
+            logger.info(f"[Pipeline] Detected domain: {domain}")
+
+            # Retrieve context from domain-specific FAISS index
+            context = rag_service.retrieve_context(transcript_text[:500], domain=domain)
             refined_transcript = await loop.run_in_executor(
                 None, rag_service.refine_with_granite, transcript_text, context
             )
             # If refinement failed or was skipped, use original
             if not refined_transcript:
                 refined_transcript = transcript_text
-                
-            domain = domain_service.detect_domain(refined_transcript)
             
             # ── Step 7: Audio Generation (75%) ────────────────────────
             current_stage = "Audio Generation"
@@ -233,6 +236,11 @@ class TranscriptionService:
             project_data = await projects_col.find_one({"_id": ObjectId(project_id)})
             target_langs = project_data.get("target_languages", ["hi"])
             segments = result.get("segments", [])
+            # Store refined transcript into the correct domain folder → re-indexes only that domain
+            await loop.run_in_executor(
+                None, rag_service.store_transcript_context, refined_transcript, domain
+            )
+
             audio_results = await dubbing_service.translate_and_dub_parallel(segments, target_langs)
 
             # ── Step 8: Mux with Video (87.5%) ────────────────────────

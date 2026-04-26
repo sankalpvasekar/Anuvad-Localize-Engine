@@ -6,6 +6,7 @@ import soundfile as sf
 from typing import List, Dict, Any
 from pathlib import Path
 from engine import NeuralSyncEngine, ScholarShield
+from app.services.rag_service import rag_service
 from app.core.config import settings
 
 logger = logging.getLogger("dubbing-service")
@@ -29,6 +30,7 @@ class DubbingService:
         
         # Models
         self.translator = None
+        self.shield = ScholarShield()
         self.tts_model = None
         self.tts_tokenizer = None
         
@@ -70,10 +72,26 @@ class DubbingService:
         """
         self._load_translator()
         
+        loop = asyncio.get_event_loop()
+        
+        # 1. OPTIMIZATION: Extract texts and run RAG & Shielding ONLY ONCE for the original source!
+        texts = [seg["text"] for seg in segments]
+        source_blob = " ".join(texts)
+        
+        # Retrieval & Refinement (Contextual Intelligence)
+        context = await loop.run_in_executor(None, rag_service.retrieve_context, source_blob)
+        refined_source = await loop.run_in_executor(None, rag_service.refine_with_granite, source_blob, context)
+        
+        # Transcript-Driven Self-Knowledge Retrieval: Store for future context
+        await loop.run_in_executor(None, rag_service.store_transcript_context, refined_source)
+        
+        # Shielding Math/STEM Phonics
+        masked_text, shield_mapping = getattr(self.shield, "shield_text")(refined_source)
+        
         # Parallel execution across languages
         tasks = []
         for lang in target_languages:
-            tasks.append(self._process_single_language(segments, lang))
+            tasks.append(self._process_single_language(segments, lang, masked_text, shield_mapping))
         
         results = await asyncio.gather(*tasks)
         
@@ -96,50 +114,37 @@ class DubbingService:
         cleaned = re.sub(r"(\b\w+\b\s*)\1{6,}", r"\1", cleaned, flags=re.IGNORECASE)
         return cleaned.strip()
 
-    async def _process_single_language(self, segments: List[Dict[str, Any]], target_lang: str) -> Dict[str, str]:
+    async def _process_single_language(self, segments: List[Dict[str, Any]], target_lang: str, masked_text: str, shield_mapping: dict) -> Dict[str, str]:
         """Process translation and TTS for a single target language."""
         try:
             logger.info(f"Processing language: {target_lang}")
+            loop = asyncio.get_event_loop()
             
-            # CACHE BYPASS: Skip processing for 'hi' and 'mr' if audio already exists 
-            if target_lang in ["hi", "mr"]:
-                existing_files = list(self.output_dir.glob(f"final_{target_lang}_*.wav"))
-                if existing_files:
-                    # Sort to get the most recent one by creation time
-                    existing_files.sort(key=os.path.getmtime, reverse=True)
-                    cached_audio = existing_files[0]
-                    # We still need the transcript! Translate it quickly.
-                    texts = [seg["text"] for seg in segments]
-                    lang_map = {"hi": "hin_Deva", "mr": "mar_Deva"}
-                    translated_texts = self.translator.translate_batch(texts, src_lang="eng_Latn", tgt_lang=lang_map[target_lang])
-                    
-                    cleaned_texts = []
-                    for t in translated_texts:
-                        cleaned = self._clean_hallucinations(t)
-                        cleaned_texts.append(cleaned if len(cleaned) > 1 else "")
-                    full_translated_transcript = " ".join([t for t in cleaned_texts if t.strip()])
-                    
-                    logger.info(f"Using cached audio for {target_lang}: {cached_audio.name}")
-                    return {
-                        "audio_path": str(cached_audio),
-                        "transcript": full_translated_transcript
-                    }
-                    
-            # 1. Translation (Batch)
-            texts = [seg["text"] for seg in segments]
+            # Map target_lang to IndicTrans2 language code format
+            it2_lang = "hin_Deva" # Defaults to Hindi if map lacks it
             lang_map = {
-                "hi": "hin_Deva", 
-                "mr": "mar_Deva", 
-                "ta": "tam_Taml", 
-                "gu": "guj_Gujr", 
-                "te": "tel_Telu",
-                "kn": "kan_Knda"
+                "hi": "hin_Deva", "mr": "mar_Deva", " gu": "guj_Gujr", 
+                "ta": "tam_Taml", "te": "tel_Telu", "kn": "kan_Knda"
             }
-            it2_lang = lang_map.get(target_lang, "hin_Deva")
+            if target_lang in lang_map:
+                it2_lang = lang_map[target_lang]
             
-            translated_texts = self.translator.translate_batch(
-                texts, src_lang="eng_Latn", tgt_lang=it2_lang
-            )
+            # 1. RAG-Enhanced Translation
+            # Step C: Translation (Optimized Phonics) - run in executor to prevent blocking
+            from functools import partial
+            translate_fn = partial(self.translator.translate_batch, [masked_text], src_lang="eng_Latn", tgt_lang=it2_lang)
+            raw_translated_blob = await loop.run_in_executor(None, translate_fn)
+            raw_translated_blob = raw_translated_blob[0]
+            
+            # Step D: Unshielding
+            final_translated_blob = getattr(self.shield, "unshield_text")(raw_translated_blob, shield_mapping)
+            
+            # Split back into segments (approximate for dubbing)
+            texts = [seg["text"] for seg in segments]
+            translated_texts = [final_translated_blob] if len(texts) == 1 else final_translated_blob.split(". ")
+            if len(translated_texts) < len(texts):
+                translated_texts.extend([""] * (len(texts) - len(translated_texts)))
+            translated_texts = translated_texts[:len(texts)]
             
             # Clean hallucinations from every translated segment
             cleaned_texts = []

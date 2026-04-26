@@ -296,7 +296,7 @@ const Player = () => {
                   </div>
                   <div className="prose prose-fuchsia max-w-none">
                     <p className="text-[#1a1a2e] text-lg leading-relaxed font-bold bg-[#fdf4ff] p-8 rounded-[2.5rem] border border-[#fae8ff] min-h-[200px]">
-                      {(selectedLang === 'original' ? project.transcript : project.translations?.[selectedLang]) || "Selecting a target language will show the translated script here for review."}
+                      {(selectedLang === 'original' ? project.transcript : project.translations?.[selectedLang]?.transcript) || "Selecting a target language will show the translated script here for review."}
                     </p>
                   </div>
                </div>
