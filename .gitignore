@@ -1,54 +1,47 @@
-# Python environments
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
 .venv/
 venv/
 env/
 ENV/
-**/.venv/
-**/venv/
-
-# Python caches and artifacts
-__pycache__/
-**/__pycache__/
-*.py[cod]
-*.pyo
-*.pyd
-*.egg-info/
 .pytest_cache/
 .mypy_cache/
 .coverage
 htmlcov/
-
-# Node and frontend artifacts
-node_modules/
-**/node_modules/
-dist/
-**/dist/
-
-# Logs and local env files
 *.log
-.env
-.env.*
-.env.local
 
-# OS and editor files
+# Node/Frontend
+node_modules/
+dist/
+.eslintcache
+.stylelintcache
+*.tsbuildinfo
+
+# OS/Editor
 .DS_Store
 Thumbs.db
 .vscode/
 .idea/
+*.swp
+*.swo
 
-# Binaries and Large Files
-ffmpeg/
-**/ffmpeg/
-*.exe
-*.dll
-*.so
-*.dylib
-
-# Local Data and Persistence
+# Project Specific
+Backend/static/
+Backend/uploads/
 Backend/mongodb_data/
-Backend/static/audio/
-.cache/
-*.wav
-*.mp4
-*.mp3
-uploads/
+ffmpeg/
+_archive/
+**/*.mp4
+**/*.mp3
+**/*.wav
+**/*.json
+!package.json
+!tsconfig.json
+!composer.json
+
+# Environment
+.env
+.env.*
+!.env.example
