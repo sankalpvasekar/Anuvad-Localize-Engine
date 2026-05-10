@@ -4,7 +4,7 @@
 [Add YouTube video link here after upload]
 
 ## Project Description
-Anuvad Localize Engine is a comprehensive neural localization platform designed to automate the process of translating and dubbing video content. It leverages state-of-the-art AI models for speech-to-text (Whisper), machine translation (IndicTrans2), and voice synthesis to provide high-quality localized output. The system is specifically optimized for Indian languages, offering RAG-enhanced translation to maintain context and technical accuracy.
+Anuvad Localize-Engine is a comprehensive neural localization platform designed to automate the process of translating and dubbing video content. It leverages state-of-the-art AI models for speech-to-text (Whisper), machine translation (IndicTrans2), and voice synthesis to provide high-quality localized output. The system is specifically optimized for Indian languages, offering RAG-enhanced translation to maintain context and technical accuracy.
 
 ## Tech Stack
 ### Backend
