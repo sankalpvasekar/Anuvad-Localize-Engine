@@ -1,4 +1,22 @@
-# Python environments
+# ============================================================
+# SENSITIVE DATA — NEVER COMMIT
+# ============================================================
+.env
+.env.*
+.env.local
+.env.production
+.env.development
+.env.test
+*.env
+secrets.json
+secrets.yaml
+secrets.yml
+config/secrets.*
+credentials.json
+
+# ============================================================
+# Python virtual environments
+# ============================================================
 .venv/
 venv/
 env/
@@ -6,49 +24,110 @@ ENV/
 **/.venv/
 **/venv/
 
-# Python caches and artifacts
+# ============================================================
+# Python caches and build artifacts
+# ============================================================
 __pycache__/
 **/__pycache__/
 *.py[cod]
 *.pyo
 *.pyd
+*.egg
 *.egg-info/
+dist/
+build/
+.eggs/
 .pytest_cache/
 .mypy_cache/
+.ruff_cache/
 .coverage
 htmlcov/
+.tox/
 
-# Node and frontend artifacts
+# ============================================================
+# Node / Frontend artifacts
+# ============================================================
 node_modules/
 **/node_modules/
 dist/
 **/dist/
+.next/
+.nuxt/
+out/
 
-# Logs and local env files
+# ============================================================
+# Logs
+# ============================================================
 *.log
-.env
-.env.*
-.env.local
+logs/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
 
-# OS and editor files
+# ============================================================
+# OS / Editor generated files
+# ============================================================
 .DS_Store
 Thumbs.db
 .vscode/
 .idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
 
-# Binaries and Large Files
+# ============================================================
+# Binaries and large media / model files
+# ============================================================
 ffmpeg/
 **/ffmpeg/
 *.exe
 *.dll
 *.so
 *.dylib
+*.bin
+*.pt
+*.pth
+*.onnx
+*.safetensors
 
-# Local Data and Persistence
-Backend/mongodb_data/
-Backend/static/audio/
-.cache/
+# ============================================================
+# Audio / Video output (generated files)
+# ============================================================
 *.wav
-*.mp4
 *.mp3
+*.mp4
+*.mkv
+*.avi
+*.flac
+
+# ============================================================
+# Upload & output directories (runtime data)
+# ============================================================
+Backend/uploads/
+Backend/final_output/
+Backend/static/audio/
+Backend/mongodb_data/
 uploads/
+final_output/
+
+# ============================================================
+# Database & persistence
+# ============================================================
+*.sqlite3
+*.db
+mongodb_data/
+
+# ============================================================
+# Cache & temp
+# ============================================================
+.cache/
+tmp/
+temp/
+
+# ============================================================
+# Knowledge base / large data directories (add specific paths)
+# ============================================================
+Backend/knowledge_base/
