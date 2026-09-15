@@ -1,0 +1,10 @@
+In Java programming, a constructor is a special method used to initialize objects when they are created. It has the same name as the class and no return type.
+The private access modifier is used to hide members from other classes. A private constructor prevents a class from being instantiated externally.
+The Singleton pattern is a design pattern that restricts the instantiation of a class to one single instance.
+Method overloading is a features that allows a class to have multiple methods with the same name if their argument lists are different.
+Variable scope in Java determines where a variable can be accessed. Variables declared inside a block {} are only accessible within that block.
+The Java Compiler (javac) translates source code into bytecode, which is then executed by the Java Virtual Machine (JVM).
+Garbage collection is the process by which Java programs perform automatic memory management.
+In mathematics, the derivative measures the rate at which a function changes. The derivative of a constant is zero.
+Integration is the inverse process of differentiation. The integral of a velocity function over time gives the displacement.
+Newton's Second Law of Motion states that force equals mass times acceleration (F=ma).
