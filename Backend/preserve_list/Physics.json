@@ -1,0 +1,1737 @@
+[
+  {
+    "term": "absolute motion",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "acceleration due to gravity",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "activation energy",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "advanced mechanics of materials",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "aircraft flight mechanics",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "alpha particle",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "alternating current",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "ampres circuital law",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "ampres force law",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "analog circuit",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "angular velocity",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "anti-gravity",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "antiparticle",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "applied mechanics",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "arbitrary waveform generator",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "areal velocity",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "asynchronous circuit",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "azimuthal quantum number",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "background radiation",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "backward wave oscillator",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "balanced forces",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "beta particle",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "binding energy",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "biomechanics",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "black-body radiation",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "body force",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "branch circuit",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "breakdown voltage",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "brownian motion",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "brushed dc electric motor",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "brushless dc electric motor",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "canadian electrical code",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "capacitor voltage transformer",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "carbon fiber reinforced polymer",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "carrier current",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "carrier wave",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "celestial mechanics",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "center of gravity",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "central force motion",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "central-force problem",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "centrifugal force",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "centripetal force",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "circuit breaker",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "circuit breaker panel",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "circuit theory",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "circuit total limitation",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "circular motion",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "class field theory",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "classical mechanics",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "closed-circuit television",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "complex harmonic motion",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "composite particle",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "conservation of energy",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "constant-velocity joint",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "continuum mechanics",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "cosmic background radiation",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "countercurrent exchange",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "crossed-field amplifier",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "current",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "current density",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "current length",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "current source",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "current source inverter",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "current transformer",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "current-to-voltage converter",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "curvilinear motion",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "dark energy",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "depth of field",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "dielectric",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "digital circuit",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "direct current",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "displacement current",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "doubly fed electric machine",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "drift current",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "drift velocity",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "earth-leakage circuit breaker",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "eddy current",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "elastic energy",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "electric arc",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "electric charge",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "electric circuit",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "electric current",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "electric dipole moment",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "electric displacement field",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "electric distribution systems",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "electric field",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "electric field gradient",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "electric field intensity",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "electric generator",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "electric motor",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "electric multiple unit",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "electric potential",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "electric power",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "electric power conversion",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "electric power distribution",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "electric power research institute",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "electric power transmission",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "electric shock",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "electrical and electronics engineering",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "electrical cable",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "electrical circuit",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "electrical code",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "electrical conductance",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "electrical conductivity",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "electrical conductor",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "electrical contact",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "electrical discharge machining",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "electrical element",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "electrical engineering",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "electrical equipment",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "electrical grid",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "electrical impedance",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "electrical insulation",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "electrical insulation paper",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "electrical insulator",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "electrical load",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "electrical machine",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "electrical measurements",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "electrical network",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "electrical polarity",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "electrical potential energy",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "electrical resistance",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "electrical resistivity",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "electrical steel",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "electrical substation",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "electrical technologist",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "electrical wiring",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "electrical wiring regulations",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "electricity",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "electricity meter",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "electricity pylon",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "electromagnetic compatibility",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "electromagnetic field",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "electromagnetic induction",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "electromagnetic radiation",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "electromagnetic spectrum",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "electromechanics",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "electromotive force",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "electron electric dipole moment",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "electron magnetic dipole moment",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "electron paramagnetic resonance",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "electronic circuit",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "elementary particle",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "energy",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "energy demand management",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "energy economics",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "energy efficient transformer",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "energy level",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "energy subsidies",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "equilibrant force",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "equivalent circuit",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "escape velocity",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "ferroelectricity",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "fiber optics",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "field effect transistor",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "field line",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "field of view",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "field theory",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "field-emission electric propulsion",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "field-oriented control",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "first law of thermodynamics",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "flow velocity",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "fluid mechanics",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "force",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "force carrier",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "force density",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "force field",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "full load current",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "full-wave rectifier",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "fundamental forces",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "gibbs energy",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "gravitational energy",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "gravitational field",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "gravitational wave",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "gravity",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "grid energy storage",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "ground fault circuit interrupter",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "ground reaction force",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "group velocity",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "hamiltonian mechanics",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "helmholtz free energy",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "high voltage",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "high-voltage cable",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "high-voltage direct current",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "high-voltage switchgear",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "hydroelectricity",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "inrush current",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "integrated circuit",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "intermittent energy source",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "intermolecular force",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "intramolecular force",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "ionizing radiation",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "kinetic energy",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "kirchhoffs circuit laws",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "lagrangian mechanics",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "lattice energy",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "law of conservation of energy",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "laws of thermodynamics",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "lc circuit",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "line of force",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "london dispersion forces",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "longitudinal wave",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "lorentz force law",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "magnetic blowout",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "magnetic circuit",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "magnetic constant",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "magnetic core memory",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "magnetic field",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "magnetic flux",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "magnetic flux density",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "magnetic moment",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "magnetic quantum number",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "magnetic sail",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "magnetization current",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "mains electricity",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "marine energy",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "maximum prospective short-circuit current",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "mechanical energy",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "mechanical wave",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "mechanics",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "mechanics of fluids",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "microwave",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "microwave oven",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "microwave radio",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "monolithic microwave integrated circuit",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "motion",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "motion control",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "motion picture expert group",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "national electrical code",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "national electrical manufacturers association",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "newtonian mechanics",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "newtons laws of motion",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "normal force",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "nuclear force",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "nuclear magnetic resonance spectroscopy",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "open-circuit test",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "open-circuit time constant method",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "open-circuit voltage",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "optically detected magnetic resonance",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "optics",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "orbital mechanics",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "overvoltage",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "parallel circuit",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "particle",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "particle accelerator",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "particle displacement",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "particle filter",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "particle physics",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "photoelectric effect",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "piezoelectric effect",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "piezoelectric motor",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "piezoelectricity",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "potential energy",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "printed circuit board",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "psi particle",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "pulse wave",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "pumped-storage hydroelectricity",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "quantum",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "quantum chromodynamics",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "quantum electrodynamics",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "quantum field theory",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "quantum gravity",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "quantum mechanics",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "quantum number",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "quantum physics",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "quantum state",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "quasiparticle",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "radiant energy",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "radiation",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "regenerative circuit",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "relativistic mechanics",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "renewable electricity",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "renewable energy payments",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "renewable energy policy",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "residual-current device",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "resistive circuit",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "resistive force",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "rlc circuit",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "rotational energy",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "second law of thermodynamics",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "series and parallel circuits",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "series circuit",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "shaft voltage",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "shear force diagrams",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "shock wave",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "short circuit",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "short-circuit test",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "shortwave radiation",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "simple harmonic motion",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "sine wave",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "single-phase electric power",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "solar energy",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "solid mechanics",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "spin quantum number",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "square wave",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "standing wave",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "standing wave ratio",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "statistical mechanics",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "subatomic particle",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "sulfur hexafluoride circuit breaker",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "superconducting electric machine",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "symbolic circuit analysis",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "synchronous circuit",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "terminal velocity",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "test particle",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "thermal radiation",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "thermodynamic equilibrium",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "thermodynamic free energy",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "thermodynamic stability",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "thermodynamics",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "thermoelectric effect",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "third law of thermodynamics",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "three-phase electric power",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "traction current",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "transverse wave",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "traveling-wave tube",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "triangle wave",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "tuned circuit",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "two-phase electric power",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "unbalanced forces",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "uniform circular motion",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "uniform motion",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "van der waals force",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "velocity",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "velocity diagrams",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "virtual particle",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "voltage",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "voltage compensation",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "voltage controller",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "voltage converter",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "voltage division",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "voltage doubler",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "voltage regulation",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "voltage regulator",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "voltage source",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "voltage spike",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "voltage-controlled amplifier",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "voltage-to-current converter",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "war of the currents",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "wave",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "wave drag",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "waveguide",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "wavelength",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "wavelets",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "waveparticle duality",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "zero-point energy",
+    "domain": "Physics",
+    "action": "preserve"
+  },
+  {
+    "term": "zeroth law of thermodynamics",
+    "domain": "Physics",
+    "action": "preserve"
+  }
+]

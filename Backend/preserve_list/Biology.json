@@ -1,0 +1,337 @@
+[
+  {
+    "term": "b cell",
+    "domain": "Biology",
+    "action": "preserve"
+  },
+  {
+    "term": "bacteria",
+    "domain": "Biology",
+    "action": "preserve"
+  },
+  {
+    "term": "cell",
+    "domain": "Biology",
+    "action": "preserve"
+  },
+  {
+    "term": "cell biology",
+    "domain": "Biology",
+    "action": "preserve"
+  },
+  {
+    "term": "cell cycle",
+    "domain": "Biology",
+    "action": "preserve"
+  },
+  {
+    "term": "cell membrane",
+    "domain": "Biology",
+    "action": "preserve"
+  },
+  {
+    "term": "cell nucleus",
+    "domain": "Biology",
+    "action": "preserve"
+  },
+  {
+    "term": "cell plate",
+    "domain": "Biology",
+    "action": "preserve"
+  },
+  {
+    "term": "cell potential",
+    "domain": "Biology",
+    "action": "preserve"
+  },
+  {
+    "term": "cell theory",
+    "domain": "Biology",
+    "action": "preserve"
+  },
+  {
+    "term": "cell wall",
+    "domain": "Biology",
+    "action": "preserve"
+  },
+  {
+    "term": "cellular",
+    "domain": "Biology",
+    "action": "preserve"
+  },
+  {
+    "term": "chromosome",
+    "domain": "Biology",
+    "action": "preserve"
+  },
+  {
+    "term": "cockcroftwalton generator",
+    "domain": "Biology",
+    "action": "preserve"
+  },
+  {
+    "term": "ecosystem",
+    "domain": "Biology",
+    "action": "preserve"
+  },
+  {
+    "term": "electrolytic cell",
+    "domain": "Biology",
+    "action": "preserve"
+  },
+  {
+    "term": "endangered species",
+    "domain": "Biology",
+    "action": "preserve"
+  },
+  {
+    "term": "engine-generator",
+    "domain": "Biology",
+    "action": "preserve"
+  },
+  {
+    "term": "enzyme",
+    "domain": "Biology",
+    "action": "preserve"
+  },
+  {
+    "term": "epigenetics",
+    "domain": "Biology",
+    "action": "preserve"
+  },
+  {
+    "term": "extracellular",
+    "domain": "Biology",
+    "action": "preserve"
+  },
+  {
+    "term": "g protein",
+    "domain": "Biology",
+    "action": "preserve"
+  },
+  {
+    "term": "galvanic cell",
+    "domain": "Biology",
+    "action": "preserve"
+  },
+  {
+    "term": "gas-generator cycle",
+    "domain": "Biology",
+    "action": "preserve"
+  },
+  {
+    "term": "gene",
+    "domain": "Biology",
+    "action": "preserve"
+  },
+  {
+    "term": "gene pool",
+    "domain": "Biology",
+    "action": "preserve"
+  },
+  {
+    "term": "general linear model",
+    "domain": "Biology",
+    "action": "preserve"
+  },
+  {
+    "term": "general relativity",
+    "domain": "Biology",
+    "action": "preserve"
+  },
+  {
+    "term": "generalized linear model",
+    "domain": "Biology",
+    "action": "preserve"
+  },
+  {
+    "term": "generalized trigonometry",
+    "domain": "Biology",
+    "action": "preserve"
+  },
+  {
+    "term": "generator",
+    "domain": "Biology",
+    "action": "preserve"
+  },
+  {
+    "term": "genetic code",
+    "domain": "Biology",
+    "action": "preserve"
+  },
+  {
+    "term": "genetic drift",
+    "domain": "Biology",
+    "action": "preserve"
+  },
+  {
+    "term": "genetics",
+    "domain": "Biology",
+    "action": "preserve"
+  },
+  {
+    "term": "homopolar generator",
+    "domain": "Biology",
+    "action": "preserve"
+  },
+  {
+    "term": "hormone",
+    "domain": "Biology",
+    "action": "preserve"
+  },
+  {
+    "term": "intracellular",
+    "domain": "Biology",
+    "action": "preserve"
+  },
+  {
+    "term": "introduced species",
+    "domain": "Biology",
+    "action": "preserve"
+  },
+  {
+    "term": "linked genes",
+    "domain": "Biology",
+    "action": "preserve"
+  },
+  {
+    "term": "lipoprotein",
+    "domain": "Biology",
+    "action": "preserve"
+  },
+  {
+    "term": "marx generator",
+    "domain": "Biology",
+    "action": "preserve"
+  },
+  {
+    "term": "mast cell",
+    "domain": "Biology",
+    "action": "preserve"
+  },
+  {
+    "term": "membrane mirror",
+    "domain": "Biology",
+    "action": "preserve"
+  },
+  {
+    "term": "membrane potential",
+    "domain": "Biology",
+    "action": "preserve"
+  },
+  {
+    "term": "metabolism",
+    "domain": "Biology",
+    "action": "preserve"
+  },
+  {
+    "term": "mucous membrane",
+    "domain": "Biology",
+    "action": "preserve"
+  },
+  {
+    "term": "multicellular",
+    "domain": "Biology",
+    "action": "preserve"
+  },
+  {
+    "term": "noise cancelling",
+    "domain": "Biology",
+    "action": "preserve"
+  },
+  {
+    "term": "organism",
+    "domain": "Biology",
+    "action": "preserve"
+  },
+  {
+    "term": "permanent magnet synchronous generator",
+    "domain": "Biology",
+    "action": "preserve"
+  },
+  {
+    "term": "photocell",
+    "domain": "Biology",
+    "action": "preserve"
+  },
+  {
+    "term": "photosynthesis",
+    "domain": "Biology",
+    "action": "preserve"
+  },
+  {
+    "term": "protein",
+    "domain": "Biology",
+    "action": "preserve"
+  },
+  {
+    "term": "regenerative braking",
+    "domain": "Biology",
+    "action": "preserve"
+  },
+  {
+    "term": "solar cell",
+    "domain": "Biology",
+    "action": "preserve"
+  },
+  {
+    "term": "species",
+    "domain": "Biology",
+    "action": "preserve"
+  },
+  {
+    "term": "stem cell",
+    "domain": "Biology",
+    "action": "preserve"
+  },
+  {
+    "term": "symbiogenesis",
+    "domain": "Biology",
+    "action": "preserve"
+  },
+  {
+    "term": "sync generator",
+    "domain": "Biology",
+    "action": "preserve"
+  },
+  {
+    "term": "t cell",
+    "domain": "Biology",
+    "action": "preserve"
+  },
+  {
+    "term": "tissue",
+    "domain": "Biology",
+    "action": "preserve"
+  },
+  {
+    "term": "unicellular",
+    "domain": "Biology",
+    "action": "preserve"
+  },
+  {
+    "term": "unit cell",
+    "domain": "Biology",
+    "action": "preserve"
+  },
+  {
+    "term": "van de graaff generator",
+    "domain": "Biology",
+    "action": "preserve"
+  },
+  {
+    "term": "virus",
+    "domain": "Biology",
+    "action": "preserve"
+  },
+  {
+    "term": "vortex generator",
+    "domain": "Biology",
+    "action": "preserve"
+  },
+  {
+    "term": "white blood cell",
+    "domain": "Biology",
+    "action": "preserve"
+  }
+]

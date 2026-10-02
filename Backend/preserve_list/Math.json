@@ -1,0 +1,1607 @@
+[
+  {
+    "term": "absolute differential calculus",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "absolute geometry",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "abstract algebra",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "abstract differential geometry",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "ackermann steering geometry",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "additive combinatorics",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "additive number theory",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "adjoint equation",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "affine differential geometry",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "affine geometry",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "algebra",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "algebraic analysis",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "algebraic combinatorics",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "algebraic computation",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "algebraic geometry",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "algebraic graph theory",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "algebraic k-theory",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "algebraic number theory",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "algebraic statistics",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "algebraic topology",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "algorithmic number theory",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "anabelian geometry",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "analytic combinatorics",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "analytic geometry",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "analytic number theory",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "arakelov geometry",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "arithmetic algebraic geometry",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "arithmetic combinatorics",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "arithmetic geometry",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "arithmetic topology",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "arithmetical algebraic geometry",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "arrhenius equation",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "asymptotic combinatorics",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "axiomatic geometry",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "bartletts bisection theorem",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "basis vector",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "bayes theorem",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "bernoulli differential equation",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "bernoulli equation",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "bernoullis equation",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "bessel function",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "birational geometry",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "bolyailobachevskian geometry",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "boolean algebra",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "buckingham  theorem",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "c-algebra theory",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "calculus",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "calculus of infinitesimals",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "calculus of variations",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "cartesian geometry",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "central limit theorem",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "characteristic function",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "classical algebraic topology",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "classical differential calculus",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "classical differential geometry",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "classical diophantine geometry",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "classical euclidean geometry",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "classical geometry",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "classical projective geometry",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "classical tensor calculus",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "clausius theorem",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "clifford algebra",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "column vector",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "combinatorial commutative algebra",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "combinatorial geometry",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "combinatorial number theory",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "combinatorial topology",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "combinatorics",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "commutative algebra",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "complex algebraic geometry",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "complex analytic geometry",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "complex differential geometry",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "complex geometry",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "computational algebraic geometry",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "computational geometry",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "computational number theory",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "computational synthetic geometry",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "computational topology",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "computer algebra",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "conditional probability",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "conditional probability distribution",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "conformal geometry",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "constructive function theory",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "contact geometry",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "continuity equation",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "convex geometry",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "coordinate geometry",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "coordinate vector",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "covector",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "cr geometry",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "darcyweisbach equation",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "de moivrelaplace theorem",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "definite integral",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "derivative",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "describing function",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "diagonal matrix",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "differential",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "differential algebraic geometry",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "differential calculus",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "differential galois theory",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "differential geometry",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "differential pressure",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "differential pulley",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "differential signaling",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "differential topology",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "diophantine geometry",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "discrete differential geometry",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "discrete exterior calculus",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "discrete geometry",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "distance geometry",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "drag equation",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "dyadic algebra",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "eccentricity vector",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "eigenvector slew",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "electromagnetic wave equation",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "elementary algebra",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "elementary matrix",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "elliptic geometry",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "elliptic partial differential equation",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "enumerative combinatorics",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "enumerative geometry",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "equation of state",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "equations of motion",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "euclidean differential geometry",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "euclidean geometry",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "euler calculus",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "exterior algebra",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "exterior calculus",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "extremal combinatorics",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "finite geometry",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "finsler geometry",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "fractal geometry",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "fractional calculus",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "function",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "function theory",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "functional analysis",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "functional calculus",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "functional group",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "fundamental theorem of calculus",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "galois geometry",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "general topology",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "geometric algebra",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "geometric calculus",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "geometric combinatorics",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "geometric function theory",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "geometric number theory",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "geometric topology",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "geometry",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "geometry of numbers",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "heaviside step function",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "hendersonhasselbalch equation",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "higher-dimensional algebra",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "holomorphic functional calculus",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "homological algebra",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "hyperbolic geometry",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "hyperbolic partial differential equation",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "hyperfunction theory",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "identity matrix",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "incidence geometry",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "indefinite integral",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "infinitary combinatorics",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "infinitesimal calculus",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "information geometry",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "integral",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "integral calculus",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "integral geometry",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "integral transform",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "inverse matrix",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "inversive geometry",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "inversive plane geometry",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "inversive ring geometry",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "isotropic vector",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "it calculus",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "joint probability",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "kelvinstokes theorem",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "khler geometry",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "kirchhoffs equations",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "klein geometry",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "kuttajoukowski theorem",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "laplacerungelenz vector",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "lie algebra theory",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "lie sphere geometry",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "likelihood function",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "line geometry",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "linear algebra",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "linear equation",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "linear functional analysis",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "linear variable differential transformer",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "liouvilles theorem",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "local algebra",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "logarithm",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "logarithmic identities",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "logarithmic mean temperature difference",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "loss function",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "low-dimensional topology",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "malliavin calculus",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "marginal probability",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "matrix",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "matrix algebra",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "matrix calculus",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "matrix multiplication",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "matrix switcher",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "matrix theory",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "maxwells equations",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "metric geometry",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "millmans theorem",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "modern algebra",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "modern algebraic geometry",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "molecular geometry",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "multilinear algebra",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "multiplicative number theory",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "multivariable calculus",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "navierstokes equations",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "neutral geometry",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "noisy-channel coding theorem",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "non-euclidean geometry",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "non-standard calculus",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "noncommutative algebra",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "noncommutative algebraic geometry",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "noncommutative geometry",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "noncommutative topology",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "nonlinear functional analysis",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "normal probability plot",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "nortons theorem",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "null vector",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "number theory",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "numerical linear algebra",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "nyquistshannon sampling theorem",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "ordered geometry",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "orthogonal matrix",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "parabolic geometry",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "parallel axis theorem",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "perpendicular axes theorem",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "plane geometry",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "point-set topology",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "pointless topology",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "poisson geometry",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "polyhedral combinatorics",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "position vector",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "posterior probability",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "precalculus",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "prior probability",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "probabilistic combinatorics",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "probabilistic number theory",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "probability",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "probability density",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "probability density function",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "probability distribution",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "probability measure",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "probability plot",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "probability space",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "probability theory",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "projective differential geometry",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "projective geometry",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "pseudo-riemannian geometry",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "quantum calculus",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "quantum geometry",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "rate equation",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "rational geometry",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "real algebra",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "real algebraic geometry",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "real clifford algebra",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "ricci calculus",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "riemannian geometry",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "rotary variable differential transformer",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "row vector",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "schrdinger equation",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "secondary calculus",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "semialgebraic geometry",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "set-theoretic topology",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "solid geometry",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "space vector modulation",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "spatial geometry",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "spectral geometry",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "spherical geometry",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "square matrix",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "stable polynomial",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "stochastic calculus",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "stochastic geometry",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "stokes theorem",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "stream function",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "super linear algebra",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "superposition theorem",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "survival function",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "symmetric probability distribution",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "symplectic geometry",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "symplectic topology",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "synthetic differential geometry",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "synthetic geometry",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "systolic geometry",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "systolic hyperbolic geometry",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "telegraphers equations",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "tellegens theorem",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "thvenin theorem",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "time-scale calculus",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "topological combinatorics",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "topology",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "toric geometry",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "torricellis equation",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "transcendental number theory",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "transfer function",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "transformation geometry",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "tropical geometry",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "tsiolkovsky rocket equation",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "umbral calculus",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "unimodal probability distribution",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "unit vector",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "universal algebra",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "vector",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "vector algebra",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "vector analysis",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "vector calculus",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "vector control",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "vector group",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "vector space",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "wave equation",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "wave function",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "wave function collapse",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "weight function",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "work function",
+    "domain": "Math",
+    "action": "preserve"
+  },
+  {
+    "term": "zero vector",
+    "domain": "Math",
+    "action": "preserve"
+  }
+]
