@@ -1,0 +1,31 @@
+# Anuvad Localize Engine: One-by-One Setup Commands
+
+Execute these commands in your terminal one by one from the root folder of the project.
+
+### 1. Setup Backend Virtual Environment
+cd Backend
+
+python -m venv .venv
+
+.\.venv\Scripts\Activate.ps1
+
+pip install --upgrade pip
+
+pip install -r requirements.txt
+
+### 2. Setup Frontend
+cd ..\Frontend
+
+npm install
+
+### 3. Final Configuration
+cd ..\Backend
+
+# Create .env file with your API keys (edit the file manually)
+echo SARVAM_API_KEY=your_key_here > .env
+echo HF_TOKEN=your_token_here >> .env
+
+### 4. Start the Project
+cd ..
+
+run_project.bat

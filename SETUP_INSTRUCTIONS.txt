@@ -1,0 +1,41 @@
+# Anuvad Localize Engine: Setup & Run Instructions
+
+Follow these steps exactly in order. These commands assume you are running inside the project root folder.
+
+### Step 1: Clean Up Old Environment (If exists)
+If there is a folder named ".venv" inside the "Backend" folder, delete it before starting.
+
+### Step 2: Setup Backend Virtual Environment
+cd Backend
+
+# Create a fresh virtual environment
+python -m venv .venv
+
+# Activate the virtual environment
+.\.venv\Scripts\Activate.ps1
+
+# Upgrade pip
+python -m pip install --upgrade pip
+
+# Install required dependencies
+pip install -r requirements.txt
+
+### Step 3: Setup Frontend
+cd ..\Frontend
+
+# Install frontend dependencies
+npm install
+
+### Step 4: Configure Environment
+cd ..\Backend
+
+# Create .env file (Open this file in a text editor to add your real API keys)
+# Copy the line below to create the file, then edit it to add your keys:
+echo SARVAM_API_KEY=your_sarvam_api_key > .env
+echo HF_TOKEN=your_huggingface_token >> .env
+
+### Step 5: Start the Project
+cd ..
+
+# Run the project startup script
+run_project.bat

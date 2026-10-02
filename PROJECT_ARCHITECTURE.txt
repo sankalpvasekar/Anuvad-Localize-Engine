@@ -1,0 +1,75 @@
+# Anuvad Localize Engine - Technical Documentation (v2.0.0)
+
+## 1. Project Overview & Pipeline Flow
+The Anuvad Localize Engine is a high-fidelity video localization pipeline designed for educational content. The system processes video through a strictly-ordered neural workflow:
+
+1. **Extraction:** Audio extracted via FFmpeg.
+2. **Transcription:** AI-driven speech-to-text (Whisper).
+3. **Intelligence (RAG):** Transcript refined by domain-specific RAG context (SBERT + Granite LLM).
+4. **Shielding:** Technical terms are masked (ScholarShield) to prevent mistranslation.
+5. **Localization:** Contextual translation (Sarvam AI).
+6. **Restoration:** Masked terms are restored to their original English form for TTS.
+7. **Synthesis:** Text-to-Speech (Sarvam AI) generates localized audio.
+8. **Finalization:** Audio and video tracks are aligned and muxed (FFmpeg).
+
+---
+
+## 2. Essential Architecture (Runtime Only)
+
+### Backend/
+- `app/main.py`: Application entry point. Configures CORS, middleware, lifecycle (Whisper loading/DB connect), and includes all routers.
+- `app/routers/`: 
+  - `transcribe.py`: Main API endpoint for video uploads and pipeline initiation. Calls `TranscriptionService`.
+  - `auth.py`: Authentication logic.
+  - `projects.py`: Project metadata and status management.
+- `app/services/`:
+  - `transcription_service.py`: Orchestrates the 8-stage pipeline. The "Brain" of the engine. Calls `rag_service`, `dubbing_service`, `speaker_service`, and `ffmpeg_utils`.
+  - `dubbing_service.py`: Parallel processing for translation and TTS across multiple languages. Calls `ScholarShield`, `rag_service`, `sarvam_tts`, `sarvam_translate`, and `ffmpeg_utils`.
+  - `scholar_shield.py`: Term preservation logic (masking/unmasking). Uses glossaries from `preserve_list/`.
+  - `rag_service.py`: FAISS-based retrieval of domain knowledge + Granite prompt engineering. Uses `knowledge_base/`.
+  - `sarvam_translate.py`: Interface for translation API. Uses `CacheManager`.
+  - `sarvam_tts.py`: Interface for speech synthesis API. Uses `CacheManager` and `ffmpeg_utils`.
+  - `sbert_service.py`: Detects academic domain.
+  - `speaker_service.py`: Speaker identification for voice profiling.
+- `app/utils/`:
+  - `cache/cache_service.py`: Persistent local disk cache for translation/TTS to reduce latency.
+  - `audio_utils.py`: Audio extraction tools.
+- `app/ffmpeg_utils.py`: High-level video/audio muxing and FFmpeg command orchestration.
+- `app/core/`: Application settings (`config.py`) and database connectivity (`database.py`).
+
+### Frontend/
+- `src/`: React source files for the user interface to upload videos and track dubbing status. Communicates with Backend routers.
+
+---
+
+## 3. Detailed Component Analysis & Interconnectivity
+
+### Data Flow Diagram
+`Request` -> `transcribe_router` -> `TranscriptionService`
+   -> `ffmpeg_utils` (extract audio)
+   -> `TranscriptionService` (Whisper)
+   -> `domain_service` (detect domain)
+   -> `rag_service` (retrieve context)
+   -> `rag_service` (refine with Granite LLM)
+   -> `dubbing_service` (mask text via `ScholarShield`)
+   -> `dubbing_service` (parallel translate via `sarvam_translate` + cache)
+   -> `dubbing_service` (parallel TTS via `sarvam_tts` + cache)
+   -> `dubbing_service` (unmask terms via `ScholarShield`)
+   -> `dubbing_service` (merge audio via `ffmpeg_utils`)
+   -> `transcribe_router` (return video URL)
+
+### RAG (Retrieval-Augmented Generation) Workflow
+1. **Indexing (`rag_service.auto_index_knowledge_base`)**: Scans `knowledge_base/<domain>/` for PDFs/TXTs. Chunks text, creates embeddings via SBERT, and stores in FAISS indices.
+2. **Retrieval (`rag_service.retrieve_context`)**: Given a transcript, it detects the domain (SBERT), searches the domain-specific FAISS index for relevant snippets, and returns the top-K chunks.
+3. **Refinement (`rag_service.refine_with_granite`)**: Passes the raw transcript + retrieved RAG context into IBM Granite LLM to correct mishearings while preserving structure.
+
+### Term Preservation (ScholarShield)
+- **Mechanism:** Mask-before-translate, Unmask-after-translate.
+- **`scholar_shield.py`**:
+  - `shield_text()`: Identifies terms from domain-specific JSON glossaries. Replaces them with placeholders (e.g., `TECH_0`).
+  - `unshield_text()`: Replaces placeholders with original terms after translation completes.
+
+### Latency Optimization
+- **Caching (`cache_service.py`)**: Uses MD5 hashing on input text + params. Every `sarvam_translate` or `sarvam_tts` call checks the cache first, resulting in near-zero latency for repeated segments.
+- **Parallelism (`dubbing_service.py`)**: Uses `asyncio.gather` to perform translation/TTS for all requested languages simultaneously.
+

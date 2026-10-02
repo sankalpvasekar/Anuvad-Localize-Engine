@@ -1,0 +1,54 @@
+# Anuvad Localize Engine: Comprehensive Contribution & Technical Execution Guide
+
+This document provides an exhaustive breakdown of the technical execution by each core role in the Anuvad Localize Engine (v2.0.0).
+
+---
+
+## Role 1: AI Pipeline Architect (The "Pipeline Orchestrator")
+**Focus:** Perception, Intelligence, and Refinement.
+**Core Files:** `Backend/app/services/transcription_service.py`, `Backend/app/services/rag_service.py`, `Backend/app/services/sbert_service.py`, `Backend/app/core/database.py`
+
+### Detailed Execution Process:
+1. **Pipeline Blueprint:** I designed the system as an 8-stage synchronous execution graph. By defining this pipeline, I ensured that the output of Whisper is fed into a chain of refinement *before* it ever reaches the dubbing engine.
+2. **Robust Perception (Whisper Orchestration):** I executed the two-pass transcription logic in `transcription_service.py`. First, I perform a 30-second spectral probe to detect the language with high confidence. Second, I run the full `model.transcribe` with constrained language parameters to prevent "language-hallucinations" common in Whisper with multi-lingual audio.
+3. **Domain Intelligence (RAG Engine):** I architected the `rag_service.py` to be dynamically aware of the content domain. 
+   - I implemented `auto_index_knowledge_base`, which recursively traverses `Backend/knowledge_base/` using `pathlib`.
+   - I utilized `faiss` for high-speed vector similarity search.
+   - I mapped domain detection via `sbert_service.py` to ensure the correct domain-specific FAISS index is queried.
+4. **LLM Refinement (Granite):** I integrated `ibm-granite/granite-3.0-2b-instruct`. I constructed the prompt template in `refine_with_granite` to specifically forbid translation and mandate the preservation of scientific notation (e.g., using Unicode for exponents), which is essential for our pedagogical goal.
+5. **Flow Control:** I used `asyncio.run_in_executor` to wrap all heavy CPU tasks, ensuring that the FastAPI API remains non-blocking even during 20+ minute transcriptions.
+
+---
+
+## Role 2: Localization & Synthesis Engineer (The "Shielding Specialist")
+**Focus:** Preservation, Translation, and Dubbing.
+**Core Files:** `Backend/app/services/scholar_shield.py`, `Backend/app/services/dubbing_service.py`, `Backend/app/services/sarvam_translate.py`, `Backend/app/services/sarvam_tts.py`
+
+### Detailed Execution Process:
+1. **Mathematical Term Preservation:** I authored `scholar_shield.py`. I implemented the `shield_text` regex-based masking engine. It searches for predefined patterns in `preserve_list/` and swaps them for immutable placeholders like `TECH_N`.
+2. **Persistence Guarantee:** I re-engineered the `dubbing_service.py` loop to ensure a *persistent mapping* throughout the entire video's execution. This prevents the system from generating `TECH_0` for "calculus" in one segment and `TECH_1` for the same word in another.
+3. **Parallel Localization:** I implemented the `translate_and_dub_parallel` method. I used `asyncio.gather` to launch multiple language-processing threads. If the user wants Hindi and Marathi output, both API calls (Translation + TTS) happen concurrently.
+4. **Audio Synthesis & Alignment:** 
+   - I implemented `_merge_segments_to_final_track` in `dubbing_service.py`. This is my most complex implementation: it uses `numpy` and `soundfile` to construct a master audio timeline.
+   - I included an automatic "time-stretch" algorithm using `librosa`, which detects if an audio segment is too long for its window and compresses it (up to 1.8x) to prevent video desync.
+5. **Unmasking:** I ensured that the `unshield_text` function is called *after* the raw translation returns but *before* the text is sent to the TTS engine, ensuring the TTS voice reads the English technical term with the correct academic pronunciation.
+
+---
+
+## Role 3: Systems & Infrastructure Engineer (The "Performance Optimizer")
+**Focus:** Throughput, Hardware, and Latency.
+**Core Files:** `Backend/app/main.py`, `Backend/app/ffmpeg_utils.py`, `Backend/app/utils/cache/cache_service.py`, `Backend/app/core/gpu_manager.py`
+
+### Detailed Execution Process:
+1. **Hardware-Agnostic Initialization:** I engineered the Singleton initialization logic in `main.py` and service `__init__` methods. By running `torch.cuda.is_available()` only once, I eliminated redundant device checks that would have degraded runtime performance by several percentage points.
+2. **Concurrency Control:** I built the `gpu_manager.py` to prevent "VRAM thrashing." Since the system runs multiple heavy models, I implemented a semaphore lock that ensures the transcription model releases its VRAM before the LLM/Refinement model requests it, preventing random crashes on low-VRAM machines.
+3. **Intelligent Caching:** I built the `cache_manager` in `Backend/app/utils/cache/`. I implemented a hashing strategy that captures the *input text AND the target language/gender*. This allows for near-instant retrieval of dubs for repetitive educational content.
+4. **FFmpeg Pipeline Orchestration:** I wrote `ffmpeg_utils.py`, managing the complex path handling for multi-track audio muxing. I optimized the FFmpeg call chain to use stream-copying (`-c copy`) wherever possible, which avoids re-encoding the video track and preserves original video quality while adding audio tracks.
+5. **Production Hardening:** I configured the `main.py` lifespan events to handle clean startup/shutdown, ensuring that the GPU memory is freed and database connections are closed gracefully, preventing memory leaks during long-running server sessions.
+
+---
+
+## Role 4: Documentation & Support (Minor Contributor)
+**Focus:** Project documentation and auxiliary management.
+- I organized the research-related folders and created documentation files for the team. 
+- I did not engage in the architectural design, algorithmic implementation, or performance engineering.

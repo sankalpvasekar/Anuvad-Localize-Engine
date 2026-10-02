@@ -1,0 +1,82 @@
+# Anuvad Localize Engine: Setup & Run Guide for New Environment
+
+This guide provides step-by-step instructions to set up the Anuvad Localize Engine on a new machine.
+
+## Prerequisites
+- **Python 3.9+** (3.10+ recommended)
+- **Node.js 18+**
+- **FFmpeg** installed and added to your System PATH.
+- **NVIDIA GPU** (Optional, but highly recommended for performance).
+
+---
+
+## Step 1: Prepare the Environment
+If you are re-installing or moving the project, clear old virtual environments to avoid conflicts.
+
+1.  Navigate to the `Backend/` directory.
+2.  If a `Backend/.venv/` folder exists, **delete it**.
+3.  Open a terminal in the `Backend/` directory and create a new virtual environment:
+    ```bash
+    # Create the virtual environment
+    python -m venv .venv
+    
+    # Activate the virtual environment (Windows PowerShell)
+    .\.venv\Scripts\Activate.ps1
+    ```
+
+---
+
+## Step 2: Install Dependencies
+
+### 2.1 Backend Dependencies
+Ensure the environment is activated, then install the required Python packages:
+```bash
+# Inside the Backend/ directory
+pip install --upgrade pip
+pip install -r requirements.txt
+```
+
+### 2.2 Frontend Dependencies
+Navigate to the `Frontend/` directory and install the Node.js packages:
+```bash
+cd ../Frontend
+npm install
+```
+
+---
+
+## Step 3: Configure Environment Variables
+Create a `.env` file inside the `Backend/` directory with the following keys. You must obtain these from your service providers:
+
+```env
+# Backend/.env
+SARVAM_API_KEY=your_sarvam_api_key_here
+HF_TOKEN=your_huggingface_token_here
+MONGO_DB_URL=your_mongodb_connection_string
+# Optional:
+YT_COOKIES_FILE=cookies.txt
+```
+
+---
+
+## Step 4: Run the Project
+The project includes a batch script to automate the startup of both servers.
+
+1. Ensure both the `Backend/` and `Frontend/` directories are at the root level as they were when you received the files.
+2. Run the provided batch file from the project root:
+   ```bash
+   run_project.bat
+   ```
+
+### Troubleshooting
+- **Missing modules?** Ensure you ran the `pip install` command *while the virtual environment was active*.
+- **GPU not detected?** The system automatically detects CUDA on startup. Check the backend logs to ensure it says `device=cuda` instead of `device=cpu`.
+- **FFmpeg errors?** Ensure FFmpeg is accessible in your command line by typing `ffmpeg -version`.
+
+---
+
+## Project Structure Reference
+- `Backend/`: Contains the FastAPI application, services, and the knowledge base.
+- `Frontend/`: Contains the React UI.
+- `static/`: Stores generated audio/video files.
+- `archived_assets/`: Contains documentation, benchmarks, and research data.
