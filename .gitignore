@@ -136,7 +136,7 @@ Backend/knowledge_base/
 # Recoverable Unplaced / Staged Files
 # ============================================================
 _unplaced/
-RAG Data/
+
 paper_assets/
 Backend/app/utils/cache/
 static/cache/
