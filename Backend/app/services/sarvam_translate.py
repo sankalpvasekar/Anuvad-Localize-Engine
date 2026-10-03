@@ -5,6 +5,7 @@ from typing import List, Dict, Optional
 import httpx
 
 from app.core.config import settings
+from app.utils.cache.cache_service import cache_manager
 
 logger = logging.getLogger("sarvam-translate")
 
@@ -59,11 +60,16 @@ class SarvamTranslate:
         mode: str = "formal",
     ) -> str:
         """
-        Translate a single text string using Sarvam AI.
+        Translate a single text string using Sarvam AI, with caching.
         """
         cleaned = text.strip()
         if not cleaned:
             return ""
+
+        # Check cache
+        cached_result = cache_manager.get(cleaned, target_lang, source_lang, mode)
+        if cached_result:
+            return cached_result
 
         tgt_code = _LANG_MAP.get(target_lang.lower(), f"{target_lang}-IN")
         src_code = _LANG_MAP.get(source_lang.lower(), f"{source_lang}-IN")
@@ -99,6 +105,8 @@ class SarvamTranslate:
                     data = resp.json()
                     translated = data.get("translated_text", "")
                     if translated:
+                        # Save to cache
+                        cache_manager.set((cleaned, target_lang, source_lang, mode), translated)
                         return translated
             except Exception as e:
                 logger.warning(

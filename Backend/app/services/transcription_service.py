@@ -265,7 +265,8 @@ class TranscriptionService:
             )
 
             audio_results = await dubbing_service.translate_and_dub_parallel(
-                segments, target_langs, audio_path,
+                segments, target_langs, audio_path=audio_path,
+                refined_transcript=refined_transcript,
                 speaker_profiles=speaker_profiles,
                 voice_gender=voice_gender,
             )

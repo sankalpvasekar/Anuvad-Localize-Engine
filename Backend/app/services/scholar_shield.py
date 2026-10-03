@@ -8,12 +8,16 @@ load_dotenv()
 
 class ScholarShield:
     def __init__(self):
-        # Neural-Sync strictly shields Universal Mathematical symbols and formulas.
+        # Neural-Sync strictly shields Universal Mathematical symbols, formulas, and code.
         self.math_regex = re.compile(
-            r'\\\w+({[^}]+})*|'                     # LaTeX commands
-            r'\b(?:[a-zA-Z0-9]+\b\s*[\+\-\*/=]\s*)+\b[a-zA-Z0-9]+\b|' # Standard equations
+            r'\\\w+(?:{[^}]+})*(?:\s*[\+\-\*/=_]\s*[^,.\s]+)*|' # LaTeX commands & equations
+            r'[a-zA-Z0-9_\^\(\)]+\s*->\s*[a-zA-Z0-9_\^\(\)\+\s]+|' # Chemical reactions (->)
+            r'\b(?:[a-zA-Z0-9_\^\(\)]+\s*[\+\-\*/=]\s*)+[a-zA-Z0-9_\^\(\)]+\b|' # Standard equations
             r'\bdy/dx\b|\$[^$]+\$|'                   # Leibniz notation and inline math
-            r'\b[a-zA-Z](?:\^[\d\w]+)\b'             # Superscripts like x^2
+            r'\b[a-zA-Z](?:\^[\d\w]+)\b|'             # Superscripts like x^2
+            r'def\s+[a-zA-Z0-9_]+\s*\([^)]*\):|'     # Python function defs
+            r'while\s+[a-zA-Z0-9_\s<=>!]+:|'         # While headers
+            r'return\s+[a-zA-Z0-9_\s\+\-\*//\(\)]+'   # Return statements
         )
         
         # Dynamic Tech Keywords based on Domain
@@ -27,7 +31,9 @@ class ScholarShield:
     def _load_glossary(self, domain: str):
         """Dynamically loads glossaries from knowledge_base/<domain>/*_glossary.txt"""
         glossary = {}
-        kb_path = os.path.join("knowledge_base", domain)
+        # Get project root (4 levels up from this file)
+        project_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
+        kb_path = os.path.join(project_root, "Backend", "knowledge_base", domain)
         if not os.path.exists(kb_path):
             return glossary
 
@@ -43,8 +49,29 @@ class ScholarShield:
                 "calculus": "कॅल्क्युलस",
                 "integral": "इंटीग्रल",
                 "derivative": "डेरिव्हेटिव्ह",
-                "formula": "फॉर्म्युला"
+                "formula": "फॉर्म्युला",
+                "momentum": "मोमेंटम",
+                "catalyst": "कैटेलिस्ट",
+                "recursion": "रिकर्शन",
+                "binary search": "बाइनरी सर्च",
+                "compiler": "कंपाइलर",
+                "mitochondria": "माइटोकॉन्ड्रिया"
             }
+
+        # Dynamically load from Backend/preserve_list/all_terms_master.json
+        preserve_dir = os.path.join(project_root, "Backend", "preserve_list")
+        master_file = os.path.join(preserve_dir, "all_terms_master.json")
+        if os.path.exists(master_file):
+            try:
+                import json
+                with open(master_file, "r", encoding="utf-8") as f:
+                    master_terms = json.load(f)
+                for item in master_terms:
+                    t = item.get("term", "").strip().lower()
+                    if t and t not in glossary:
+                        glossary[t] = t.capitalize()
+            except Exception as e:
+                print(f"Failed to load master preserve list: {e}")
 
         for gf in glossary_files:
             try:
@@ -53,40 +80,48 @@ class ScholarShield:
                         if line.startswith("-") and ":" in line:
                             parts = line.split(":")
                             term = parts[0].strip("- ").lower()
-                            # We keep the English term as the translation to force phonetic consistency in IndicTrans
                             glossary[term] = term.capitalize() 
             except Exception as e:
                 print(f"Failed to load glossary {gf}: {e}")
         
         return glossary
 
-    def shield_text(self, text: str, domain: str = "STEM"):
-        mapping = {}
-        counter = 0
-        masked_text = text
+    def shield_text(self, text: str, domain: str = "STEM", mapping: dict = None, counter: int = 0):
+        if mapping is None:
+            mapping = {}
+        
+        current_counter = counter
 
-        # 1. Shield Math Formulas (MATH_N)
-        for match in self.math_regex.finditer(masked_text):
+        # 1. Shield Math Formulas (MATH_N) via callback substitution
+        def _replace_math(match):
+            nonlocal current_counter
             formula = match.group(0)
-            if formula not in mapping.values(): 
-                placeholder = f"MATH_{counter}"
-                mapping[placeholder] = formula
-                masked_text = masked_text.replace(formula, placeholder)
-                counter += 1
-                
+            placeholder = f"[MATH_{current_counter}]"
+            mapping[f"MATH_{current_counter}"] = formula
+            mapping[placeholder] = formula
+            current_counter += 1
+            return f" {placeholder} "
+
+        masked_text = self.math_regex.sub(_replace_math, text)
+
         # 2. Shield Technical Keywords from the detected Domain
         tech_keywords = self.domain_glossaries.get(domain, {})
         if tech_keywords:
-            tech_regex = re.compile(rf"\b({'|'.join(re.escape(k) for k in tech_keywords.keys())})\b", re.IGNORECASE)
-            for match in tech_regex.finditer(masked_text):
-                term = match.group(0)
-                placeholder = f"TECH_{counter}"
-                # Use phonetic transliteration if provided, otherwise keep term original
-                mapping[placeholder] = tech_keywords.get(term.lower(), term)
-                masked_text = masked_text.replace(term, placeholder)
-                counter += 1
+            pattern_str = r"\b(" + "|".join(re.escape(k) for k in tech_keywords.keys()) + r")\b"
+            tech_regex = re.compile(pattern_str, re.IGNORECASE)
 
-        return masked_text, mapping
+            def _replace_tech(match):
+                nonlocal current_counter
+                term = match.group(0)
+                placeholder = f"[TECH_{current_counter}]"
+                mapping[f"TECH_{current_counter}"] = tech_keywords.get(term.lower(), term)
+                mapping[placeholder] = tech_keywords.get(term.lower(), term)
+                current_counter += 1
+                return f" {placeholder} "
+
+            masked_text = tech_regex.sub(_replace_tech, masked_text)
+
+        return masked_text, mapping, current_counter
 
     def _to_indic(self, num_str):
         indic_map = str.maketrans("0123456789", "०१२३४५६७८९")
@@ -97,29 +132,32 @@ class ScholarShield:
             return text
             
         unmasked = text
+        indic_to_arabic = str.maketrans("०१२३४५६७८९", "0123456789")
         
-        # 1. Capture all types of markers the AI might have outputted.
+        # 1. First, replace direct placeholders (including bracketed forms like [MATH_0])
+        sorted_keys = sorted(mapping.keys(), key=len, reverse=True)
+        for k in sorted_keys:
+            val = str(mapping[k])
+            # Direct bracketed and unbracketed replacement
+            unmasked = unmasked.replace(f"[{k}]", val)
+            unmasked = unmasked.replace(f"<{k}>", val)
+            unmasked = re.sub(rf'\b{re.escape(k)}\b', lambda m: val, unmasked)
+            
+        # 2. Capture and replace transliterated or translated markers (e.g. मॅथ_1, मैथ 0, गणित_0, टेक: 2, तकनीक_1, etc.)
+        def replace_transliterated_marker(match):
+            full_match = match.group(0)
+            marker_type = match.group(1).upper()
+            num_str = match.group(2).translate(indic_to_arabic)
+            prefix = "MATH" if any(m in marker_type for m in ["MATH", "मॅथ", "मैथ", "गणित"]) else "TECH"
+            key = f"{prefix}_{num_str}"
+            return str(mapping.get(key, full_match))
+
         marker_pattern = re.compile(
-            r'(?:MATH|मॅथ|मैथ|टेक|टेक्|TECH|TECHNOLOGY)\s*[:\-\s_]*\s*([0-9०१२३४५६७८९]{1,3})', 
+            r'\[?\s*(MATH|मॅथ|मैथ|गणित|टेक|टेक्|तकनीक|TECH|TECHNOLOGY)\s*[:\-\s_]*\s*([0-9०१२३४५६७८९]{1,3})\s*\]?', 
             re.IGNORECASE
         )
+        unmasked = marker_pattern.sub(replace_transliterated_marker, unmasked)
         
-        # 2. Get all original placeholders in the order they were created.
-        placeholders = list(mapping.keys())
-        
-        # 3. Find all matches in the translated text.
-        matches = list(marker_pattern.finditer(unmasked))
-        
-        # 4. Sequential replacement: Replace the Nth match with the Nth placeholder.
-        for i in range(min(len(matches), len(placeholders)) - 1, -1, -1):
-            match = matches[i]
-            placeholder = placeholders[i]
-            unmasked = unmasked[:match.start()] + placeholder + unmasked[match.end():]
-
-        # 5. Restore original terms from the standardized placeholders
-        for placeholder, original in mapping.items():
-            unmasked = unmasked.replace(placeholder, original)
-            
         return unmasked
 
 

@@ -11,6 +11,7 @@ import numpy as np
 
 from app.core.config import settings
 from app.ffmpeg_utils import configure_ffmpeg_path
+from app.utils.cache.cache_service import cache_manager
 
 logger = logging.getLogger("sarvam-tts")
 
@@ -68,16 +69,14 @@ class SarvamTTS:
         self, text: str, lang: str, gender: str = "male",
     ) -> Tuple[str, float]:
         """
-        Convert text to speech via Sarvam AI API.
-
-        Args:
-            text: The text to synthesize.
-            lang: Internal language code (e.g. "hi", "mr", "ta").
-            gender: "male" or "female".
-
-        Returns:
-            (wav_path, duration_seconds)
+        Convert text to speech via Sarvam AI API, with caching.
         """
+        # Check cache
+        cached_result = cache_manager.get(text, lang, gender)
+        if cached_result and os.path.exists(cached_result["path"]):
+            logger.info(f"Returning cached audio for: {text[:20]}...")
+            return cached_result["path"], cached_result["duration"]
+
         output_dir = Path("static/dubbed_audio")
         output_dir.mkdir(parents=True, exist_ok=True)
         output_file = output_dir / f"sarvam_{lang}_{os.urandom(4).hex()}.wav"
@@ -164,6 +163,10 @@ class SarvamTTS:
 
         duration = self._get_duration(str(output_file))
         logger.info(f"Sarvam TTS: {lang}/{speaker} -> {output_file} ({duration:.2f}s)")
+        
+        # Save to cache
+        cache_manager.set((cleaned_text, lang, gender), {"path": str(output_file), "duration": duration})
+        
         return str(output_file), duration
 
     def _chunk_text(self, text: str, max_len: int = 450) -> list[str]:
