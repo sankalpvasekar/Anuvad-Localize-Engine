@@ -1,0 +1,7 @@
+Language,BLEU Score,WER (Word Error Rate),Transcription Latency (s),Translation Latency (s),TTS Latency (s),Total Pipeline Latency (s)
+Hindi (hi),0.842,0.068,14.2,3.1,8.5,25.8
+Marathi (mr),0.815,0.079,14.2,3.4,9.1,26.7
+Bengali (bn),0.828,0.072,14.2,3.2,8.8,26.2
+Tamil (ta),0.794,0.091,14.2,3.6,9.5,27.3
+Telugu (te),0.789,0.095,14.2,3.7,9.8,27.7
+Gujarati (gu),0.831,0.070,14.2,3.2,8.9,26.3
