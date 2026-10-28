@@ -1,6 +1,6 @@
 # Anuvad Evaluation & Benchmarking Suite
 
-This folder contains the evaluation scripts and experimental results supporting the Anuvad Localize Engine publication.
+This folder contains the evaluation scripts, experimental result tables, and reference transcripts supporting the Anuvad Localize Engine publication.
 
 ## Contents
 - `benchmark_evaluation.py`: Computes BLEU and WER against ground-truth reference translations.
@@ -9,6 +9,7 @@ This folder contains the evaluation scripts and experimental results supporting 
 - `run_local_tcr_benchmark.py`: Evaluates Transcription-Correction-Refinement (TCR) accuracy.
 - `strictly_authentic_benchmark.py`: Tests mathematical and technical term preservation accuracy via ScholarShield.
 - `results_summary.csv`: Summary table of BLEU, WER, and latency metrics across tested Indic languages.
+- `reference_dataset.json`: Ground-truth source transcripts, RAG-refined transcripts, and professional human reference translations in Hindi and Marathi used for BLEU and WER benchmarking.
 
 ## Reproducibility
 To run the evaluation benchmarks:

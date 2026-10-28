@@ -1,0 +1,23 @@
+[
+  {
+    "domain": "Mathematics",
+    "source_raw_whisper": "Differentiation is a fundamental operation in calculus and the derivative measures the rate of change.",
+    "rag_refined_transcript": "Differentiation is a fundamental operation in calculus, and the derivative measures the rate of change.",
+    "ground_truth_translation_hi": "अवकलन कलन में एक मौलिक संक्रिया है, और व्युत्पन्न परिवर्तन की दर को मापता है।",
+    "ground_truth_translation_mr": "विकलन हे कलनातील एक मूलभूत ऑपरेशन आहे, आणि व्युत्पन्न बदलाचा दर मोजते."
+  },
+  {
+    "domain": "Physics",
+    "source_raw_whisper": "An eigenvalue is a scalar associated with a linear transformation of a vector space.",
+    "rag_refined_transcript": "An eigenvalue is a scalar associated with a linear transformation of a vector space.",
+    "ground_truth_translation_hi": "आइगेनमान एक अदिश है जो सदिश समष्टि के रैखिक रूपांतरण से जुड़ा होता है।",
+    "ground_truth_translation_mr": "आयकनव्हॅल्यू ही सदिश समष्टीच्या रेषीय रूपांतरणाशी संबंधित अदिश आहे."
+  },
+  {
+    "domain": "Biology",
+    "source_raw_whisper": "The mitochondrion is the power house of the sell and generates ATP energy.",
+    "rag_refined_transcript": "The mitochondrion is the powerhouse of the cell and generates ATP energy.",
+    "ground_truth_translation_hi": "माइटोकॉन्ड्रिया कोशिका का पावरहाउस है और एटीपी ऊर्जा उत्पन्न करता है।",
+    "ground_truth_translation_mr": "माइटोकॉन्ड्रिया हे पेशीचे पॉवरहाऊस आहे आणि एटीपी ऊर्जा निर्माण करते."
+  }
+]
